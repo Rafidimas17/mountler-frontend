@@ -1,5 +1,5 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 
 import Button from "../elements/Button";
 
@@ -15,8 +15,7 @@ export default function Activities({ data }) {
             return (
               <div
                 className="item column-3 row-1"
-                key={`activity-item-${index2}`}
-              >
+                key={`activity-item-${index2}`}>
                 <Fade bottom delay={300 * index2}>
                   <div className="card">
                     {item.isPopular && (
@@ -40,11 +39,9 @@ export default function Activities({ data }) {
                       <Button
                         type="link"
                         href={`/properties/${item._id}`}
-                        className="stretched-link d-block text-gray-800"
-                      >
+                        className="stretched-link d-block text-gray-800">
                         <h5 className="h4">{item.name}</h5>
                       </Button>
-                   
                     </div>
                   </div>
                 </Fade>

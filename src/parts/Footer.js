@@ -3,7 +3,7 @@ import React from "react";
 import IconText from "./IconText";
 import Button from "../elements/Button";
 import "../assets/scss/style.scss";
-import Fade from "react-reveal";
+import { Fade } from "react-awesome-reveal";
 export default function Footer() {
   return (
     <Fade>
@@ -19,16 +19,14 @@ export default function Footer() {
             <ul className="list-group">
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/properties">
                   Book of Mountain
                 </Button>
               </li>
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/payment">
                   Payment
                 </Button>
@@ -39,32 +37,28 @@ export default function Footer() {
             <ul className="list-group list-group-flush">
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/properties">
                   Explore us
                 </Button>
               </li>
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/payment">
                   About
                 </Button>
               </li>
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/payment">
                   Privacy Policy
                 </Button>
               </li>
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/payment">
                   Terms & Conditions
                 </Button>
@@ -75,37 +69,32 @@ export default function Footer() {
             <ul className="list-group list-group-flush">
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/properties">
                   Getting Touch
                 </Button>
               </li>
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/payment">
                   ckr.support@gmail.com
                 </Button>
               </li>
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button
                   className="btn-link"
                   type="link"
                   href="/payment"
-                  style={{ color: `$gray-500`, fontWeight: 300 }}
-                >
+                  style={{ color: `$gray-500`, fontWeight: 300 }}>
                   089-613-260-405
                 </Button>
               </li>
               <li
                 className="list-groups-item"
-                style={{ padding: `0.3125rem 0`, border: 0 }}
-              >
+                style={{ padding: `0.3125rem 0`, border: 0 }}>
                 <Button className="btn-link" type="link" href="/payment">
                   Cakrawala, Surabaya
                 </Button>

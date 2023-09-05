@@ -1,7 +1,7 @@
 import React from "react";
 import Star from "../elements/Star";
 import Button from "../elements/Button";
-import Fade from "react-reveal";
+import { Fade } from "react-awesome-reveal";
 export default function Testimony({ data }) {
   return (
     <Fade left>
@@ -10,9 +10,8 @@ export default function Testimony({ data }) {
           <div className="col-auto" style={{ marginRight: 70 }}>
             <div
               className="testimonial-hero"
-              style={{ margin: `30px 0 0 30px` }}
-            >
-             <img
+              style={{ margin: `30px 0 0 30px` }}>
+              <img
                 src={`${process.env.REACT_APP_HOST}/${data.imageUrl}`}
                 alt="Testimonial"
                 className="position-absolute"
@@ -45,8 +44,7 @@ export default function Testimony({ data }) {
                 hasShadow
                 isPrimary
                 type="link"
-                href={`/testimonial/${data._id}`}
-              >
+                href={`/testimonial/${data._id}`}>
                 Read story
               </Button>
             </div>
