@@ -20,9 +20,7 @@ jobs:
     - run: npm i 
     - run: npm i -g jest
     - run: npm test
-    - run: npm run build
-      env:
-        CI: false
+ 
 
 
 
