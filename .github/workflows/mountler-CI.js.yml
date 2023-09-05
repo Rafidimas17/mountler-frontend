@@ -17,9 +17,14 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 18.x
-    - run: npm i --legacy-peer-deps
+    - run: npm ci --legacy-peer-deps
     - run: npm i -g jest
     - run: npm test
-    - run: CI='' npm run build
+    - run: npm run build
+      env:
+        CI: false
+
+
+    
 
 
