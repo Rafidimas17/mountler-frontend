@@ -1,0 +1,53 @@
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-end;
+    justify-content: center;
+    border-radius: 20px;
+    height: 100%;
+  
+    &.cold {
+        background-image: url("https://cdn.pixabay.com/photo/2017/03/05/01/21/cumulus-2117444_1280.jpg");
+    }
+    
+    &.hot {
+        background-image: url("https://cdn.pixabay.com/photo/2017/03/05/01/21/cumulus-2117444_1280.jpg");
+        // background-color: #ff3300; /* Warna latar belakang panas */
+    }
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .weather-info {
+    text-align: right;
+  }
+  .date-info {
+    text-align: left;
+  }
+  
+  .temperature {
+    margin-right: 30px;
+    margin-top: 16px;
+    font-size: 35px;
+    font-family: "Poppins";
+    font-weight: bold;
+    color: #fff; /* Warna teks putih */
+  }
+  
+  .description {
+    margin-right: 30px;
+    font-size: 22px;
+    font-family: "Poppins";
+    margin-top: 16px;
+    color: #fff; /* Warna teks putih */
+  }
+  
+  .date {
+    // text-align: left;
+    margin-left: 50px;
+    font-size: 26px;
+    font-family: "Poppins";
+    color: #fff; /* Warna teks putih */
+  }
+  
