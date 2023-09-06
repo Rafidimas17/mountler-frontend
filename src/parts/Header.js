@@ -2,14 +2,13 @@ import React from "react";
 
 import Button from "../elements/Button";
 import BrandIcon from "./IconText";
-import { Fade } from "react-reveal";
+import { Fade } from "react-awesome-reveal";
 
 export default function Header(props) {
-  
   const getNavLinkClass = (path) => {
     return props.location.pathname === path ? " active" : "";
   };
-  
+
   const base64Url = props.data.split(".")[1];
   const decodedValue = JSON.parse(window.atob(base64Url));
   const removeToken = () => {
@@ -78,8 +77,8 @@ export default function Header(props) {
                         fontSize: 18,
                         backgroundColor: "white",
                         border: "none",
-                        color:"#152C58",
-                        outline:"none"
+                        color: "#152C58",
+                        outline: "none",
                       }}>
                       Halo, {decodedValue.username}👋
                     </button>
@@ -88,8 +87,13 @@ export default function Header(props) {
                       aria-labelledby="dropdownMenuButton">
                       <a
                         className="dropdown-item"
-                        onClick={()=>removeToken()}
-                        style={{ fontFamily: "Poppins", fontSize: 16,border:"none",outline:"none" }}>
+                        onClick={() => removeToken()}
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 16,
+                          border: "none",
+                          outline: "none",
+                        }}>
                         Logout
                       </a>
                     </div>

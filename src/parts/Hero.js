@@ -4,7 +4,7 @@ import { frame } from "../assets";
 import { IconCities } from "../assets";
 import { IconHiker } from "../assets";
 import { IconMountain } from "../assets";
-import Fade from "react-reveal";
+import { Fade } from "react-awesome-reveal";
 import Button from "../elements/Button";
 import formatNumber from "../utils/formatNumber";
 export default function Hero(props) {
@@ -27,8 +27,7 @@ export default function Hero(props) {
                 fontWeight: 600,
                 fontSize: 40,
                 color: "#011A4B",
-              }}
-            >
+              }}>
               Forget Busy Work, <br />
               Start Next Advanture
             </h2>
@@ -39,8 +38,7 @@ export default function Hero(props) {
                 fontFamily: "Poppins",
                 fontWeight: 400,
                 fontSize: 18,
-              }}
-            >
+              }}>
               We provide what you need to enjoy your hiking in Indonesia. Let’s
               get started !
             </p>
@@ -60,15 +58,13 @@ export default function Hero(props) {
                 borderBottomLeftRadius: 4,
                 borderBottomRightRadius: 4,
               }}
-              onClick={showMostPicked}
-            >
+              onClick={showMostPicked}>
               Show Me Now
             </Button>
             <div className="row mt-5">
               <div
                 className="col-auto"
-                style={{ marginRight: 10, marginLeft: 10 }}
-              >
+                style={{ marginRight: 10, marginLeft: 10 }}>
                 <img
                   width="48"
                   height="48"
@@ -81,8 +77,7 @@ export default function Hero(props) {
                     fontSize: 18,
                     fontFamily: "Poppins",
                     fontWeight: 500,
-                  }}
-                >
+                  }}>
                   {formatNumber(props.data.treasures)}{" "}
                   <span
                     className="text-gray-500 font-weight-light"
@@ -90,8 +85,7 @@ export default function Hero(props) {
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: 300,
-                    }}
-                  >
+                    }}>
                     Mountain
                   </span>
                 </h6>
@@ -109,8 +103,7 @@ export default function Hero(props) {
                     fontSize: 18,
                     fontFamily: "Poppins",
                     fontWeight: 500,
-                  }}
-                >
+                  }}>
                   {formatNumber(props.data.travelers)}{" "}
                   <span
                     className="text-gray-500 font-weight-light"
@@ -118,8 +111,7 @@ export default function Hero(props) {
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: 300,
-                    }}
-                  >
+                    }}>
                     Hiker
                   </span>
                 </h6>
@@ -137,8 +129,7 @@ export default function Hero(props) {
                     fontSize: 18,
                     fontFamily: "Poppins",
                     fontWeight: 500,
-                  }}
-                >
+                  }}>
                   {formatNumber(props.data.cities)}{" "}
                   <span
                     className="text-gray-500 font-weight-light"
@@ -146,8 +137,7 @@ export default function Hero(props) {
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: 300,
-                    }}
-                  >
+                    }}>
                     Cities
                   </span>
                 </h6>
@@ -161,8 +151,7 @@ export default function Hero(props) {
                 height: 396,
                 marginTop: 30,
                 marginRight: 90,
-              }}
-            >
+              }}>
               <img
                 src={hiking}
                 alt="Room with couches"

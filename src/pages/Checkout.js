@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Fade from "react-reveal";
+import { Fade } from "react-awesome-reveal";
 import { connect } from "react-redux";
 import Header from "../parts/Header";
 import Button from "../elements/Button";
@@ -198,7 +198,7 @@ class Checkout extends Component {
     };
     return (
       <>
-        <Header {...this.props} data={data.token}/>
+        <Header {...this.props} data={data.token} />
         <Stepper steps={steps} initialStep="">
           {(prevStep, nextStep, CurrentStep, steps) => (
             <>
@@ -249,7 +249,8 @@ class Checkout extends Component {
                             isBlock
                             isPrimary
                             hasShadow
-                            onClick={() => { console.log(this.state.data) // Menampilkan state saat tombol diklik
+                            onClick={() => {
+                              console.log(this.state.data); // Menampilkan state saat tombol diklik
                               this._Submit(nextStep); // Lanjutkan ke langkah berikutnya
                             }}>
                             Continue to Book

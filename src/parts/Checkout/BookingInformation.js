@@ -1,5 +1,5 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 import { InputText } from "../../elements/Form";
 import ReservationSummary from "./ReservationSummary";
 import Form from "react-bootstrap/Form";
@@ -206,9 +206,7 @@ export default function BookingInformation(props) {
                                 value={data.member[index].gender}
                                 required
                                 style={{ width: "100%" }}>
-                                <option value={null}>
-                                  --Pilih Kelamin--
-                                </option>
+                                <option value={null}>--Pilih Kelamin--</option>
                                 <option value="pria">Laki-Laki</option>
                                 <option value="wanita">Perempuan</option>
                               </Form.Select>

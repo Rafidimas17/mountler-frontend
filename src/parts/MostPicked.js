@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../elements/Button";
-import Fade from "react-reveal";
+import { Fade } from "react-awesome-reveal";
 function MostPicked(props) {
   return (
     <section className="container" ref={props.refMostPicked}>
@@ -18,16 +18,16 @@ function MostPicked(props) {
                     <span className="font-weight-light"> / {item.unit}</span>
                   </div>
                   <figure className="img-wrapper">
-                      <img
-                        src={
-                          item.imageId[0].imageUrl
-                            ? `${process.env.REACT_APP_HOST}/${item.imageId[0].imageUrl}`
-                            : ""
-                        }
-                        alt={item.title}
-                        className="img-cover"
-                      />
-                    </figure>
+                    <img
+                      src={
+                        item.imageId[0].imageUrl
+                          ? `${process.env.REACT_APP_HOST}/${item.imageId[0].imageUrl}`
+                          : ""
+                      }
+                      alt={item.title}
+                      className="img-cover"
+                    />
+                  </figure>
                   <div className="meta-wrapper">
                     <Button
                       className="btn"
