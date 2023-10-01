@@ -12,8 +12,7 @@ export default function Profile() {
         <div className="row">
           <div
             className="account-space col-3 m-2 pb-2"
-            style={{ width: "100%", height: "100%" }}
-          >
+            style={{ width: "100%", height: "100%" }}>
             <div className="card mb-4 p-2 d-flex">
               <h2 className="account-profile mt-3 ml-2">Account</h2>
               {/* <div className="card-body"> */}
@@ -40,8 +39,7 @@ export default function Profile() {
               <Link to="/signup" className="card-account text-decoration-none">
                 <div
                   className="account-inform mt-4
-                mb-5"
-                >
+                mb-5">
                   <img
                     src={IconLogout}
                     alt="icon-personal"

@@ -17,8 +17,8 @@ export default function Hero(props) {
   return (
     <Fade bottom>
       <section className="container pt-4">
-        <div className="row align-items-center mt-3">
-          <div className="col-auto pr-5" style={{ width: 500 }}>
+        <div className="row align-items-center mt-5">
+          <div className="col-md-6 col-sm-12 d-block pr-5 d-block">
             <h2
               className="h2"
               style={{
@@ -26,6 +26,7 @@ export default function Hero(props) {
                 fontFamily: "Poppins",
                 fontWeight: 600,
                 fontSize: 40,
+                gap: 16,
                 color: "#011A4B",
               }}>
               Forget Busy Work, <br />
@@ -62,9 +63,7 @@ export default function Hero(props) {
               Show Me Now
             </Button>
             <div className="row mt-5">
-              <div
-                className="col-auto"
-                style={{ marginRight: 10, marginLeft: 10 }}>
+              <div className="col-sm-4 col-md-4">
                 <img
                   width="48"
                   height="48"
@@ -90,7 +89,7 @@ export default function Hero(props) {
                   </span>
                 </h6>
               </div>
-              <div className="col-auto" style={{ marginRight: 35 }}>
+              <div className="col-sm-4 col-md-4">
                 <img
                   width="48"
                   height="48"
@@ -116,7 +115,7 @@ export default function Hero(props) {
                   </span>
                 </h6>
               </div>
-              <div className="col-auto" style={{ marginRight: 35 }}>
+              <div className="col-sm-4 col-md-4">
                 <img
                   width="48"
                   height="48"
@@ -144,13 +143,14 @@ export default function Hero(props) {
               </div>
             </div>
           </div>
-          <div className="col-6 pl-5" style={{ marginTop: 10, marginLeft: 70 }}>
+          <div
+            className="col-md-6 col-lg-6 d-md-block d-none"
+            style={{ marginTop: 10 }}>
             <div
               style={{
                 width: 492,
                 height: 396,
                 marginTop: 30,
-                marginRight: 90,
               }}>
               <img
                 src={hiking}

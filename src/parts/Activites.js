@@ -9,7 +9,7 @@ export default function Activities({ data }) {
   return (
     <section className="container">
       <Fade bottom>
-        <h4 className="mb-3 font-weight-medium">Activities</h4>
+        <h4 className="mb-3 font-weight-medium">Favourite Spot</h4>
         <div className="container-grid">
           {data.map((item, index2) => {
             return (

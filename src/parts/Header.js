@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../elements/Button";
 import BrandIcon from "./IconText";
 import { Fade } from "react-awesome-reveal";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Header(props) {
   const getNavLinkClass = (path) => {
@@ -52,18 +53,6 @@ export default function Header(props) {
                   </Button>
                 </li>
                 <li className={`nav-item${getNavLinkClass("/agents")}`}>
-                  {/* <Button
-                    className="nav-link btn btn-shadow"
-                    type="link"
-                    href="/login"
-                    style={{
-                      borderRadius: 10,
-                      backgroundColor: "#3252DF",
-                      color: "#FDFDFD",
-                    }}
-                  >
-                    Login
-                  </Button> */}
                   <div className="dropdown">
                     <button
                       className="nav-link"
@@ -74,23 +63,38 @@ export default function Header(props) {
                       aria-expanded="false"
                       style={{
                         fontFamily: "Poppins",
-                        fontSize: 18,
+                        fontSize: 16,
                         backgroundColor: "white",
                         border: "none",
                         color: "#152C58",
                         outline: "none",
                       }}>
-                      Halo, {decodedValue.username}👋
+                      Halo, {decodedValue.username}
                     </button>
                     <div
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton">
+                      <Link
+                        to="contoh"
+                        style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                        <a
+                          className="dropdown-item"
+                          style={{
+                            fontFamily: "Poppins",
+                            fontSize: 16,
+                            border: "none",
+                            outline: "none",
+                          }}>
+                          Profile
+                        </a>
+                      </Link>
                       <a
                         className="dropdown-item"
                         onClick={() => removeToken()}
                         style={{
                           fontFamily: "Poppins",
                           fontSize: 16,
+                          color: "#2A2A2A",
                           border: "none",
                           outline: "none",
                         }}>

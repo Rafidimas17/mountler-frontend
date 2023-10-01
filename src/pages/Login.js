@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../elements/Button";
 import CardWelcome from "../parts/CardWelcome";
+import { IconGoogle } from "../assets";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 

@@ -50,7 +50,8 @@ export default function BookingInformation(props) {
               return (
                 <Fade delay={300}>
                   <div
-                    className="card shadow p-3 mb-5 bg-white rounded mt-3"
+                    className="card p-3 mb-5 bg-white rounded mt-3"
+                    style={{ boxShadow: "0 6px 60px #3333330f" }}
                     key={`row-${index}`}
                     value={item}
                     id={`item ${index}`}>

@@ -12,7 +12,7 @@ import Stepper, {
 } from "../elements/Stepper";
 
 import BookingInformation from "../parts/Checkout/BookingInformation";
-import Payment from "../parts/Checkout/Payment";
+import Equipment from "../parts/Checkout/Equipment";
 import Completed from "../parts/Checkout/Completed";
 
 import ItemDetails from "../json/bookingInformation.json";
@@ -32,7 +32,7 @@ class Checkout extends Component {
           phone: "",
         },
       ],
-      proofPayment: "",
+      proofEquipment: "",
       bankName: "",
       bankHolder: "",
       token: localStorage.getItem("token"),
@@ -116,7 +116,7 @@ class Checkout extends Component {
     payload.append("bankName", data.bankName);
     payload.append("nameAccountBank", data.bankHolder);
     payload.append("total", grandTotal);
-    payload.append("image", data.proofPayment[0]);
+    payload.append("image", data.proofEquipment[0]);
 
     data.member.forEach((member_data, index) => {
       const memberPrefix = `members[${index}]`;
@@ -178,11 +178,11 @@ class Checkout extends Component {
           />
         ),
       },
-      payment: {
-        title: "Payment",
-        description: null,
+      Equipment: {
+        title: "Equipment",
+        description: "Add your equipment for enjoy hiking!",
         content: (
-          <Payment
+          <Equipment
             data={data}
             checkout={checkout}
             ItemDetails={ItemDetails}
@@ -202,11 +202,7 @@ class Checkout extends Component {
         <Stepper steps={steps} initialStep="">
           {(prevStep, nextStep, CurrentStep, steps) => (
             <>
-              <Numbering
-                data={steps}
-                current={CurrentStep}
-                style={{ marginBottom: 50 }}
-              />
+              <Numbering data={steps} current={CurrentStep} />
               <Meta data={steps} current={CurrentStep} />
               <MainContent data={steps} current={CurrentStep} />
               {CurrentStep === "bookingInformation" && (
@@ -236,10 +232,10 @@ class Checkout extends Component {
                   </Button>
                 </Controller>
               )}
-              {CurrentStep === "payment" && (
+              {CurrentStep === "Equipment" && (
                 <Fade>
                   <Controller>
-                    {data.proofPayment !== "" &&
+                    {data.proofEquipment !== "" &&
                       data.bankName !== "" &&
                       data.bankHolder !== "" && (
                         <Fade>
