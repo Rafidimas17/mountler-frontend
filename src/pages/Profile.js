@@ -7,7 +7,7 @@ import { IconMembership } from "../assets";
 export default function Profile() {
   return (
     <>
-      <Header isCentered />
+      {/* <Header isCentered /> */}
       <div className="container mt-3" style={{ height: "100vh" }}>
         <div className="row">
           <div

@@ -32,9 +32,13 @@ class Checkout extends Component {
           phone: "",
         },
       ],
-      proofEquipment: "",
-      bankName: "",
-      bankHolder: "",
+      jumlahTenda: "",
+      jumlahKompor: "",
+      jumlahCarrier: "",
+      jumlahMatras: "",
+      jumlahSB: "",
+      jumlahHeadlamp: "",
+      jumlahP3k: "",
       token: localStorage.getItem("token"),
     },
   };
@@ -113,14 +117,17 @@ class Checkout extends Component {
     payload.append("duration", checkout.duration);
     payload.append("startDateBooking", checkout.date.startDate);
     payload.append("endDateBooking", checkout.date.endDate);
-    payload.append("bankName", data.bankName);
-    payload.append("nameAccountBank", data.bankHolder);
+    payload.append("jumlah_tenda", data.jumlahTenda);
+    payload.append("jumlah_kompor", data.jumlahKompor);
+    payload.append("jumlah_carrier", data.jumlahCarrier);
+    payload.append("jumlah_matras", data.jumlahMatras);
+    payload.append("jumlah_sleeping_bag", data.jumlahSB);
+    payload.append("jumlah_headlamp", data.jumlahHeadlamp);
+    payload.append("jumlah_p3k", data.jumlahP3k);
     payload.append("total", grandTotal);
-    payload.append("image", data.proofEquipment[0]);
 
     data.member.forEach((member_data, index) => {
       const memberPrefix = `members[${index}]`;
-
       payload.append(`${memberPrefix}[nameMember]`, member_data.fullname);
       payload.append(`${memberPrefix}[addressMember]`, member_data.address);
       payload.append(`${memberPrefix}[noIdMember]`, member_data.no_id);
@@ -133,7 +140,7 @@ class Checkout extends Component {
       nextStep();
     });
   };
-
+  conso;
   render() {
     const { data } = this.state;
     const { checkout } = this.props;

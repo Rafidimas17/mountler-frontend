@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Fade } from "react-awesome-reveal";
 
 import { InputText, InputFile } from "../../elements/Form";
 
 export default function Equipment(props) {
   const { data, checkout } = props;
-  const [jumlah, setJumlah] = useState("");
-
-  const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-    setJumlah(inputValue);
-  };
 
   return (
     <Fade>
@@ -38,9 +32,11 @@ export default function Equipment(props) {
                       type="number"
                       min={0}
                       className="form-control"
-                      placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                      value={jumlah}
-                      onChange={handleInputChange}
+                      placeholder="Jumlah"
+                      id="jumlahTenda"
+                      name="jumlahTenda"
+                      value={data.tenda}
+                      onChange={props.onChange}
                     />
                   </div>
                   <div className="col">
@@ -50,9 +46,11 @@ export default function Equipment(props) {
                       type="number"
                       min={0}
                       className="form-control"
-                      placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                      value={jumlah}
-                      onChange={handleInputChange}
+                      placeholder="Kapasitas"
+                      id="jumlahTenda"
+                      name="kapasitas"
+                      value={data.kapasitas}
+                      onChange={props.kapasitas}
                     />
                   </div>
                 </div>
@@ -70,9 +68,11 @@ export default function Equipment(props) {
                   type="number"
                   min={0}
                   className="form-control"
-                  placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                  value={jumlah}
-                  onChange={handleInputChange}
+                  placeholder="Jumlah"
+                  id="kompor"
+                  name="jumlahKompor"
+                  value={data.kompor}
+                  onChange={props.onChange}
                 />
               </div>
               <div class="col-2">
@@ -88,9 +88,11 @@ export default function Equipment(props) {
                   type="number"
                   min={0}
                   className="form-control"
-                  placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                  value={jumlah}
-                  onChange={handleInputChange}
+                  placeholder="Jumlah"
+                  id="carrier"
+                  name="jumlahCarrier"
+                  value={data.carrier}
+                  onChange={props.onChange}
                 />
               </div>
               <div class="col-2">
@@ -106,9 +108,10 @@ export default function Equipment(props) {
                   type="number"
                   min={0}
                   className="form-control"
-                  placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                  value={jumlah}
-                  onChange={handleInputChange}
+                  id="matras"
+                  name="jumlahMatras"
+                  value={data.matras}
+                  onChange={props.onChange}
                 />
               </div>
               <div class="col-2">
@@ -124,9 +127,10 @@ export default function Equipment(props) {
                   type="number"
                   min={0}
                   className="form-control"
-                  placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                  value={jumlah}
-                  onChange={handleInputChange}
+                  id="matras"
+                  name="jumlahSB"
+                  value={data.sleeping_bag}
+                  onChange={props.onChange}
                 />
               </div>
               <div class="col-2">
@@ -142,9 +146,10 @@ export default function Equipment(props) {
                   type="number"
                   min={0}
                   className="form-control"
-                  placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                  value={jumlah}
-                  onChange={handleInputChange}
+                  id="matras"
+                  name="jumlahHeadlamp"
+                  value={data.headlamp}
+                  onChange={props.onChange}
                 />
               </div>
               <div class="col-2">
@@ -160,9 +165,10 @@ export default function Equipment(props) {
                   type="number"
                   min={0}
                   className="form-control"
-                  placeholder={jumlah === 0 ? "Jumlah" : "Jumlah"}
-                  value={jumlah}
-                  onChange={handleInputChange}
+                  id="p3k"
+                  name="jumlahP3k"
+                  value={data.p3k}
+                  onChange={props.onChange}
                 />
               </div>
               <div class="col-2">
