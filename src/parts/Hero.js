@@ -15,8 +15,8 @@ export default function Hero(props) {
     });
   }
   return (
-    <Fade bottom>
-      <section className="container pt-4">
+    <section className="container pt-4">
+      <Fade bottom>
         <div className="row align-items-center mt-5">
           <div className="col-md-6 col-sm-12 d-block pr-5 d-block">
             <h2
@@ -183,7 +183,7 @@ export default function Hero(props) {
             </div>
           </div>
         </div>
-      </section>
-    </Fade>
+      </Fade>
+    </section>
   );
 }

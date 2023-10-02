@@ -26,7 +26,7 @@ export default function Login() {
       username: username,
       password: password,
     };
-    console.log(data);
+    // console.log(data);
     axios
       .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data)
       .then((result) => {
@@ -38,6 +38,9 @@ export default function Login() {
       })
       .catch((e) => {
         setError(e.response.data.message);
+        setTimeout(() => {
+          setError("");
+        }, 2000);
       });
   };
   return (
@@ -45,10 +48,10 @@ export default function Login() {
       {direct && <Redirect to="/" />}
       <div className="container">
         <div className="row">
-          <div className="col-tag col-6">
+          <div className="col-tag col-6 d-md-block d-none">
             <CardWelcome />
           </div>
-          <div className="col-6 p-5">
+          <div className="col-md-6 col-sm-12 p-5">
             <div className="container">
               <h5 className="title-signup">Login</h5>
               <p className="tagline-welcome mt-2">
@@ -115,7 +118,10 @@ export default function Login() {
                   </Button>
                 </div>
                 <div className="form-group mb-0 justify-content-center text-center">
-                  <h4 className="text-center" htmlFor="exampleInputPassword">
+                  <h4
+                    className="text-center"
+                    htmlFor="exampleInputPassword"
+                    hidden>
                     OR
                   </h4>
                 </div>

@@ -74,30 +74,32 @@ export default function Header(props) {
                     <div
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton">
-                      <Link
-                        to="contoh"
-                        style={{ textDecoration: "none", color: "#2A2A2A" }}>
-                        <a
-                          className="dropdown-item"
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            border: "none",
-                            outline: "none",
-                          }}>
-                          Profile
-                        </a>
-                      </Link>
                       <a
                         className="dropdown-item"
-                        onClick={() => removeToken()}
                         style={{
                           fontFamily: "Poppins",
                           fontSize: 16,
-                          color: "#2A2A2A",
                           border: "none",
                           outline: "none",
                         }}>
+                        <Link
+                          to="contoh"
+                          style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                          Profile
+                        </Link>
+                      </a>
+                      <a
+                        className="dropdown-item"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 16,
+                          border: "none",
+                          outline: "none",
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          color: "#2A2A2A",
+                        }}
+                        onClick={() => removeToken()}>
                         Logout
                       </a>
                     </div>
