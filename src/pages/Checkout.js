@@ -35,6 +35,7 @@ class Checkout extends Component {
       jumlahTenda: "",
       jumlahKompor: "",
       jumlahCarrier: "",
+      jumlahKapasitas: "",
       jumlahMatras: "",
       jumlahSB: "",
       jumlahHeadlamp: "",
@@ -117,13 +118,6 @@ class Checkout extends Component {
     payload.append("duration", checkout.duration);
     payload.append("startDateBooking", checkout.date.startDate);
     payload.append("endDateBooking", checkout.date.endDate);
-    payload.append("jumlah_tenda", data.jumlahTenda);
-    payload.append("jumlah_kompor", data.jumlahKompor);
-    payload.append("jumlah_carrier", data.jumlahCarrier);
-    payload.append("jumlah_matras", data.jumlahMatras);
-    payload.append("jumlah_sleeping_bag", data.jumlahSB);
-    payload.append("jumlah_headlamp", data.jumlahHeadlamp);
-    payload.append("jumlah_p3k", data.jumlahP3k);
     payload.append("total", grandTotal);
 
     data.member.forEach((member_data, index) => {
@@ -135,15 +129,23 @@ class Checkout extends Component {
       payload.append(`${memberPrefix}[emailMember]`, member_data.email);
       payload.append(`${memberPrefix}[genderMember]`, member_data.gender);
     });
+    payload.append("equipments[0][jumlahSleepingBag]", data.jumlahSB);
+    payload.append("equipments[0][jumlahTenda]", data.jumlahTenda);
+    payload.append("equipments[0][jumlahKompor]", data.jumlahKompor);
+    payload.append("equipments[0][jumlahMatras]", data.jumlahMatras);
+    payload.append("equipments[0][jumlahP3k]", data.jumlahP3k);
+    payload.append("equipments[0][jumlahCarrier]", data.jumlahCarrier);
+    payload.append("equipments[0][jumlahHeadlamp]", data.jumlahHeadlamp);
 
     this.props.submitBooking(payload).then(() => {
       nextStep();
     });
   };
-  conso;
   render() {
     const { data } = this.state;
     const { checkout } = this.props;
+
+    console.log(data);
     if (!data.token) {
       return <Redirect to="/login" />;
     }
