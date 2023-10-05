@@ -41,6 +41,7 @@ class Checkout extends Component {
       jumlahHeadlamp: "",
       jumlahP3k: "",
       token: localStorage.getItem("token"),
+      result: null,
     },
   };
 
@@ -106,6 +107,20 @@ class Checkout extends Component {
 
   componentDidMount() {
     window.scroll(0, 0);
+    const { token } = this.state.data;
+    if (token) {
+      try {
+        const decodedToken = JSON.parse(window.atob(token));
+        this.setState({
+          data: {
+            ...this.state.data,
+            result: decodedToken, // Menyimpan hasil dekode ke dalam state
+          },
+        });
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
   }
   _Submit = (nextStep) => {
     const { data } = this.state;
@@ -114,6 +129,8 @@ class Checkout extends Component {
     const subTotal = checkout.price * checkout.duration * data.member.length;
     const grandTotal = (subTotal * tax) / 100 + subTotal;
     const payload = new FormData();
+    console.log(data.result);
+    payload.append("idProfile", data.result);
     payload.append("idItem", checkout._id);
     payload.append("duration", checkout.duration);
     payload.append("startDateBooking", checkout.date.startDate);

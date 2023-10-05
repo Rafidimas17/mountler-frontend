@@ -7,6 +7,7 @@ import IconTelegram from "./icon/telegram.svg";
 import IconGithub from "./icon/github.svg";
 import IconCities from "./icon/Cities.svg";
 import IconHiker from "./icon/Hiker.svg";
+import TicketNotFound from "./image/no-ticket.png";
 // import IconQris from './icon/icon_qris.svg'
 import IconCalender from "./icon/calender.svg";
 import IconMountain from "./icon/Mountain.svg";
@@ -23,6 +24,7 @@ export {
   // IconQris,
   ImageCompleted,
   IconPersonal,
+  TicketNotFound,
   IconMembership,
   IconLogout,
   IconMandiri,
