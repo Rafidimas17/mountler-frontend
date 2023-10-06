@@ -11,17 +11,17 @@ export default function FeaturedImage({ data }) {
               className={`item ${index > 0 ? "column-4" : "column-8"} ${
                 index > 0 ? "row-1" : "row-2"
               }`}>
-              <Fade bottom delay={300 * index}>
-                <div className="card h-100">
-                  <figure className="img-wrapper">
-                    <img
-                      className="img-cover"
-                      src={`${process.env.REACT_APP_HOST}/${item.imageUrl}`}
-                      alt={item._id}
-                    />
-                  </figure>
-                </div>
-              </Fade>
+              {/* <Fade bottom delay={300 * index}> */}
+              <div className="card h-100">
+                <figure className="img-wrapper">
+                  <img
+                    className="img-cover"
+                    src={`${process.env.REACT_APP_HOST}/${item.imageUrl}`}
+                    alt={item._id}
+                  />
+                </figure>
+              </div>
+              {/* </Fade> */}
             </div>
           );
         })}

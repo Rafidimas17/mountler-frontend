@@ -41,7 +41,6 @@ class Checkout extends Component {
       jumlahHeadlamp: "",
       jumlahP3k: "",
       token: localStorage.getItem("token"),
-      result: null,
     },
   };
 
@@ -107,56 +106,58 @@ class Checkout extends Component {
 
   componentDidMount() {
     window.scroll(0, 0);
-    const { token } = this.state.data;
-    if (token) {
-      try {
-        const decodedToken = JSON.parse(window.atob(token));
-        this.setState({
-          data: {
-            ...this.state.data,
-            result: decodedToken, // Menyimpan hasil dekode ke dalam state
-          },
-        });
-      } catch (error) {
-        console.error("Error decoding token:", error);
-      }
+    const { checkout } = this.props;
+    if (checkout && checkout._id) {
+      // console.log(checkout._id);
+    } else {
+      console.error(
+        "Objek checkout tidak memiliki properti _id atau objek checkout adalah null atau undefined."
+      );
     }
+    // console.log(checkout._id);
   }
   _Submit = (nextStep) => {
     const { data } = this.state;
     const { checkout } = this.props;
-    const tax = 10;
-    const subTotal = checkout.price * checkout.duration * data.member.length;
-    const grandTotal = (subTotal * tax) / 100 + subTotal;
-    const payload = new FormData();
-    console.log(data.result);
-    payload.append("idProfile", data.result);
-    payload.append("idItem", checkout._id);
-    payload.append("duration", checkout.duration);
-    payload.append("startDateBooking", checkout.date.startDate);
-    payload.append("endDateBooking", checkout.date.endDate);
-    payload.append("total", grandTotal);
 
-    data.member.forEach((member_data, index) => {
-      const memberPrefix = `members[${index}]`;
-      payload.append(`${memberPrefix}[nameMember]`, member_data.fullname);
-      payload.append(`${memberPrefix}[addressMember]`, member_data.address);
-      payload.append(`${memberPrefix}[noIdMember]`, member_data.no_id);
-      payload.append(`${memberPrefix}[phoneMember]`, member_data.phone);
-      payload.append(`${memberPrefix}[emailMember]`, member_data.email);
-      payload.append(`${memberPrefix}[genderMember]`, member_data.gender);
-    });
-    payload.append("equipments[0][jumlahSleepingBag]", data.jumlahSB);
-    payload.append("equipments[0][jumlahTenda]", data.jumlahTenda);
-    payload.append("equipments[0][jumlahKompor]", data.jumlahKompor);
-    payload.append("equipments[0][jumlahMatras]", data.jumlahMatras);
-    payload.append("equipments[0][jumlahP3k]", data.jumlahP3k);
-    payload.append("equipments[0][jumlahCarrier]", data.jumlahCarrier);
-    payload.append("equipments[0][jumlahHeadlamp]", data.jumlahHeadlamp);
+    const jumlahSafety = data.jumlahTenda * data.jumlahKapasitas;
 
-    this.props.submitBooking(payload).then(() => {
-      nextStep();
-    });
+    if (jumlahSafety < data.member.length) {
+      alert("Tenda anda tidak sesuai kapasitas");
+    } else if (jumlahSafety >= data.member.length) {
+      console.log(checkout._id);
+      const tax = 10;
+      const subTotal = checkout.price * checkout.duration * data.member.length;
+      const grandTotal = (subTotal * tax) / 100 + subTotal;
+      const payload = new FormData();
+      payload.append("token", data.token);
+      payload.append("idItem", checkout._id);
+      payload.append("duration", checkout.duration);
+      payload.append("startDateBooking", checkout.date.startDate);
+      payload.append("endDateBooking", checkout.date.endDate);
+      payload.append("total", grandTotal);
+
+      data.member.forEach((member_data, index) => {
+        const memberPrefix = `members[${index}]`;
+        payload.append(`${memberPrefix}[nameMember]`, member_data.fullname);
+        payload.append(`${memberPrefix}[addressMember]`, member_data.address);
+        payload.append(`${memberPrefix}[noIdMember]`, member_data.no_id);
+        payload.append(`${memberPrefix}[phoneMember]`, member_data.phone);
+        payload.append(`${memberPrefix}[emailMember]`, member_data.email);
+        payload.append(`${memberPrefix}[genderMember]`, member_data.gender);
+      });
+      payload.append("equipments[0][jumlahSleepingBag]", data.jumlahSB);
+      payload.append("equipments[0][jumlahTenda]", data.jumlahTenda);
+      payload.append("equipments[0][jumlahKompor]", data.jumlahKompor);
+      payload.append("equipments[0][jumlahMatras]", data.jumlahMatras);
+      payload.append("equipments[0][jumlahP3k]", data.jumlahP3k);
+      payload.append("equipments[0][jumlahCarrier]", data.jumlahCarrier);
+      payload.append("equipments[0][jumlahHeadlamp]", data.jumlahHeadlamp);
+
+      this.props.submitBooking(payload).then(() => {
+        nextStep();
+      });
+    }
   };
   render() {
     const { data } = this.state;
@@ -261,9 +262,13 @@ class Checkout extends Component {
               {CurrentStep === "Equipment" && (
                 <Fade>
                   <Controller>
-                    {data.proofEquipment !== "" &&
-                      data.bankName !== "" &&
-                      data.bankHolder !== "" && (
+                    {data.jumlahCarrier !== "" &&
+                      data.jumlahHeadlamp !== "" &&
+                      data.jumlahMatras !== "" &&
+                      data.jumlahTenda !== "" &&
+                      data.jumlahSB !== "" &&
+                      data.jumlahP3k !== "" &&
+                      data.jumlahKompor !== "" && (
                         <Fade>
                           <Button
                             className="btn mb-3"
@@ -299,8 +304,8 @@ class Checkout extends Component {
                       isBlock
                       isPrimary
                       hasShadow
-                      href="">
-                      Back to Home
+                      href="/dashboard">
+                      My Dashboard
                     </Button>
                   </Controller>
                 </Fade>

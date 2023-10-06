@@ -13,9 +13,6 @@ export default function Equipment(props) {
           style={{
             display: "flex",
             flexDirection: "column",
-            margin: "0",
-            alignItems: "center",
-            justifyContent: "center",
           }}
           className="card-equipment">
           <div class="form-row  align-items-center p-3">
@@ -26,12 +23,11 @@ export default function Equipment(props) {
               <div className="row  align-items-center">
                 <div className="col">
                   {" "}
-                  <h6>Jumlah</h6>
                   <input
                     type="number"
                     min={0}
                     className="form-control"
-                    placeholder="Jumlah"
+                    placeholder="Amount"
                     id="jumlahTenda"
                     name="jumlahTenda"
                     value={data.jumlahTenda}
@@ -40,12 +36,11 @@ export default function Equipment(props) {
                 </div>
                 <div className="col">
                   {" "}
-                  <h6>Kapasitas</h6>
                   <input
                     type="number"
                     min={0}
                     className="form-control"
-                    placeholder="Kapasitas"
+                    placeholder="Capacity"
                     id="jumlahKapasitas"
                     name="jumlahKapasitas"
                     value={data.jumlahKapasitas}
@@ -67,7 +62,7 @@ export default function Equipment(props) {
                 type="number"
                 min={0}
                 className="form-control"
-                placeholder="Jumlah"
+                placeholder="Amount"
                 id="jumlahKompor"
                 name="jumlahKompor"
                 value={data.jumlahKompor}
@@ -87,7 +82,7 @@ export default function Equipment(props) {
                 type="number"
                 min={0}
                 className="form-control"
-                placeholder="Jumlah"
+                placeholder="Amount"
                 id="jumlahCarrier"
                 name="jumlahCarrier"
                 value={data.jumlahCarrier}
@@ -109,6 +104,7 @@ export default function Equipment(props) {
                 className="form-control"
                 id="jumlahMatras"
                 name="jumlahMatras"
+                placeholder="Amount"
                 value={data.jumlahMatras}
                 onChange={props.onChange}
               />
@@ -127,6 +123,7 @@ export default function Equipment(props) {
                 min={0}
                 className="form-control"
                 id="jumlahSB"
+                placeholder="Amount"
                 name="jumlahSB"
                 value={data.jumlahSB}
                 onChange={props.onChange}
@@ -145,6 +142,7 @@ export default function Equipment(props) {
                 type="number"
                 min={0}
                 className="form-control"
+                placeholder="Amount"
                 id="jumlahHeadlamp"
                 name="jumlahHeadlamp"
                 value={data.jumlahHeadlamp}
@@ -164,6 +162,7 @@ export default function Equipment(props) {
                 type="number"
                 min={0}
                 className="form-control"
+                placeholder="Amount"
                 id="jumlahP3k"
                 name="jumlahP3k"
                 value={data.jumlahP3k}
@@ -174,7 +173,6 @@ export default function Equipment(props) {
               <h6>Set</h6>
             </div>
           </div>
-          \
         </div>
       </div>
     </Fade>

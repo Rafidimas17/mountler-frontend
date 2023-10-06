@@ -6,15 +6,15 @@ export default function Completed() {
     <Fade>
       <div className="container" style={{ marginBottom: 30 }}>
         <div className="row justify-content-center text-center">
-          <div className="col-4">
+          <div className="col-5">
             <img
               src={ImageCompleted}
               className="img-fluid"
               alt="completed checkout"
             />
             <p className="text-gray-500">
-              We wil inform you via email later once the transaction has been
-              accepted
+              You have successfully checkout and completed your payment. Now,
+              get ready to enjoy your best hiking experience!
             </p>
           </div>
         </div>
