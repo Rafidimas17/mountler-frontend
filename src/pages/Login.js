@@ -26,7 +26,6 @@ export default function Login() {
       username: username,
       password: password,
     };
-    // console.log(data);
     axios
       .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data)
       .then((result) => {
