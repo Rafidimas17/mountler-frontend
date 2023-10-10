@@ -37,7 +37,8 @@
 @import "spinners";
 @import "utilities";
 @import "print";
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 .brand-text-icon {
   font-size: 30px;
   font-weight: 500;
@@ -1049,7 +1050,8 @@ color: #2D2D2D;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-
+  align-items: center;
+  justify-content: center;
 
   background: #FFFFFF;
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.04);
@@ -1081,4 +1083,119 @@ color: #2D2D2D;
       // font-family: "Poppins";    
     }
   } 
+}
+.ticket-information-found{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+ 
+
+  background: #FFFFFF;
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  padding: 30px;
+  .image-not-found{
+    width: 200px;
+    height: 220px;
+  }
+  h6{
+   font-weight: 700;
+   font-size: 24px;
+   margin-top: 20px;
+    font-family: "Poppins";    
+  }
+  p{
+    font-weight: 500;
+      font-size: 18px;
+
+      margin-top: 10px;
+       font-family: "Poppins";  
+    span{
+      font-weight: 500;
+      font-size: 18px;
+
+      margin-top: 20px;
+       font-family: "Poppins";    
+      
+      // font-family: "Poppins";    
+    }
+  } 
+}
+
+.ticket-card{
+  border-radius: 20px;
+background: #FFF;
+box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.04);
+.booking-number{
+  color: #120C80;
+font-family: "Poppins",sans-serif;
+font-size: 22px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.identity-information{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+.destination{
+  display: flex;
+  gap: 6px;
+  h5{
+    color: #120C80;
+    font-family: 'Poppins', sans-serif;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+  }  
+}
+.nameUser{
+  color: #120C80;
+  font-family: 'Poppins', sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.idUser{
+  color: #120C80;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+}
+.date-value{
+  color: #120C80;
+  font-family: 'Poppins', sans-serif;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.title-date{
+  color: #120C80;
+  font-family: 'Poppins', sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+}
+.qr-code-space{
+  display: flex;
+  flex-direction: column;
+  gap:2px;
+.text-scan-title{
+  color: #120C80;
+  font-family: "Poppins",sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+}
 }
