@@ -30,7 +30,7 @@ export default function Login() {
       .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data)
       .then((result) => {
         if (result) {
-          console.log(result);
+          // console.log(result);
           localStorage.setItem("token", result.data.token);
           setRedirect(true);
         }
