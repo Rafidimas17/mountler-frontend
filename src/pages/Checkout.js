@@ -12,7 +12,7 @@ import Stepper, {
 } from "../elements/Stepper";
 
 import BookingInformation from "../parts/Checkout/BookingInformation";
-import Payment from "../parts/Checkout/Payment";
+import Equipment from "../parts/Checkout/Equipment";
 import Completed from "../parts/Checkout/Completed";
 
 import ItemDetails from "../json/bookingInformation.json";
@@ -32,9 +32,14 @@ class Checkout extends Component {
           phone: "",
         },
       ],
-      proofPayment: "",
-      bankName: "",
-      bankHolder: "",
+      jumlahTenda: "",
+      jumlahKompor: "",
+      jumlahCarrier: "",
+      jumlahKapasitas: "",
+      jumlahMatras: "",
+      jumlahSB: "",
+      jumlahHeadlamp: "",
+      jumlahP3k: "",
       token: localStorage.getItem("token"),
     },
   };
@@ -101,42 +106,64 @@ class Checkout extends Component {
 
   componentDidMount() {
     window.scroll(0, 0);
+    const { checkout } = this.props;
+    if (checkout && checkout._id) {
+      // console.log(checkout._id);
+    } else {
+      console.error(
+        "Objek checkout tidak memiliki properti _id atau objek checkout adalah null atau undefined."
+      );
+    }
+    // console.log(checkout._id);
   }
   _Submit = (nextStep) => {
     const { data } = this.state;
     const { checkout } = this.props;
-    const tax = 10;
-    const subTotal = checkout.price * checkout.duration * data.member.length;
-    const grandTotal = (subTotal * tax) / 100 + subTotal;
-    const payload = new FormData();
-    payload.append("idItem", checkout._id);
-    payload.append("duration", checkout.duration);
-    payload.append("startDateBooking", checkout.date.startDate);
-    payload.append("endDateBooking", checkout.date.endDate);
-    payload.append("bankName", data.bankName);
-    payload.append("nameAccountBank", data.bankHolder);
-    payload.append("total", grandTotal);
-    payload.append("image", data.proofPayment[0]);
 
-    data.member.forEach((member_data, index) => {
-      const memberPrefix = `members[${index}]`;
+    const jumlahSafety = data.jumlahTenda * data.jumlahKapasitas;
 
-      payload.append(`${memberPrefix}[nameMember]`, member_data.fullname);
-      payload.append(`${memberPrefix}[addressMember]`, member_data.address);
-      payload.append(`${memberPrefix}[noIdMember]`, member_data.no_id);
-      payload.append(`${memberPrefix}[phoneMember]`, member_data.phone);
-      payload.append(`${memberPrefix}[emailMember]`, member_data.email);
-      payload.append(`${memberPrefix}[genderMember]`, member_data.gender);
-    });
+    if (jumlahSafety < data.member.length) {
+      alert("Tenda anda tidak sesuai kapasitas");
+    } else if (jumlahSafety >= data.member.length) {
+      console.log(checkout._id);
+      const tax = 10;
+      const subTotal = checkout.price * checkout.duration * data.member.length;
+      const grandTotal = (subTotal * tax) / 100 + subTotal;
+      const payload = new FormData();
+      payload.append("token", data.token);
+      payload.append("idItem", checkout._id);
+      payload.append("duration", checkout.duration);
+      payload.append("startDateBooking", checkout.date.startDate);
+      payload.append("endDateBooking", checkout.date.endDate);
+      payload.append("total", grandTotal);
 
-    this.props.submitBooking(payload).then(() => {
-      nextStep();
-    });
+      data.member.forEach((member_data, index) => {
+        const memberPrefix = `members[${index}]`;
+        payload.append(`${memberPrefix}[nameMember]`, member_data.fullname);
+        payload.append(`${memberPrefix}[addressMember]`, member_data.address);
+        payload.append(`${memberPrefix}[noIdMember]`, member_data.no_id);
+        payload.append(`${memberPrefix}[phoneMember]`, member_data.phone);
+        payload.append(`${memberPrefix}[emailMember]`, member_data.email);
+        payload.append(`${memberPrefix}[genderMember]`, member_data.gender);
+      });
+      payload.append("equipments[0][jumlahSleepingBag]", data.jumlahSB);
+      payload.append("equipments[0][jumlahTenda]", data.jumlahTenda);
+      payload.append("equipments[0][jumlahKompor]", data.jumlahKompor);
+      payload.append("equipments[0][jumlahMatras]", data.jumlahMatras);
+      payload.append("equipments[0][jumlahP3k]", data.jumlahP3k);
+      payload.append("equipments[0][jumlahCarrier]", data.jumlahCarrier);
+      payload.append("equipments[0][jumlahHeadlamp]", data.jumlahHeadlamp);
+
+      this.props.submitBooking(payload).then(() => {
+        nextStep();
+      });
+    }
   };
-
   render() {
     const { data } = this.state;
     const { checkout } = this.props;
+
+    console.log(data);
     if (!data.token) {
       return <Redirect to="/login" />;
     }
@@ -178,11 +205,11 @@ class Checkout extends Component {
           />
         ),
       },
-      payment: {
-        title: "Payment",
-        description: null,
+      Equipment: {
+        title: "Equipment",
+        description: "Add your equipment for enjoy hiking!",
         content: (
-          <Payment
+          <Equipment
             data={data}
             checkout={checkout}
             ItemDetails={ItemDetails}
@@ -202,11 +229,7 @@ class Checkout extends Component {
         <Stepper steps={steps} initialStep="">
           {(prevStep, nextStep, CurrentStep, steps) => (
             <>
-              <Numbering
-                data={steps}
-                current={CurrentStep}
-                style={{ marginBottom: 50 }}
-              />
+              <Numbering data={steps} current={CurrentStep} />
               <Meta data={steps} current={CurrentStep} />
               <MainContent data={steps} current={CurrentStep} />
               {CurrentStep === "bookingInformation" && (
@@ -236,12 +259,16 @@ class Checkout extends Component {
                   </Button>
                 </Controller>
               )}
-              {CurrentStep === "payment" && (
+              {CurrentStep === "Equipment" && (
                 <Fade>
                   <Controller>
-                    {data.proofPayment !== "" &&
-                      data.bankName !== "" &&
-                      data.bankHolder !== "" && (
+                    {data.jumlahCarrier !== "" &&
+                      data.jumlahHeadlamp !== "" &&
+                      data.jumlahMatras !== "" &&
+                      data.jumlahTenda !== "" &&
+                      data.jumlahSB !== "" &&
+                      data.jumlahP3k !== "" &&
+                      data.jumlahKompor !== "" && (
                         <Fade>
                           <Button
                             className="btn mb-3"
@@ -277,8 +304,8 @@ class Checkout extends Component {
                       isBlock
                       isPrimary
                       hasShadow
-                      href="">
-                      Back to Home
+                      href="/dashboard">
+                      My Dashboard
                     </Button>
                   </Controller>
                 </Fade>

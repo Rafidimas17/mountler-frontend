@@ -7,22 +7,28 @@ import IconTelegram from "./icon/telegram.svg";
 import IconGithub from "./icon/github.svg";
 import IconCities from "./icon/Cities.svg";
 import IconHiker from "./icon/Hiker.svg";
+import TicketNotFound from "./image/no-ticket.png";
 // import IconQris from './icon/icon_qris.svg'
 import IconCalender from "./icon/calender.svg";
 import IconMountain from "./icon/Mountain.svg";
 import hiking from "./image/hiking.jpg";
+import QRCode from "./icon/qr-test.png";
 import frame from "./image/hero-frame.png";
 import IconMandiri from "./icon/BankMandiri.svg";
 import IconGoogle from "./icon/google.svg";
 import IconPersonal from "./icon/personal.svg";
 import IconMembership from "./icon/membership.svg";
 import IconLogout from "./icon/logout.svg";
+import LogoTicket from "./icon/logo-ticket.svg";
 import ImageCompleted from "./image/completed.jpg";
 // import IconGoogle from "./icon/google.svg";
 export {
   // IconQris,
+  LogoTicket,
   ImageCompleted,
   IconPersonal,
+  QRCode,
+  TicketNotFound,
   IconMembership,
   IconLogout,
   IconMandiri,

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../elements/Button";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import CardWelcome from "../parts/CardWelcome";
@@ -55,7 +56,7 @@ const Signup = () => {
         setError(e.response.data.message);
         setTimeout(() => {
           setError("");
-        }, 5000);
+        }, 2000);
       });
   };
 
@@ -64,10 +65,10 @@ const Signup = () => {
       <div className="container">
         {/* <Header isCentered /> */}
         <div className="row">
-          <div className="col-tag col-6 d-none d-md-block">
+          <div className="col-tag col-6 d-md-block d-none">
             <CardWelcome />
           </div>
-          <div className="col-6 p-5">
+          <div className="col-md-6 col-sm-12 p-5">
             <div className="container">
               <h5 className="title-signup">Sign up</h5>
               <p className="tagline-welcome mt-2">

@@ -14,7 +14,7 @@ class BookingForm extends Component {
       data: {
         duration: 1,
         track: "",
-        nameMountain:"",
+        nameMountain: "",
         date: {
           startDate: new Date(),
           endDate: new Date(),
@@ -71,12 +71,12 @@ class BookingForm extends Component {
     const { data } = this.state;
     this.props.startBooking({
       _id: this.props.itemDetails._id,
-      name:this.props.itemDetails.title,
+      name: this.props.itemDetails.title,
       duration: data.duration,
-      price:this.props.itemDetails.price,
+      price: this.props.itemDetails.price,
       track: data.track,
-      nameMountin:data.name,
-      bankId:this.props.itemDetails.bankId,
+      nameMountin: data.name,
+      bankId: this.props.itemDetails.bankId,
       date: {
         startDate: data.date.startDate,
         endDate: data.date.endDate,
@@ -99,7 +99,9 @@ class BookingForm extends Component {
           </span>
         </h5>
 
-        <label htmlFor="duration">How long you will stay?</label>
+        <label htmlFor="duration" style={{ fontFamily: "Poppins" }}>
+          How long you will stay?
+        </label>
         <InputNumber
           max={30}
           suffix={" day"}
@@ -109,11 +111,22 @@ class BookingForm extends Component {
           value={data.duration}
         />
 
-        <label htmlFor="date">Pick a date</label>
+        <label htmlFor="date" style={{ fontFamily: "Poppins" }}>
+          Pick a date
+        </label>
         <InputDate onChange={this.updateData} name="date" value={data.date} />
-        <label htmlFor="date">Choose Track</label>
-        <Form.Select className="select" name="track" onChange={this.updateData} value={data.track} required>
-        <option value={null} required>--Pilih Track--</option>
+        <label htmlFor="date" style={{ fontFamily: "Poppins" }}>
+          Choose Track
+        </label>
+        <Form.Select
+          className="select"
+          name="track"
+          onChange={this.updateData}
+          value={data.track}
+          required>
+          <option value={null} required>
+            --Pilih Track--
+          </option>
           {itemDetails.trackId.map((street, index) => {
             return (
               <option key={`street-Rp{index}`} value={street.name}>
@@ -127,7 +140,7 @@ class BookingForm extends Component {
           style={{ marginBottom: 30, fontWeight: 370, fontFamily: "Poppins" }}>
           You will pay{" "}
           <span className="text-gray-900" style={{ fontWeight: 600 }}>
-            Rp{itemDetails.price * data.duration} 
+            Rp{itemDetails.price * data.duration}
           </span>{" "}
           per{" "}
           <span className="text-gray-900" style={{ fontWeight: 600 }}>
@@ -143,7 +156,6 @@ class BookingForm extends Component {
           onClick={this.startBooking}>
           Continue to Book
         </Button>
-       
       </div>
     );
   }

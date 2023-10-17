@@ -9,7 +9,7 @@ import Weather from "../parts/weather";
 import Footer from "../parts/Footer";
 import { Redirect } from "react-router-dom";
 import BookingForm from "../parts/BookingForm";
-import Activities from '../parts/Activites'
+import Activities from "../parts/Activites";
 import Testimony from "../parts/Testimony";
 import { checkoutBooking } from "../store/actions/Checkout";
 import { fetchPage } from "../store/actions/page";
@@ -24,31 +24,47 @@ class DetailsPage extends Component {
   componentDidMount() {
     window.title = "Details Page";
     window.scrollTo(0, 0);
-    if(!this.props.page[this.props.match.params.id])
-    this.props.fetchPage(`${process.env.REACT_APP_HOST}/api-v1/detail-page/${this.props.match.params.id}`,this.props.match.params.id).then((response)=>{
-      // console.log(response.message)
-    })
+    if (!this.props.page[this.props.match.params.id])
+      this.props
+        .fetchPage(
+          `${process.env.REACT_APP_HOST}/api-v1/detail-page/${this.props.match.params.id}`,
+          this.props.match.params.id
+        )
+        .then((response) => {
+          // console.log(response.message)
+        });
   }
   render() {
-    const {page,match}=this.props
-    const {token}=this.state
+    const { page, match } = this.props;
+    const { token } = this.state;
     if (!token) {
       return <Redirect to="/login" />;
     }
     // console.log(this.props.page)
-    if(!page[match.params.id]){
+    if (!page[match.params.id]) {
       return (
         <div className="container">
           <div
             className="row align-items-center justify-content-center text-center"
             style={{ height: "100vh" }}>
             <div className="col-3">
-            Item Tidak Tersedia
+              <div className="spinner-grow text-light" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div className="spinner-grow text-light" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div className="spinner-grow text-light" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div className="spinner-grow text-light" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div className="spinner-grow text-light" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
               <div>
-                <Button
-                  className="btn mt-5"
-                  type="button"
-                  isLight>
+                <Button className="btn mt-5" type="button" isLight>
                   Back
                 </Button>
               </div>
@@ -63,10 +79,10 @@ class DetailsPage extends Component {
     ];
     return (
       <>
-       {/* <Payment someProp={propValue} /> */}
+        {/* <Payment someProp={propValue} /> */}
         <Header {...this.props} data={token}></Header>
         <PageDetailTitle breadcrumb={breadcrumb} data={page[match.params.id]} />
-        <Weather  data={page[match.params.id].currentWeather}/>
+        <Weather data={page[match.params.id].currentWeather} />
         <FeaturedImage data={page[match.params.id].imageId} />
         <section className="container">
           <div className="row">
@@ -74,7 +90,10 @@ class DetailsPage extends Component {
               <PageDetailDescription data={page[match.params.id]} />
             </div>
             <div className="col-5">
-              <BookingForm itemDetails={page[match.params.id]} startBooking={this.props.checkoutBooking} />
+              <BookingForm
+                itemDetails={page[match.params.id]}
+                startBooking={this.props.checkoutBooking}
+              />
             </div>
           </div>
         </section>
@@ -85,7 +104,6 @@ class DetailsPage extends Component {
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   page: state.page,
