@@ -37,6 +37,7 @@ class Dashboard extends Component {
       return <Redirect to="/login" />;
     }
 
+    // console.log(orders);
     // orders.map((item) => {
     //   console.log(item.payments.payment_status);
     // });
@@ -182,15 +183,17 @@ class Dashboard extends Component {
                           }
                           target="_blank"
                           rel="noopener noreferrer">
-                          <button
+                          <Button
                             className="btn btn-primary"
+                            type="link"
+                            href={`/ticket-show/${order._id}`}
                             style={{
                               fontFamily: "Poppins",
                               fontSize: 14,
                               fontWeight: 500,
                             }}>
                             Show ticket
-                          </button>
+                          </Button>
                         </a>
                       ) : (
                         ""
