@@ -9,13 +9,13 @@ export default function Footer() {
     <Fade>
       <div className="container" style={{ borderTop: `1px solid #F0F1F6` }}>
         <div className="row">
-          <div className="col-auto mr-5" style={{ width: 350 }}>
+          <div className="col-sm-12 col-lg-auto mr-5" style={{ width: 350 }}>
             <IconText />
             <p className="brand-tagline">
               We make your advanture easy and memorable
             </p>
           </div>
-          <div className="col-auto mr-5">
+          <div className="col-sm-12 col-lg-auto mr-5">
             <ul className="list-group">
               <li
                 className="list-groups-item"
@@ -33,7 +33,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-2 mr-5">
+          <div className="col-sm-12 col-lg-2 mr-5">
             <ul className="list-group list-group-flush">
               <li
                 className="list-groups-item"
@@ -65,7 +65,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-3">
+          <div className="col-sm-12 col-lg-3">
             <ul className="list-group list-group-flush">
               <li
                 className="list-groups-item"
