@@ -18,7 +18,7 @@ export default function ReservationSummary({ checkout }) {
   const formattedDateEnd = `${dayEnd}, ${dateEnd}/${monthEnd}/${yearEnd}`;
   return (
     <div
-      className="col-4  p-3 mb-5 bg-white rounded"
+      className="col-4 d-none d-lg-block p-3 mb-5 bg-white rounded"
       style={{
         boxShadow: "0 6px 60px #3333330f",
         backgroundColor: "white",

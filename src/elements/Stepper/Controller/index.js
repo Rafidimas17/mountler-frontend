@@ -6,7 +6,7 @@ export default function Controller(props) {
     <Fade>
       <section className="container">
         <div className="row justify-content-center mt-5">
-          <div className="col-3 mt-1">{props.children}</div>
+          <div className="col-auto mt-1">{props.children}</div>
         </div>
       </section>
     </Fade>

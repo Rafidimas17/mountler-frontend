@@ -9,7 +9,7 @@ export default function PageDetailTitle({ data, breadcrumb }) {
           <div className="col-lg-auto col-sm-12">
             <Breadcrumb data={breadcrumb} />
           </div>
-          <div className="col-lg-auto col-sm-12 text-center">
+          <div className="col-lg-12 col-sm-12 text-center">
             <h1 className="h2" style={{ fontFamily: "Poppins", marginTop: 20 }}>
               {data.title}
             </h1>

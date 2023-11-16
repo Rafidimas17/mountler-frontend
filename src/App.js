@@ -24,7 +24,7 @@ function App() {
           <Route path="/signup" component={SignupPage}></Route>
           <Route path="/ticket-show/:id" component={Ticket}></Route>
           <Route path="/forgotpassword" component={forgotPassword}></Route>
-          <Route exact path="/properties/:id" component={DetailsPage}></Route>
+          <Route path="/properties/:id" component={DetailsPage}></Route>
           <Route path="/checkout" component={Checkout}></Route>
           <Route path="/example" component={Example}></Route>
           <Route path="/verify-email/:tokenAktif" component={VerifyEmail} />

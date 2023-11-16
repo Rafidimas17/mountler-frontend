@@ -64,6 +64,7 @@ class Dashboard extends Component {
     const filteredOrders = orders.filter(
       (order) => order.payments.payment_status === "waiting"
     );
+    console.log(orders);
     return (
       <>
         <Header {...this.props} data={token}></Header>
@@ -74,8 +75,7 @@ class Dashboard extends Component {
             zIndex: 2,
           }}>
           <div className="row d-flex justify-content-between">
-            <Sidebar />
-            <div className="col-8">
+            <div className="col-lg-12">
               <div className="personal">
                 <h3 className="title-inform mt-2">Your Orders</h3>
                 <button id="history-order">Riwayat Pesanan</button>
@@ -175,26 +175,28 @@ class Dashboard extends Component {
                           </a>
                         </div>
                       ) : order.payments.payment_status === "paid" ? (
-                        <a
-                          href={
-                            order.payments.midtrans_url
-                              ? order.payments.midtrans_url.replace(/"/g, "")
-                              : ""
-                          }
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          <Button
-                            className="btn btn-primary"
-                            type="link"
-                            href={`/ticket-show/${order._id}`}
-                            style={{
-                              fontFamily: "Poppins",
-                              fontSize: 14,
-                              fontWeight: 500,
-                            }}>
-                            Show ticket
-                          </Button>
-                        </a>
+                        <div className="col-2 d-flex align-items-center justify-content-center">
+                          <a
+                            href={
+                              order.payments.midtrans_url
+                                ? order.payments.midtrans_url.replace(/"/g, "")
+                                : ""
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <Button
+                              className="btn btn-primary"
+                              type="link"
+                              href={`/ticket-show/${order._id}`}
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 14,
+                                fontWeight: 500,
+                              }}>
+                              Show ticket
+                            </Button>
+                          </a>
+                        </div>
                       ) : (
                         ""
                       )}

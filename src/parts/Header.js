@@ -82,21 +82,59 @@ export default function Header(props) {
                   </button>
                   <div
                     className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton">
-                    <a
-                      className="dropdown-item"
+                    aria-labelledby="dropdownMenuButton"
+                    style={{ gap: 8 }}>
+                    <h6
+                      className="pl-4 mt-2"
                       style={{
                         fontFamily: "Poppins",
                         fontSize: 16,
                         border: "none",
                         outline: "none",
+                        fontWeight: 600,
                       }}>
-                      <Link
-                        to="profile"
-                        style={{ textDecoration: "none", color: "#2A2A2A" }}>
-                        Profile
-                      </Link>
-                    </a>
+                      Akun saya
+                    </h6>
+
+                    <Link
+                      to="dashboard"
+                      style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                      <Button
+                        className="nav-link pl-4"
+                        type="link"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 16,
+                          border: "none",
+                          outline: "none",
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          color: "#2A2A2A",
+                        }}
+                        href="/dashboard">
+                        Pesanan saya
+                      </Button>
+                    </Link>
+                    <Link
+                      to="riwayat"
+                      style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                      <Button
+                        className="nav-link pl-4"
+                        type="link"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 16,
+                          border: "none",
+                          outline: "none",
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          color: "#2A2A2A",
+                        }}
+                        href="/riwayat">
+                        Riwayat transaksi
+                      </Button>
+                    </Link>
+
                     <a
                       className="dropdown-item"
                       style={{
