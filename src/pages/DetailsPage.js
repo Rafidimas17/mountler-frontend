@@ -86,10 +86,10 @@ class DetailsPage extends Component {
         <FeaturedImage data={page[match.params.id].imageId} />
         <section className="container">
           <div className="row">
-            <div className="col-7 pr-5">
+            <div className="col-lg-7 col-sm-12 pr-5">
               <PageDetailDescription data={page[match.params.id]} />
             </div>
-            <div className="col-5">
+            <div className="col-lg-5 col-sm-12">
               <BookingForm
                 itemDetails={page[match.params.id]}
                 startBooking={this.props.checkoutBooking}

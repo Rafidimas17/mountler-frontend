@@ -47,6 +47,36 @@
       
       grid-column-end:span 12; 
     }
+    .item.column-8{
+      grid-column-end:span 12; 
+    }
+  }
+  .tagline-welcome {
+    width: auto;
+    height: 30px;
+    left: 843px;
+    top: 167px;
+  
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 30px;
+    /* identical to box height */
+  
+    color: #2d2d2d;
+    .regist {
+      width: auto;
+      height: 30px;
+      left: 843px;
+      top: 167px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 30px;
+      color: #5248f6;
+    }
   }
 }
 
@@ -399,7 +429,7 @@ section {
   color: #2d2d2d;
 }
 .tagline-welcome {
-  width: 374px;
+  width: auto;
   height: 30px;
   left: 843px;
   top: 167px;

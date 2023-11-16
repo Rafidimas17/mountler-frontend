@@ -63,7 +63,7 @@ export default function Hero(props) {
               Show Me Now
             </Button>
             <div className="row mt-5">
-              <div className="col-12 col-sm-6 col-md-4" id="card-icon">
+              <div className="col-auto mr-lg-5">
                 <img
                   width="48"
                   height="48"
@@ -90,9 +90,7 @@ export default function Hero(props) {
                   </span>
                 </h6>
               </div>
-              <div
-                className="col-12 col-sm-6 col-md-4"
-                style={{ width: "fitContent" }}>
+              <div className="col-auto mr-lg-5" style={{ width: "fitContent" }}>
                 <img
                   width="48"
                   height="48"
@@ -119,7 +117,7 @@ export default function Hero(props) {
                   </span>
                 </h6>
               </div>
-              <div className="col-12 col-sm-6 col-md-4">
+              <div className="col-auto mr-lg-5">
                 <img
                   width="48"
                   height="48"
