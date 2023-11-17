@@ -43,7 +43,7 @@ class Ticket extends Component {
     if (!token) {
       return <Redirect to="/login" />;
     }
-
+    console.log(ticketData);
     if (isLoading) {
       return (
         <div className="container">

@@ -1241,4 +1241,31 @@ section {
   }
 }
 
+.input-container {
+  width: 100%;
+  position: relative;
+  
+
+  .icon {
+    position: absolute;
+    right: 10px;
+    top: calc(50% + 5px);
+    transform: translateY(calc(-50% - 5px));
+  }
+
+  .input {
+    width: 100%;
+    border-radius: 10px;
+    height: 40px;
+    padding: 10px;
+    transition: 0.2s linear;
+    border: 2.5px solid black;
+    font-size: 14px;
+    font-family: "Poppins";
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+  }
+
+}
 

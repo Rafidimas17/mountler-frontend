@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Ticket from "./pages/Ticket";
 import TicketActive from "./pages/TiketActive";
 import History from "./pages/Riwayat";
+import Porter from "./pages/Porter";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={LandingPage}></Route>
           <Route path="/pesanan" component={Dashboard}></Route>
+          <Route path="/porter" component={Porter}></Route>
           <Route path="/riwayat" component={History}></Route>
           <Route path="/tiket-aktif" component={TicketActive}></Route>
           <Route path="/login" component={LoginPage}></Route>

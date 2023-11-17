@@ -37,7 +37,7 @@ class History extends Component {
       return <Redirect to="/login" />;
     }
 
-    console.log(orders);
+    // console.log(orders);
     // orders.map((item) => {
     //   console.log(item.payments.payment_status);
     // });
