@@ -83,7 +83,7 @@ export default function Header(props) {
                   <div
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
-                    style={{ gap: 8 }}>
+                    style={{ gap: 8, width: "auto" }}>
                     <h6
                       className="pl-4 mt-2"
                       style={{
@@ -95,24 +95,42 @@ export default function Header(props) {
                       }}>
                       Akun saya
                     </h6>
-
                     <Link
-                      to="dashboard"
+                      to="pesanan"
                       style={{ textDecoration: "none", color: "#2A2A2A" }}>
                       <Button
                         className="nav-link pl-4"
                         type="link"
                         style={{
                           fontFamily: "Poppins",
-                          fontSize: 16,
+                          fontSize: 14,
                           border: "none",
                           outline: "none",
                           cursor: "pointer",
                           textDecoration: "none",
                           color: "#2A2A2A",
                         }}
-                        href="/dashboard">
+                        href="/pesanan">
                         Pesanan saya
+                      </Button>
+                    </Link>
+                    <Link
+                      to="tiket-aktif"
+                      style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                      <Button
+                        className="nav-link pl-4"
+                        type="link"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 14,
+                          border: "none",
+                          outline: "none",
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          color: "#2A2A2A",
+                        }}
+                        href="/tiket-aktif">
+                        Tiket saya
                       </Button>
                     </Link>
                     <Link
@@ -123,7 +141,7 @@ export default function Header(props) {
                         type="link"
                         style={{
                           fontFamily: "Poppins",
-                          fontSize: 16,
+                          fontSize: 14,
                           border: "none",
                           outline: "none",
                           cursor: "pointer",
@@ -139,7 +157,7 @@ export default function Header(props) {
                       className="dropdown-item"
                       style={{
                         fontFamily: "Poppins",
-                        fontSize: 16,
+                        fontSize: 14,
                         border: "none",
                         outline: "none",
                         cursor: "pointer",

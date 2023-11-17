@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Header from "../parts/Header";
 import Sidebar from "../parts/Sidebar";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-class Dashboard extends Component {
+class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +37,7 @@ class Dashboard extends Component {
       return <Redirect to="/login" />;
     }
 
-    // console.log(orders);
+    console.log(orders);
     // orders.map((item) => {
     //   console.log(item.payments.payment_status);
     // });
@@ -62,7 +62,7 @@ class Dashboard extends Component {
     const latestOrder = sortedOrders[0];
 
     const filteredOrders = orders.filter(
-      (order) => order.payments.payment_status === "waiting"
+      (order) => order.boarding.boarding_status === "Selesai"
     );
 
     return (
@@ -187,53 +187,20 @@ class Dashboard extends Component {
                           {order.payments.status}
                         </h6>
                       </div>
-                      {order.payments.payment_status === "waiting" ? (
-                        <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
-                          <a
-                            href={
-                              order.payments.midtrans_url
-                                ? order.payments.midtrans_url.replace(/"/g, "")
-                                : ""
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <Button
-                              className="btn btn-primary"
-                              style={{
-                                fontFamily: "Poppins",
-                                fontSize: 14,
-                                fontWeight: 500,
-                              }}>
-                              Paid now
-                            </Button>
-                          </a>
-                        </div>
-                      ) : order.payments.payment_status === "paid" ? (
-                        <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
-                          <a
-                            href={
-                              order.payments.midtrans_url
-                                ? order.payments.midtrans_url.replace(/"/g, "")
-                                : ""
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <Button
-                              className="btn btn-primary"
-                              type="link"
-                              href={`/ticket-show/${order._id}`}
-                              style={{
-                                fontFamily: "Poppins",
-                                fontSize: 14,
-                                fontWeight: 500,
-                              }}>
-                              Show ticket
-                            </Button>
-                          </a>
-                        </div>
-                      ) : (
-                        ""
-                      )}
+
+                      <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
+                        <Link to={`properties/${order.itemId._id}`}>
+                          <Button
+                            className="btn btn-primary"
+                            style={{
+                              fontFamily: "Poppins",
+                              fontSize: 14,
+                              fontWeight: 500,
+                            }}>
+                            Pesan lagi
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 ))
@@ -245,4 +212,5 @@ class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+
+export default History;

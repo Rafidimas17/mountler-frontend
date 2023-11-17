@@ -12,13 +12,18 @@ import Profile from "./pages/Profile";
 import VerifyEmail from "./pages/verify/VerifyEmail";
 import Dashboard from "./pages/Dashboard";
 import Ticket from "./pages/Ticket";
+import TicketActive from "./pages/TiketActive";
+import History from "./pages/Riwayat";
+
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage}></Route>
-          <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/pesanan" component={Dashboard}></Route>
+          <Route path="/riwayat" component={History}></Route>
+          <Route path="/tiket-aktif" component={TicketActive}></Route>
           <Route path="/login" component={LoginPage}></Route>
           <Route exact path="/profile" component={Profile}></Route>
           <Route path="/signup" component={SignupPage}></Route>

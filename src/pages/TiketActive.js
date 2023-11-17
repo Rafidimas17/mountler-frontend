@@ -7,7 +7,7 @@ import { TicketNotFound } from "../assets";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-class Dashboard extends Component {
+class TicketActive extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,7 +62,7 @@ class Dashboard extends Component {
     const latestOrder = sortedOrders[0];
 
     const filteredOrders = orders.filter(
-      (order) => order.payments.payment_status === "waiting"
+      (order) => order.payments.payment_status === "paid"
     );
 
     return (
@@ -245,4 +245,5 @@ class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+
+export default TicketActive;
