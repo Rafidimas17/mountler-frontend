@@ -299,7 +299,7 @@ class Checkout extends Component {
                       isBlock
                       isPrimary
                       hasShadow
-                      href="/pesanan">
+                      href="/menunggu-pembayaran">
                       Mulai pembayaran
                     </Button>
                   </Controller>

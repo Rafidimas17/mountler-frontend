@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "../parts/Header";
-import Sidebar from "../parts/Sidebar";
+import Breadcrumb from "../elements/Breadcrumb";
 import { Redirect, Link } from "react-router-dom";
 import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
@@ -12,6 +12,10 @@ class History extends Component {
     super(props);
     this.state = {
       token: localStorage.getItem("token"),
+      breadcrumb: [
+        { pageTitle: "Beranda", pageHref: "" },
+        { pageTitle: "Riwayat transaksi", pageHref: "" },
+      ],
       orders: [], // Menambah state untuk menyimpan data pesanan dari API
     };
   }
@@ -32,7 +36,7 @@ class History extends Component {
   }
 
   render() {
-    const { token, orders } = this.state;
+    const { token, orders, breadcrumb } = this.state;
     if (!token) {
       return <Redirect to="/login" />;
     }
@@ -74,11 +78,11 @@ class History extends Component {
             marginTop: 60,
             zIndex: 2,
           }}>
+          <Breadcrumb data={breadcrumb} />
           <div className="row d-flex justify-content-between">
             <div className="col-lg-12">
               <div className="personal">
                 <h3 className="title-inform mt-2">Pesanan saya</h3>
-                <button id="history-order">Riwayat Pesanan</button>
               </div>
               {orders.length === 0 ? (
                 <div className="ticket-information">
@@ -154,39 +158,46 @@ class History extends Component {
                           {formatDate(latestOrder.bookingEndDate)}
                         </h6>
                       </div>
-
-                      <div className="d-lg-block d-none col-lg-2 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
-                      <div className="d-block d-lg-none col-6 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
+                      {order.payments.status === "Selesai" ? (
+                        // Jika status pembayaran adalah "Selesai"
+                        <>
+                          <div className="d-lg-block d-none col-lg-2 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#333333",
+                                backgroundColor: "white",
+                                border: "1px solid #2D2D2D",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Selesai
+                            </h6>
+                          </div>
+                          <div className="d-block d-lg-none col-6 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#333333",
+                                backgroundColor: "white",
+                                border: "1px solid #2D2D2D",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Selesai
+                            </h6>
+                          </div>
+                        </>
+                      ) : (
+                        // Jika status pembayaran bukan "Selesai"
+                        <></>
+                      )}
 
                       <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
                         <Link to={`properties/${order.itemId._id}`}>

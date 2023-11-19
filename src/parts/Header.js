@@ -110,8 +110,8 @@ export default function Header(props) {
                           textDecoration: "none",
                           color: "#2A2A2A",
                         }}
-                        href="/pesanan">
-                        Pesanan saya
+                        href="/menunggu-pembayaran">
+                        Menunggu pembayaran
                       </Button>
                     </Link>
                     <Link
@@ -129,8 +129,8 @@ export default function Header(props) {
                           textDecoration: "none",
                           color: "#2A2A2A",
                         }}
-                        href="/tiket-aktif">
-                        Tiket saya
+                        href="/pesanan-saya">
+                        Pesanan saya
                       </Button>
                     </Link>
                     <Link

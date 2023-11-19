@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import Header from "../parts/Header";
-import Sidebar from "../parts/Sidebar";
 import { Redirect } from "react-router-dom";
 import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import Breadcrumb from "../elements/Breadcrumb";
 
 class TicketActive extends Component {
   constructor(props) {
     super(props);
     this.state = {
       token: localStorage.getItem("token"),
+      breadcrumb: [
+        { pageTitle: "Beranda", pageHref: "" },
+        { pageTitle: "Tiket saya", pageHref: "" },
+      ],
       orders: [], // Menambah state untuk menyimpan data pesanan dari API
     };
   }
@@ -32,15 +36,10 @@ class TicketActive extends Component {
   }
 
   render() {
-    const { token, orders } = this.state;
+    const { token, orders, breadcrumb } = this.state;
     if (!token) {
       return <Redirect to="/login" />;
     }
-
-    // console.log(orders);
-    // orders.map((item) => {
-    //   console.log(item.payments.payment_status);
-    // });
 
     function formatDate(dateString) {
       const date = new Date(dateString);
@@ -74,11 +73,11 @@ class TicketActive extends Component {
             marginTop: 60,
             zIndex: 2,
           }}>
+          <Breadcrumb data={breadcrumb} />
           <div className="row d-flex justify-content-between">
             <div className="col-lg-12">
               <div className="personal">
                 <h3 className="title-inform mt-2">Pesanan saya</h3>
-                <button id="history-order">Riwayat Pesanan</button>
               </div>
               {orders.length === 0 ? (
                 <div className="ticket-information">
@@ -154,39 +153,80 @@ class TicketActive extends Component {
                           {formatDate(latestOrder.bookingEndDate)}
                         </h6>
                       </div>
+                      {order.payments.status === "Proses" ? (
+                        // Jika status pembayaran adalah "Proses"
+                        <>
+                          <div className="d-lg-block d-none col-lg-2 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#F8DE22",
+                                backgroundColor: "white",
+                                border: "1px solid #F8FDCF",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Proses
+                            </h6>
+                          </div>
+                          <div className="d-block d-lg-none col-6 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#F8DE22",
+                                backgroundColor: "white",
+                                border: "1px solid #F8FDCF",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Proses
+                            </h6>
+                          </div>
+                        </>
+                      ) : (
+                        // Jika status pembayaran bukan "Proses"
+                        <>
+                          <div className="d-lg-block d-none col-lg-2 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#A8DF8E",
+                                backgroundColor: "white",
+                                border: "1px solid #F3FDE8",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Lunas
+                            </h6>
+                          </div>
+                          <div className="d-block d-lg-none col-6 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#A8DF8E",
+                                backgroundColor: "white",
+                                border: "1px solid #F3FDE8",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Lunas
+                            </h6>
+                          </div>
+                        </>
+                      )}
 
-                      <div className="d-lg-block d-none col-lg-2 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
-                      <div className="d-block d-lg-none col-6 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
                       {order.payments.payment_status === "waiting" ? (
                         <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
                           <a

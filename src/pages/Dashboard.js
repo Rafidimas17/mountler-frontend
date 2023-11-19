@@ -6,6 +6,7 @@ import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import Breadcrumb from "../elements/Breadcrumb";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -64,7 +65,10 @@ class Dashboard extends Component {
     const filteredOrders = orders.filter(
       (order) => order.payments.payment_status === "waiting"
     );
-
+    const breadcrumb = [
+      { pageTitle: "Beranda", pageHref: "" },
+      { pageTitle: "Menunggu pembayaran", pageHref: "" },
+    ];
     return (
       <>
         <Header {...this.props} data={token}></Header>
@@ -74,11 +78,11 @@ class Dashboard extends Component {
             marginTop: 60,
             zIndex: 2,
           }}>
+          <Breadcrumb data={breadcrumb} />
           <div className="row d-flex justify-content-between">
             <div className="col-lg-12">
               <div className="personal">
-                <h3 className="title-inform mt-2">Pesanan saya</h3>
-                <button id="history-order">Riwayat Pesanan</button>
+                <h3 className="title-inform mt-2">Menunggu pembayaran</h3>
               </div>
               {orders.length === 0 ? (
                 <div className="ticket-information">

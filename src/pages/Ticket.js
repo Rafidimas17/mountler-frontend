@@ -4,6 +4,7 @@ import { LogoTicket, QRCode } from "../assets";
 import { Redirect } from "react-router-dom";
 import Header from "../parts/Header";
 import axios from "axios";
+import Breadcrumb from "../elements/Breadcrumb";
 
 class Ticket extends Component {
   constructor(props) {
@@ -13,7 +14,11 @@ class Ticket extends Component {
       params: "",
       isLoading: true,
       error: null,
-      ticketData: [], // Ubah dari ticketData: []
+      ticketData: [],
+      breadcrumb: [
+        { pageTitle: "Beranda", pageHref: "" },
+        { pageTitle: "Pesanan saya", pageHref: "" },
+      ],
     };
   }
 
@@ -38,12 +43,12 @@ class Ticket extends Component {
   }
 
   render() {
-    const { token, ticket, isLoading, ticketData, error } = this.state;
-    console.log(ticketData);
+    const { token, breadcrumb, isLoading, ticketData, error } = this.state;
+
     if (!token) {
       return <Redirect to="/login" />;
     }
-    console.log(ticketData);
+
     if (isLoading) {
       return (
         <div className="container">
@@ -81,7 +86,6 @@ class Ticket extends Component {
       return (
         <>
           <Header {...this.props} data={token} />
-          {console.log(ticketData.invoice)}
           <div
             className="container"
             style={{
