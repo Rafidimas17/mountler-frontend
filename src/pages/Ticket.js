@@ -5,7 +5,8 @@ import { Redirect } from "react-router-dom";
 import Header from "../parts/Header";
 import axios from "axios";
 import Breadcrumb from "../elements/Breadcrumb";
-
+import Tabs from "../elements/Tabs";
+import "./tabs.css";
 class Ticket extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,9 @@ class Ticket extends Component {
       params: "",
       isLoading: true,
       error: null,
+      display: "d-flex",
+      status: "",
+      dataItem: {},
       ticketData: [],
       breadcrumb: [
         { pageTitle: "Beranda", pageHref: "" },
@@ -21,7 +25,9 @@ class Ticket extends Component {
       ],
     };
   }
-
+  handleStatus = (index) => {
+    this.setState({ status: index });
+  };
   componentDidMount() {
     const { match } = this.props;
     const paramsId = match.params.id;
@@ -43,7 +49,16 @@ class Ticket extends Component {
   }
 
   render() {
-    const { token, breadcrumb, isLoading, ticketData, error } = this.state;
+    const {
+      token,
+      breadcrumb,
+      isLoading,
+      ticketData,
+      error,
+      display,
+      status,
+      dataItem,
+    } = this.state;
 
     if (!token) {
       return <Redirect to="/login" />;
@@ -82,7 +97,129 @@ class Ticket extends Component {
     }
 
     if (ticketData) {
-      // Render the data when it's available
+      const tabsData = [
+        {
+          title: <>Tiket</>,
+          content: (
+            <>
+              <div className="row d-flex justify-content-center">
+                {/* <Sidebar /> */}
+                <div
+                  className="col-lg-8 col-sm-12 d-flex flex-column"
+                  style={{ gap: 16 }}>
+                  {ticketData.memberData.map((item) => {
+                    return (
+                      <div className="ticket-card">
+                        <div className="header-ticket d-flex justify-content-between pt-2 px-4 align-items-center">
+                          <img src={LogoTicket} />
+                          <h5 className="booking-number pr-4">
+                            {this.state.ticketData.invoice}
+                          </h5>
+                        </div>
+                        <div className="row justify-content-between p-4 mb-4">
+                          <div className="identity-information col-lg-8 col-sm-12 mb-4">
+                            <div className="destination">
+                              <h5> {this.state.ticketData.item}</h5>
+                              <h5> | </h5>
+                              <h5> {this.state.ticketData.track}</h5>
+                            </div>
+                            <h5 className="nameUser">{item.nama}</h5>
+                            <h5 className="idUser">{item.no_id}</h5>
+                            <div className="dateHiking row">
+                              <div className="col-6">
+                                <h5 className="title-date">Tanggal Naik</h5>
+                                <h5 className="date-value">
+                                  {this.state.ticketData.startDate}
+                                </h5>
+                              </div>
+                              <div className="col-6">
+                                <h5 className="title-date">Tanggal Turun</h5>
+                                <h5 className="date-value">
+                                  {" "}
+                                  {this.state.ticketData.endDate}
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="qr-code-space col-lg-4 col-sm-12">
+                            <h5 className="text-scan-title">
+                              Pindai kode ini di Basecamp
+                            </h5>
+                            <img
+                              src={`${process.env.REACT_APP_HOST}${item.qrStart}`}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          ),
+        },
+        {
+          title: <>Porter</>,
+          content: (
+            <>
+              <div className="row d-flex justify-content-center">
+                {/* <Sidebar /> */}
+                <div
+                  className="col-lg-8 col-sm-12 d-flex flex-column"
+                  style={{ gap: 16 }}>
+                  {ticketData.porterData.map((item) => {
+                    return (
+                      <div className="ticket-card">
+                        <div className="header-ticket d-flex justify-content-between pt-2 px-4 align-items-center">
+                          <img src={LogoTicket} />
+                          <h5 className="booking-number pr-4">
+                            {this.state.ticketData.invoice}
+                          </h5>
+                        </div>
+                        <div className="row justify-content-between p-4 mb-4">
+                          <div className="identity-information col-lg-8 col-sm-12 mb-4">
+                            <div className="destination">
+                              <h5> {this.state.ticketData.item}</h5>
+                              <h5> | </h5>
+                              <h5> {this.state.ticketData.track}</h5>
+                            </div>
+                            <h5 className="nameUser">{item.name}</h5>
+                            <h5 className="idUser">{item.noHandphone}</h5>
+                            <div className="dateHiking row">
+                              <div className="col-6">
+                                <h5 className="title-date">Tanggal Naik</h5>
+                                <h5 className="date-value">
+                                  {this.state.ticketData.startDate}
+                                </h5>
+                              </div>
+                              <div className="col-6">
+                                <h5 className="title-date">Tanggal Turun</h5>
+                                <h5 className="date-value">
+                                  {" "}
+                                  {this.state.ticketData.endDate}
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+                          {/* <div className="qr-code-space col-lg-4 col-sm-12">
+                            <h5 className="text-scan-title">
+                              Pindai kode ini di Basecamp
+                            </h5>
+                            <img
+                              src={`${process.env.REACT_APP_HOST}${item.qrStart}`}
+                            />
+                          </div> */}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          ),
+        },
+      ];
+
       return (
         <>
           <Header {...this.props} data={token} />
@@ -92,59 +229,11 @@ class Ticket extends Component {
               marginTop: 60,
               zIndex: 2,
             }}>
-            <div className="row d-flex justify-content-center">
-              {/* <Sidebar /> */}
-              <div
-                className="col-lg-8 col-sm-12 d-flex flex-column"
-                style={{ gap: 16 }}>
-                {ticketData.memberData.map((item) => {
-                  return (
-                    <div className="ticket-card">
-                      <div className="header-ticket d-flex justify-content-between pt-2 px-4 align-items-center">
-                        <img src={LogoTicket} />
-                        <h5 className="booking-number pr-4">
-                          {this.state.ticketData.invoice}
-                        </h5>
-                      </div>
-                      <div className="row justify-content-between p-4 mb-4">
-                        <div className="identity-information col-lg-8 col-sm-12 mb-4">
-                          <div className="destination">
-                            <h5> {this.state.ticketData.item}</h5>
-                            <h5> | </h5>
-                            <h5> {this.state.ticketData.track}</h5>
-                          </div>
-                          <h5 className="nameUser">{item.nama}</h5>
-                          <h5 className="idUser">{item.no_id}</h5>
-                          <div className="dateHiking row">
-                            <div className="col-6">
-                              <h5 className="title-date">Tanggal Naik</h5>
-                              <h5 className="date-value">
-                                {this.state.ticketData.startDate}
-                              </h5>
-                            </div>
-                            <div className="col-6">
-                              <h5 className="title-date">Tanggal Turun</h5>
-                              <h5 className="date-value">
-                                {" "}
-                                {this.state.ticketData.endDate}
-                              </h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="qr-code-space col-lg-4 col-sm-12">
-                          <h5 className="text-scan-title">
-                            Pindai kode ini di Basecamp
-                          </h5>
-                          <img
-                            src={`${process.env.REACT_APP_HOST}${item.qrStart}`}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <Tabs
+              tabsData={tabsData}
+              display={display}
+              handleActive={this.handleStatus}
+            />
           </div>
         </>
       );

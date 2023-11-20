@@ -83,7 +83,11 @@ export default function Header(props) {
                   <div
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
-                    style={{ gap: 8, width: "auto" }}>
+                    style={{
+                      gap: 8,
+                      width: "220px",
+                      margin: "20px 100px 0px -20px",
+                    }}>
                     <h6
                       className="pl-4 mt-2"
                       style={{

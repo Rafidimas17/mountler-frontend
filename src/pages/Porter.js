@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Header from "../parts/Header";
 import axios from "axios";
 import Modal from "../elements/Modal";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 class Porter extends Component {
   constructor(props) {
     super(props);
@@ -10,9 +12,22 @@ class Porter extends Component {
       searchValue: "",
       porters: [],
       status: false,
+      dataSelected: {},
     };
   }
-
+  showSwal = (responsePayload) => {
+    withReactContent(Swal)
+      .fire({
+        icon: "success",
+        title: responsePayload.payload,
+        showConfirmButton: false,
+        timer: 1500,
+      })
+      .then(() => {
+        // Redirect to the Midtrans URL after SweetAlert is closed
+        window.location.href = responsePayload.midtrans_url;
+      });
+  };
   handleModal = (modalStatus) => {
     this.setState({ status: modalStatus });
   };
@@ -38,34 +53,14 @@ class Porter extends Component {
   };
 
   handleOrder = async (id) => {
-    const { searchValue } = this.state;
+    const { searchValue, porters } = this.state;
     this.handleModal(true);
-    // try {
-    //   const orderUrl = `${process.env.REACT_APP_HOST}/api-v1/order-porter`;
-    //   const data = {
-    //     id: id,
-    //     invoice: searchValue,
-    //   };
-    //   // console.log(data);
-    //   const response = await axios.post(orderUrl, data, {
-    //     headers: {
-    //       Authorization: `Bearer iO3quoYg265hlzq30E8RelQc0LOKle4R0yk6CMbgeHgGNcm_mR`, // Assuming your token is stored in the state
-    //       // Add any other headers if needed
-    //     },
-    //   });
-
-    //   // Handle the response accordingly
-    //   console.log(response.data);
-
-    //   // You may want to update the state or perform other actions based on the response
-    // } catch (error) {
-    //   console.error("Error ordering porter:", error);
-    //   // Handle the error accordingly
-    // }
+    const itemData = porters.find((item) => item.id === id);
+    this.setState({ dataSelected: itemData });
   };
 
   render() {
-    const { token, searchValue, porters, status } = this.state;
+    const { token, searchValue, porters, status, dataSelected } = this.state;
     // console.log(porters);
     return (
       <>
@@ -171,8 +166,9 @@ class Porter extends Component {
           </div>
         </div>
         <Modal
-          data={porters} // Adjust based on your data structure
+          data={dataSelected} // Adjust based on your data structure
           status={status}
+          statusResponse={this.showSwal}
           onCloseModal={this.handleCloseModal}
         />
       </>
