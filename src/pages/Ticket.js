@@ -141,14 +141,27 @@ class Ticket extends Component {
                               </div>
                             </div>
                           </div>
-                          <div className="qr-code-space col-lg-4 col-sm-12">
-                            <h5 className="text-scan-title">
-                              Pindai kode ini di Basecamp
-                            </h5>
-                            <img
-                              src={`${process.env.REACT_APP_HOST}${item.qrStart}`}
-                            />
-                          </div>
+                          {this.state.ticketData.status === "Registrasi" ? (
+                            <div className="qr-code-space col-lg-4 col-sm-12">
+                              <h5 className="text-scan-title">
+                                Pindai kode ini di Basecamp
+                              </h5>
+                              <img
+                                src={`${process.env.REACT_APP_HOST}${item.qrStart}`}
+                              />
+                            </div>
+                          ) : this.state.ticketData.status === "check-in" ? (
+                            <div className="qr-code-space col-lg-4 col-sm-12">
+                              <h5 className="text-scan-title">
+                                Pindai kode ini di Basecamp
+                              </h5>
+                              <img
+                                src={`${process.env.REACT_APP_HOST}${item.qrEnd}`}
+                              />
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                     );

@@ -15,6 +15,7 @@ import Ticket from "./pages/Ticket";
 import TicketActive from "./pages/TiketActive";
 import History from "./pages/Riwayat";
 import Porter from "./pages/Porter";
+import Simulator from "./pages/Simulator";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/menunggu-pembayaran" component={Dashboard}></Route>
           <Route path="/porter" component={Porter}></Route>
           <Route path="/riwayat" component={History}></Route>
+          <Route path="/simulator" component={Simulator}></Route>
           <Route path="/pesanan-saya" component={TicketActive}></Route>
           <Route path="/login" component={LoginPage}></Route>
           <Route exact path="/profile" component={Profile}></Route>

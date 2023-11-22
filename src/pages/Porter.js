@@ -78,6 +78,12 @@ class Porter extends Component {
           }}>
           <Header {...this.props} data={token} />
           <div className="container" style={{ padding: 100 }}>
+            <h5 className="text-primary text-center">
+              Dapatkan porter terbaikmu sekarang
+            </h5>
+            <h6 className="text-secondary text-center">
+              Pesan porter pendakianmu dan nikmati pendakian dengan lebih mudah{" "}
+            </h6>
             <div className="row d-flex justify-content-center p-5">
               <div class="input-container">
                 <input
