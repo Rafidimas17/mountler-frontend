@@ -23,11 +23,11 @@ class Simulator extends Component {
     const { searchValue } = this.state;
 
     try {
-      const url = `${process.env.REACT_APP_HOST}/admin/status/scan-qr/${searchValue}`;
-      axios.post(url).then((response) => {
-        // Setel data yang diterima dari API ke dalam state ticketData
-        this.setState({ statusResponse: response.data.message });
-      });
+      const url = `${process.env.REACT_APP_HOST}/admin/status/scan-qr`;
+      const response = await axios.post(url, { imageUrl: searchValue });
+      // Set the received data from the API to the ticketData state
+      this.setState({ statusResponse: response.data.message });
+      this.showSwal(response.data.message);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -36,7 +36,7 @@ class Simulator extends Component {
     withReactContent(Swal)
       .fire({
         icon: "success",
-        title: responsePayload.payload,
+        title: responsePayload,
         showConfirmButton: false,
         timer: 1500,
       })
