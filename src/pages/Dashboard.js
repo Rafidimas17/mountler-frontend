@@ -136,7 +136,7 @@ class Dashboard extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(latestOrder.bookingStartDate)}
+                          {formatDate(order.bookingStartDate)}
                         </h6>
                       </div>
                       <div className="col-6 col-lg-2 order-4">
@@ -155,7 +155,7 @@ class Dashboard extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(latestOrder.bookingEndDate)}
+                          {formatDate(order.bookingEndDate)}
                         </h6>
                       </div>
 

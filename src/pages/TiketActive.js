@@ -28,7 +28,12 @@ class TicketActive extends Component {
       .get(`${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`)
       .then((response) => {
         const data = response.data;
-        this.setState({ orders: data }); // Menyimpan data pesanan dari API ke dalam state
+        const sortedOrders = data.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB.getTime() - dateA.getTime(); // Mengurutkan dari yang terbaru ke yang terlama
+        });
+        this.setState({ orders: sortedOrders });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -54,14 +59,16 @@ class TicketActive extends Component {
     const sortedOrders = orders.sort((a, b) => {
       const dateA = new Date(a.createdAt);
       const dateB = new Date(b.createdAt);
-      return dateB - dateA; // Mengurutkan dari yang terbaru ke yang terlama
+      return dateA - dateB; // Mengurutkan dari yang terbaru ke yang terlama
     });
 
     // Mengambil data terbaru
     const latestOrder = sortedOrders[0];
 
     const filteredOrders = orders.filter(
-      (order) => order.payments.payment_status === "paid"
+      (order) =>
+        order.boarding.boarding_status === "Registrasi" ||
+        order.boarding.boarding_status === "check-in"
     );
 
     return (
@@ -131,7 +138,7 @@ class TicketActive extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(latestOrder.bookingStartDate)}
+                          {formatDate(order.bookingStartDate)}
                         </h6>
                       </div>
                       <div className="col-6 col-lg-2 order-4">
@@ -150,7 +157,7 @@ class TicketActive extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(latestOrder.bookingEndDate)}
+                          {formatDate(order.bookingEndDate)}
                         </h6>
                       </div>
                       {order.payments.status === "Proses" ? (

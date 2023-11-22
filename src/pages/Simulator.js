@@ -3,7 +3,8 @@ import Header from "../parts/Header";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
+import { withRouter } from "react-router-dom";
+import Review from "./Review";
 class Simulator extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ class Simulator extends Component {
       searchValue: "",
       statusResponse: "",
       status: false,
+      invoice: "",
       dataSelected: {},
     };
   }
@@ -26,8 +28,8 @@ class Simulator extends Component {
       const url = `${process.env.REACT_APP_HOST}/admin/status/scan-qr`;
       const response = await axios.post(url, { imageUrl: searchValue });
       // Set the received data from the API to the ticketData state
-      this.setState({ statusResponse: response.data.message });
-      this.showSwal(response.data.message);
+      this.setState({ invoice: response.data.invoice_end });
+      this.showSwal(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -36,15 +38,21 @@ class Simulator extends Component {
     withReactContent(Swal)
       .fire({
         icon: "success",
-        title: responsePayload,
+        title: responsePayload.message,
         showConfirmButton: false,
         timer: 1500,
       })
       .then(() => {
-        // Redirect to the Midtrans URL after SweetAlert is closed
-        window.location.href = responsePayload.midtrans_url;
+        // Assuming responsePayload is defined somewhere
+        if (responsePayload.status === "end") {
+          // Add the "invoice_end" parameter to the URL
+
+          const url = responsePayload.url; // or fetch it from responsePayload or elsewhere
+          this.props.history.push(`/review/${url}`);
+        }
       });
   };
+
   render() {
     const { token, searchValue } = this.state;
     return (
@@ -114,7 +122,9 @@ class Simulator extends Component {
             </div>
           </div>
         </div>
-        ;
+        <div className="d-none">
+          <Review dataInvoice={this.state.invoice} />;
+        </div>
       </>
     );
   }

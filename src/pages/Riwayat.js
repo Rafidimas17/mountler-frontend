@@ -158,7 +158,7 @@ class History extends Component {
                           {formatDate(latestOrder.bookingEndDate)}
                         </h6>
                       </div>
-                      {order.payments.status === "Selesai" ? (
+                      {order.boarding.boarding_status === "Selesai" ? (
                         // Jika status pembayaran adalah "Selesai"
                         <>
                           <div className="d-lg-block d-none col-lg-2 order-2">
