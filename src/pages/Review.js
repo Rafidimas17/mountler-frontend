@@ -6,7 +6,7 @@ import { InputFile } from "../elements/Form";
 import Button from "../elements/Button";
 import Header from "../parts/Header";
 import axios from "axios";
-import { withRouter } from "react-router-dom";
+import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
 class Review extends Component {
