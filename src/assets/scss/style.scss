@@ -38,6 +38,48 @@
 @import 'utilities';
 @import 'print';
 
+@include media-breakpoint-down(sm){
+  .container-grid{
+    .item.column-4{
+      grid-column-end:span 12; 
+    }
+    .item.column-3{
+      
+      grid-column-end:span 12; 
+    }
+    .item.column-8{
+      grid-column-end:span 12; 
+    }
+  }
+  .tagline-welcome {
+    width: auto;
+    height: 30px;
+    left: 843px;
+    top: 167px;
+  
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 30px;
+    /* identical to box height */
+  
+    color: #2d2d2d;
+    .regist {
+      width: auto;
+      height: 30px;
+      left: 843px;
+      top: 167px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 30px;
+      color: #5248f6;
+    }
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 .brand-text-icon {
   font-size: 30px;
@@ -49,17 +91,27 @@
     text-decoration: none;
   }
 }
+
+
 header {
   border-bottom: 1px solid $gray-200;
   width: 100%;
   position: sticky;
   top: 0;
+  right: 0;
+  left: 0;
   background-color: $white;
   z-index: 99;
   text-decoration: none;
+
   .navbar {
-    height: 80px;
+    height: auto;
+
+
     ul.navbar-nav {
+      display: flex;
+      justify-content: space-between;
+      background-color: white;
       li.nav-item {
         &.active {
           a.nav-link {
@@ -68,6 +120,7 @@ header {
             color: $primary;
           }
         }
+
         a {
           font-family: 'Poppins', sans-serif;
           font-size: 16px;
@@ -76,6 +129,11 @@ header {
             color: $gray-900;
             padding-left: 1rem;
             padding-right: 1rem;
+            
+  @media (max-width: 576px) {
+    padding-left:0;
+    padding-right: 0;
+  }
             &:hover {
               text-decoration: none;
             }
@@ -84,7 +142,9 @@ header {
       }
     }
   }
+
 }
+
 section {
   margin-bottom: 70px;
 }
@@ -369,7 +429,7 @@ section {
   color: #2d2d2d;
 }
 .tagline-welcome {
-  width: 374px;
+  width: auto;
   height: 30px;
   left: 843px;
   top: 167px;
@@ -1180,3 +1240,32 @@ section {
     }
   }
 }
+
+.input-container {
+  width: 100%;
+  position: relative;
+  
+
+  .icon {
+    position: absolute;
+    right: 10px;
+    top: calc(50% + 5px);
+    transform: translateY(calc(-50% - 5px));
+  }
+
+  .input {
+    width: 100%;
+    border-radius: 10px;
+    height: 40px;
+    padding: 10px;
+    transition: 0.2s linear;
+    border: 2.5px solid black;
+    font-size: 14px;
+    font-family: "Poppins";
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+  }
+
+}
+

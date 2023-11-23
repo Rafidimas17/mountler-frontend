@@ -91,16 +91,14 @@ class BookingForm extends Component {
 
     return (
       <div className="card bordered" style={{ padding: "20px 40px" }}>
-        <h4 className="mb-3">Start Booking</h4>
+        <h4 className="mb-3">Jadwalkan sekarang</h4>
         <h5 className="h2 mb-4" style={{ color: "#6ECCAF" }}>
           Rp{itemDetails.price}{" "}
-          <span className="text-gray-500 font-weight-light">
-            per {itemDetails.unit}
-          </span>
+          <span className="text-gray-500 font-weight-light">per hari</span>
         </h5>
 
         <label htmlFor="duration" style={{ fontFamily: "Poppins" }}>
-          How long you will stay?
+          Berapa lama waktu pendakian ?
         </label>
         <InputNumber
           max={30}
@@ -112,11 +110,11 @@ class BookingForm extends Component {
         />
 
         <label htmlFor="date" style={{ fontFamily: "Poppins" }}>
-          Pick a date
+          Pilih tanggal
         </label>
         <InputDate onChange={this.updateData} name="date" value={data.date} />
         <label htmlFor="date" style={{ fontFamily: "Poppins" }}>
-          Choose Track
+          Pilih Jalur Pendakian
         </label>
         <Form.Select
           className="select"
@@ -138,13 +136,13 @@ class BookingForm extends Component {
         <h6
           className="text-gray-700 mt-3"
           style={{ marginBottom: 30, fontWeight: 370, fontFamily: "Poppins" }}>
-          You will pay{" "}
+          Total harga{" "}
           <span className="text-gray-900" style={{ fontWeight: 600 }}>
             Rp{itemDetails.price * data.duration}
           </span>{" "}
           per{" "}
           <span className="text-gray-900" style={{ fontWeight: 600 }}>
-            {data.duration} {itemDetails.unit}
+            {data.duration} hari
           </span>
         </h6>
 

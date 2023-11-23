@@ -174,7 +174,7 @@ class Checkout extends Component {
           <div
             className="row align-items-center justify-content-center text-center"
             style={{ height: "100vh" }}>
-            <div className="col-3">
+            <div className="col-lg-3 col-sm-12">
               Pilih tanggal dulu
               <div>
                 <Button
@@ -234,21 +234,16 @@ class Checkout extends Component {
               <MainContent data={steps} current={CurrentStep} />
               {CurrentStep === "bookingInformation" && (
                 <Controller>
-                  <Fade>
-                    <div className="row">
-                      <div className="col d-flex justify-content-center">
-                        <Button
-                          className="btn mb-3"
-                          type="button"
-                          isBlock
-                          isPrimary
-                          hasShadow
-                          onClick={nextStep}>
-                          Continue to Book
-                        </Button>
-                      </div>
-                    </div>
-                  </Fade>
+                  <Fade></Fade>
+                  <Button
+                    className="btn mb-3"
+                    type="button"
+                    isBlock
+                    isPrimary
+                    hasShadow
+                    onClick={nextStep}>
+                    Continue to Book
+                  </Button>
                   <Button
                     className="btn"
                     type="link"
@@ -304,8 +299,8 @@ class Checkout extends Component {
                       isBlock
                       isPrimary
                       hasShadow
-                      href="/dashboard">
-                      My Dashboard
+                      href="/menunggu-pembayaran">
+                      Mulai pembayaran
                     </Button>
                   </Controller>
                 </Fade>

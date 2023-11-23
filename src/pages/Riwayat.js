@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import Header from "../parts/Header";
-import Sidebar from "../parts/Sidebar";
-import { Redirect } from "react-router-dom";
+import Breadcrumb from "../elements/Breadcrumb";
+import { Redirect, Link } from "react-router-dom";
 import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import Breadcrumb from "../elements/Breadcrumb";
 
-class Dashboard extends Component {
+class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
       token: localStorage.getItem("token"),
+      breadcrumb: [
+        { pageTitle: "Beranda", pageHref: "" },
+        { pageTitle: "Riwayat transaksi", pageHref: "" },
+      ],
       orders: [], // Menambah state untuk menyimpan data pesanan dari API
     };
   }
@@ -33,7 +36,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { token, orders } = this.state;
+    const { token, orders, breadcrumb } = this.state;
     if (!token) {
       return <Redirect to="/login" />;
     }
@@ -63,12 +66,9 @@ class Dashboard extends Component {
     const latestOrder = sortedOrders[0];
 
     const filteredOrders = orders.filter(
-      (order) => order.payments.payment_status === "waiting"
+      (order) => order.boarding.boarding_status === "Selesai"
     );
-    const breadcrumb = [
-      { pageTitle: "Beranda", pageHref: "" },
-      { pageTitle: "Menunggu pembayaran", pageHref: "" },
-    ];
+
     return (
       <>
         <Header {...this.props} data={token}></Header>
@@ -82,7 +82,7 @@ class Dashboard extends Component {
           <div className="row d-flex justify-content-between">
             <div className="col-lg-12">
               <div className="personal">
-                <h3 className="title-inform mt-2">Menunggu pembayaran</h3>
+                <h3 className="title-inform mt-2">Pesanan saya</h3>
               </div>
               {orders.length === 0 ? (
                 <div className="ticket-information">
@@ -136,7 +136,7 @@ class Dashboard extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(order.bookingStartDate)}
+                          {formatDate(latestOrder.bookingStartDate)}
                         </h6>
                       </div>
                       <div className="col-6 col-lg-2 order-4">
@@ -155,89 +155,63 @@ class Dashboard extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(order.bookingEndDate)}
+                          {formatDate(latestOrder.bookingEndDate)}
                         </h6>
                       </div>
-
-                      <div className="d-lg-block d-none col-lg-2 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
-                      <div className="d-block d-lg-none col-6 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
-                      {order.payments.payment_status === "waiting" ? (
-                        <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
-                          <a
-                            href={
-                              order.payments.midtrans_url
-                                ? order.payments.midtrans_url.replace(/"/g, "")
-                                : ""
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <Button
-                              className="btn btn-primary"
+                      {order.boarding.boarding_status === "Selesai" ? (
+                        // Jika status pembayaran adalah "Selesai"
+                        <>
+                          <div className="d-lg-block d-none col-lg-2 order-2">
+                            <h6
                               style={{
                                 fontFamily: "Poppins",
-                                fontSize: 14,
+                                fontSize: 16,
+                                color: "#333333",
+                                backgroundColor: "white",
+                                border: "1px solid #2D2D2D",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Paid now
-                            </Button>
-                          </a>
-                        </div>
-                      ) : order.payments.payment_status === "paid" ? (
-                        <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
-                          <a
-                            href={
-                              order.payments.midtrans_url
-                                ? order.payments.midtrans_url.replace(/"/g, "")
-                                : ""
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <Button
-                              className="btn btn-primary"
-                              type="link"
-                              href={`/ticket-show/${order._id}`}
+                              Selesai
+                            </h6>
+                          </div>
+                          <div className="d-block d-lg-none col-6 order-2">
+                            <h6
                               style={{
                                 fontFamily: "Poppins",
-                                fontSize: 14,
+                                fontSize: 16,
+                                color: "#333333",
+                                backgroundColor: "white",
+                                border: "1px solid #2D2D2D",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Show ticket
-                            </Button>
-                          </a>
-                        </div>
+                              Selesai
+                            </h6>
+                          </div>
+                        </>
                       ) : (
-                        ""
+                        // Jika status pembayaran bukan "Selesai"
+                        <></>
                       )}
+
+                      <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
+                        <Link to={`properties/${order.itemId._id}`}>
+                          <Button
+                            className="btn btn-primary"
+                            style={{
+                              fontFamily: "Poppins",
+                              fontSize: 14,
+                              fontWeight: 500,
+                            }}>
+                            Pesan lagi
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 ))
@@ -249,4 +223,5 @@ class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+
+export default History;

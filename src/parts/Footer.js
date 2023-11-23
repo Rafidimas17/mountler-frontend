@@ -8,21 +8,19 @@ export default function Footer() {
   return (
     <Fade>
       <div className="container" style={{ borderTop: `1px solid #F0F1F6` }}>
-        <div className="row">
-          <div className="col-auto mr-5" style={{ width: 350 }}>
+        <div className="row d-flex justify-content-between">
+          <div className="col-sm-12 col-lg-auto mr-5" style={{ width: 350 }}>
             <IconText />
             <p className="brand-tagline">
               We make your advanture easy and memorable
             </p>
           </div>
-          <div className="col-auto mr-5">
+          <div className="col-sm-12 col-lg-auto">
             <ul className="list-group">
               <li
                 className="list-groups-item"
                 style={{ padding: `0.3125rem 0`, border: 0 }}>
-                <Button className="btn-link" type="link" href="/properties">
-                  Book of Mountain
-                </Button>
+                <h5>Book of Mountain</h5>
               </li>
               <li
                 className="list-groups-item"
@@ -33,14 +31,12 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-2 mr-5">
+          <div className="col-sm-12 col-lg-2">
             <ul className="list-group list-group-flush">
               <li
                 className="list-groups-item"
                 style={{ padding: `0.3125rem 0`, border: 0 }}>
-                <Button className="btn-link" type="link" href="/properties">
-                  Explore us
-                </Button>
+                <h5>Explore us</h5>
               </li>
               <li
                 className="list-groups-item"
@@ -65,14 +61,12 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-3">
+          <div className="col-sm-12 col-lg-3">
             <ul className="list-group list-group-flush">
               <li
                 className="list-groups-item"
                 style={{ padding: `0.3125rem 0`, border: 0 }}>
-                <Button className="btn-link" type="link" href="/properties">
-                  Getting Touch
-                </Button>
+                <h5>Getting Touch</h5>
               </li>
               <li
                 className="list-groups-item"

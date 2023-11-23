@@ -63,7 +63,7 @@ export default function Hero(props) {
               Show Me Now
             </Button>
             <div className="row mt-5">
-              <div className="col-sm-4 col-md-4">
+              <div className="col-auto mr-lg-5">
                 <img
                   width="48"
                   height="48"
@@ -84,12 +84,13 @@ export default function Hero(props) {
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: 300,
+                      width: "fit-content",
                     }}>
                     Mountain
                   </span>
                 </h6>
               </div>
-              <div className="col-sm-4 col-md-4">
+              <div className="col-auto mr-lg-5" style={{ width: "fitContent" }}>
                 <img
                   width="48"
                   height="48"
@@ -110,12 +111,13 @@ export default function Hero(props) {
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: 300,
+                      width: "fit-content",
                     }}>
                     Hiker
                   </span>
                 </h6>
               </div>
-              <div className="col-sm-4 col-md-4">
+              <div className="col-auto mr-lg-5">
                 <img
                   width="48"
                   height="48"
@@ -123,7 +125,7 @@ export default function Hero(props) {
                   alt={`${props.data.cities} Cities`}
                 />
                 <h6
-                  className="mt-3"
+                  className="mt-3 d-flex w-75"
                   style={{
                     fontSize: 18,
                     fontFamily: "Poppins",
@@ -131,11 +133,12 @@ export default function Hero(props) {
                   }}>
                   {formatNumber(props.data.cities)}{" "}
                   <span
-                    className="text-gray-500 font-weight-light"
+                    className="text-gray-500 font-weight-light "
                     style={{
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: 300,
+                      width: "fit-content",
                     }}>
                     Cities
                   </span>

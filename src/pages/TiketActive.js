@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Header from "../parts/Header";
-import Sidebar from "../parts/Sidebar";
 import { Redirect } from "react-router-dom";
 import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
@@ -8,11 +7,15 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Breadcrumb from "../elements/Breadcrumb";
 
-class Dashboard extends Component {
+class TicketActive extends Component {
   constructor(props) {
     super(props);
     this.state = {
       token: localStorage.getItem("token"),
+      breadcrumb: [
+        { pageTitle: "Beranda", pageHref: "" },
+        { pageTitle: "Tiket saya", pageHref: "" },
+      ],
       orders: [], // Menambah state untuk menyimpan data pesanan dari API
     };
   }
@@ -25,7 +28,12 @@ class Dashboard extends Component {
       .get(`${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`)
       .then((response) => {
         const data = response.data;
-        this.setState({ orders: data }); // Menyimpan data pesanan dari API ke dalam state
+        const sortedOrders = data.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB.getTime() - dateA.getTime(); // Mengurutkan dari yang terbaru ke yang terlama
+        });
+        this.setState({ orders: sortedOrders });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -33,15 +41,10 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { token, orders } = this.state;
+    const { token, orders, breadcrumb } = this.state;
     if (!token) {
       return <Redirect to="/login" />;
     }
-
-    // console.log(orders);
-    // orders.map((item) => {
-    //   console.log(item.payments.payment_status);
-    // });
 
     function formatDate(dateString) {
       const date = new Date(dateString);
@@ -56,19 +59,18 @@ class Dashboard extends Component {
     const sortedOrders = orders.sort((a, b) => {
       const dateA = new Date(a.createdAt);
       const dateB = new Date(b.createdAt);
-      return dateB - dateA; // Mengurutkan dari yang terbaru ke yang terlama
+      return dateA - dateB; // Mengurutkan dari yang terbaru ke yang terlama
     });
 
     // Mengambil data terbaru
     const latestOrder = sortedOrders[0];
 
     const filteredOrders = orders.filter(
-      (order) => order.payments.payment_status === "waiting"
+      (order) =>
+        order.boarding.boarding_status === "Registrasi" ||
+        order.boarding.boarding_status === "check-in"
     );
-    const breadcrumb = [
-      { pageTitle: "Beranda", pageHref: "" },
-      { pageTitle: "Menunggu pembayaran", pageHref: "" },
-    ];
+
     return (
       <>
         <Header {...this.props} data={token}></Header>
@@ -82,7 +84,7 @@ class Dashboard extends Component {
           <div className="row d-flex justify-content-between">
             <div className="col-lg-12">
               <div className="personal">
-                <h3 className="title-inform mt-2">Menunggu pembayaran</h3>
+                <h3 className="title-inform mt-2">Pesanan saya</h3>
               </div>
               {orders.length === 0 ? (
                 <div className="ticket-information">
@@ -158,39 +160,80 @@ class Dashboard extends Component {
                           {formatDate(order.bookingEndDate)}
                         </h6>
                       </div>
+                      {order.payments.status === "Proses" ? (
+                        // Jika status pembayaran adalah "Proses"
+                        <>
+                          <div className="d-lg-block d-none col-lg-2 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#F8DE22",
+                                backgroundColor: "white",
+                                border: "1px solid #F8FDCF",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Proses
+                            </h6>
+                          </div>
+                          <div className="d-block d-lg-none col-6 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#F8DE22",
+                                backgroundColor: "white",
+                                border: "1px solid #F8FDCF",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Proses
+                            </h6>
+                          </div>
+                        </>
+                      ) : (
+                        // Jika status pembayaran bukan "Proses"
+                        <>
+                          <div className="d-lg-block d-none col-lg-2 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#A8DF8E",
+                                backgroundColor: "white",
+                                border: "1px solid #F3FDE8",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Lunas
+                            </h6>
+                          </div>
+                          <div className="d-block d-lg-none col-6 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#A8DF8E",
+                                backgroundColor: "white",
+                                border: "1px solid #F3FDE8",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Lunas
+                            </h6>
+                          </div>
+                        </>
+                      )}
 
-                      <div className="d-lg-block d-none col-lg-2 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
-                      <div className="d-block d-lg-none col-6 order-2">
-                        <h6
-                          style={{
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                            color: "#F8DE22",
-                            backgroundColor: "white",
-                            border: "1px solid #F8FDCF",
-                            borderRadius: 8,
-                            textAlign: "center",
-                            lineHeight: 2,
-                            fontWeight: 500,
-                          }}>
-                          {order.payments.status}
-                        </h6>
-                      </div>
                       {order.payments.payment_status === "waiting" ? (
                         <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
                           <a
@@ -249,4 +292,5 @@ class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+
+export default TicketActive;

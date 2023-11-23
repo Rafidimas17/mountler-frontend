@@ -13,6 +13,7 @@ import Activities from "../parts/Activites";
 import Testimony from "../parts/Testimony";
 import { checkoutBooking } from "../store/actions/Checkout";
 import { fetchPage } from "../store/actions/page";
+import AnimatedLines from "../elements/Loading/Loading";
 // import { fetchPage } from "./store/actions/page";
 class DetailsPage extends Component {
   constructor(props) {
@@ -44,32 +45,7 @@ class DetailsPage extends Component {
     if (!page[match.params.id]) {
       return (
         <div className="container">
-          <div
-            className="row align-items-center justify-content-center text-center"
-            style={{ height: "100vh" }}>
-            <div className="col-3">
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div>
-                <Button className="btn mt-5" type="button" isLight>
-                  Back
-                </Button>
-              </div>
-            </div>
-          </div>
+          <AnimatedLines />
         </div>
       );
     }
@@ -86,10 +62,10 @@ class DetailsPage extends Component {
         <FeaturedImage data={page[match.params.id].imageId} />
         <section className="container">
           <div className="row">
-            <div className="col-7 pr-5">
+            <div className="col-lg-7 col-sm-12 pr-5">
               <PageDetailDescription data={page[match.params.id]} />
             </div>
-            <div className="col-5">
+            <div className="col-lg-5 col-sm-12">
               <BookingForm
                 itemDetails={page[match.params.id]}
                 startBooking={this.props.checkoutBooking}

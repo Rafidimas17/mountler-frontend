@@ -6,10 +6,10 @@ export default function PageDetailTitle({ data, breadcrumb }) {
     <section className="container spacing-sm">
       <Fade bottom>
         <div className="row align-items-center">
-          <div className="col">
+          <div className="col-lg-auto col-sm-12">
             <Breadcrumb data={breadcrumb} />
           </div>
-          <div className="col-auto text-center">
+          <div className="col-lg-12 col-sm-12 text-center">
             <h1 className="h2" style={{ fontFamily: "Poppins", marginTop: 20 }}>
               {data.title}
             </h1>

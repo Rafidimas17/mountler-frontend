@@ -46,12 +46,12 @@ export default function Date(props) {
   const displayDate = `${value.startDate ? formatDate(value.startDate) : ""}${
     value.endDate ? " - " + formatDate(value.endDate) : ""
   }`;
+  console.log(displayDate);
 
   return (
     <div
       ref={refDate}
-      className={["input-date mb-3", props.outerClassName].join(" ")}
-    >
+      className={["input-date mb-3", props.outerClassName].join(" ")}>
       <div className="input-group">
         <div className="input-group-prepend bg-gray-900">
           <span className="input-group-text">
@@ -62,6 +62,7 @@ export default function Date(props) {
           readOnly
           type="text"
           className="form-control"
+          disabled={false}
           value={displayDate}
           placeholder={placeholder}
           onClick={() => setIsShowed(!isShowed)}

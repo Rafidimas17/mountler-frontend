@@ -34,15 +34,25 @@ export default function Header(props) {
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light">
           <BrandIcon />
-          <div className="collapse navbar-collapse">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className={`nav-item${getNavLinkClass("/")}`}>
                 <Button className="nav-link" type="link" href="/">
                   Home
                 </Button>
               </li>
-              <li className={`nav-item${getNavLinkClass("/browse-by")}`}>
-                <Button className="nav-link" type="link" href="/browse-by">
+              <li className={`nav-item${getNavLinkClass("/porter")}`}>
+                <Button className="nav-link" type="link" href="/porter">
                   Porter Order
                 </Button>
               </li>
@@ -72,26 +82,86 @@ export default function Header(props) {
                   </button>
                   <div
                     className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton">
-                    <a
-                      className="dropdown-item"
+                    aria-labelledby="dropdownMenuButton"
+                    style={{
+                      gap: 8,
+                      width: "220px",
+                      margin: "20px 100px 0px -20px",
+                    }}>
+                    <h6
+                      className="pl-4 mt-2"
                       style={{
                         fontFamily: "Poppins",
                         fontSize: 16,
                         border: "none",
                         outline: "none",
+                        fontWeight: 600,
                       }}>
-                      <Link
-                        to="profile"
-                        style={{ textDecoration: "none", color: "#2A2A2A" }}>
-                        Profile
-                      </Link>
-                    </a>
+                      Akun saya
+                    </h6>
+                    <Link
+                      to="pesanan"
+                      style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                      <Button
+                        className="nav-link pl-4"
+                        type="link"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 14,
+                          border: "none",
+                          outline: "none",
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          color: "#2A2A2A",
+                        }}
+                        href="/menunggu-pembayaran">
+                        Menunggu pembayaran
+                      </Button>
+                    </Link>
+                    <Link
+                      to="tiket-aktif"
+                      style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                      <Button
+                        className="nav-link pl-4"
+                        type="link"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 14,
+                          border: "none",
+                          outline: "none",
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          color: "#2A2A2A",
+                        }}
+                        href="/pesanan-saya">
+                        Pesanan saya
+                      </Button>
+                    </Link>
+                    <Link
+                      to="riwayat"
+                      style={{ textDecoration: "none", color: "#2A2A2A" }}>
+                      <Button
+                        className="nav-link pl-4"
+                        type="link"
+                        style={{
+                          fontFamily: "Poppins",
+                          fontSize: 14,
+                          border: "none",
+                          outline: "none",
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          color: "#2A2A2A",
+                        }}
+                        href="/riwayat">
+                        Riwayat transaksi
+                      </Button>
+                    </Link>
+
                     <a
                       className="dropdown-item"
                       style={{
                         fontFamily: "Poppins",
-                        fontSize: 16,
+                        fontSize: 14,
                         border: "none",
                         outline: "none",
                         cursor: "pointer",

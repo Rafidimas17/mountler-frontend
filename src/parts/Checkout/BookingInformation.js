@@ -6,22 +6,21 @@ import Form from "react-bootstrap/Form";
 import "./booking.scss";
 export default function BookingInformation(props) {
   const { data, ItemDetails, checkout } = props;
-  // console.log(ItemDetails);
 
   return (
     <Fade>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-8 " style={{ paddingRight: 30 }}>
+          <div className="col-lg-8 col-sm-12 " style={{ paddingRight: 30 }}>
             <div className="row">
-              <div className="col-8">
+              <div className="col-lg-8 col-sm-12">
                 <h5 className="h3">Hikers Information</h5>
                 <p style={{ fontFamily: "Poppins" }}>
                   Please fill your information with completed
                 </p>
               </div>
               <div
-                className="col-4 d-flex justify-content-end"
+                className="col-lg-4 col-sm-12 d-flex justify-content-end"
                 style={{ height: "100%" }}>
                 <button
                   className="btn-add mt-2 shadow"
@@ -58,8 +57,8 @@ export default function BookingInformation(props) {
                     <div className="row mt-1 p-2">
                       <div className="col">
                         <div className="card">
-                          <div className="row">
-                            <div className="col-6">
+                          <div className="row d-flex align-items-center">
+                            <div className="col-6 col-sm-6">
                               <h5
                                 className="h5 p-2"
                                 style={{
@@ -69,7 +68,7 @@ export default function BookingInformation(props) {
                                 {label}
                               </h5>
                             </div>
-                            <div className="col-6 d-flex justify-content-end">
+                            <div className="col-6 col-lg-6 col-sm-3 d-flex justify-content-end">
                               {index !== 0 && (
                                 <button
                                   className="Btn"
@@ -106,7 +105,7 @@ export default function BookingInformation(props) {
                           </div>
                           <div className="row p-2">
                             {/* <div className="col-6 border"></div> */}
-                            <div className="col-6">
+                            <div className="col-lg-6 col-sm-12">
                               <h5
                                 className="h6"
                                 style={{
@@ -158,7 +157,7 @@ export default function BookingInformation(props) {
                                 }
                               />
                             </div>
-                            <div className="col-6">
+                            <div className="col-lg-6 col-sm-12">
                               <h5
                                 className="h6"
                                 style={{

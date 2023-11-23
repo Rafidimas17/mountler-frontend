@@ -19,28 +19,28 @@ export default function Equipment(props) {
             <div class="col-4">
               <h5 className="mt-4">Tenda</h5>
             </div>
-            <div class="col">
-              <div className="row  align-items-center">
-                <div className="col">
+            <div className="col-lg-8 col-sm-12">
+              <div className="row align-items-center">
+                <div className="col-6 col-lg-6 col-sm-auto">
                   {" "}
                   <input
                     type="number"
                     min={0}
                     className="form-control"
-                    placeholder="Amount"
+                    placeholder="Jumlah"
                     id="jumlahTenda"
                     name="jumlahTenda"
                     value={data.jumlahTenda}
                     onChange={props.onChange}
                   />
                 </div>
-                <div className="col">
+                <div className="col-6 col-lg-6 col-sm-auto">
                   {" "}
                   <input
                     type="number"
                     min={0}
                     className="form-control"
-                    placeholder="Capacity"
+                    placeholder="Kapasitas"
                     id="jumlahKapasitas"
                     name="jumlahKapasitas"
                     value={data.jumlahKapasitas}
@@ -49,129 +49,108 @@ export default function Equipment(props) {
                 </div>
               </div>
             </div>
-            <div class="col-2 align-items-center">
-              <h6 className="mt-4">Unit</h6>
-            </div>
           </div>
-          <div class="form-row align-items-center p-3">
-            <div class="col-4">
-              <h5>Kompor Nesting</h5>
-            </div>
-            <div class="col">
-              <input
-                type="number"
-                min={0}
-                className="form-control"
-                placeholder="Amount"
-                id="jumlahKompor"
-                name="jumlahKompor"
-                value={data.jumlahKompor}
-                onChange={props.onChange}
-              />
-            </div>
-            <div class="col-2">
-              <h6>Set</h6>
-            </div>
+        </div>
+        <div class="form-row align-items-center p-3">
+          <div class="col-lg-4 col-sm-12">
+            <h5>Kompor Nesting</h5>
           </div>
-          <div class="form-row p-3  align-items-center">
-            <div class="col-4">
-              <h5>Carrier</h5>
-            </div>
-            <div class="col">
-              <input
-                type="number"
-                min={0}
-                className="form-control"
-                placeholder="Amount"
-                id="jumlahCarrier"
-                name="jumlahCarrier"
-                value={data.jumlahCarrier}
-                onChange={props.onChange}
-              />
-            </div>
-            <div class="col-2">
-              <h6>Unit</h6>
-            </div>
+          <div class="col">
+            <input
+              type="number"
+              min={0}
+              className="form-control"
+              placeholder="Amount"
+              id="jumlahKompor"
+              name="jumlahKompor"
+              value={data.jumlahKompor}
+              onChange={props.onChange}
+            />
           </div>
-          <div class="form-row p-3  align-items-center">
-            <div class="col-4">
-              <h5>Matras</h5>
-            </div>
-            <div class="col">
-              <input
-                type="number"
-                min={0}
-                className="form-control"
-                id="jumlahMatras"
-                name="jumlahMatras"
-                placeholder="Amount"
-                value={data.jumlahMatras}
-                onChange={props.onChange}
-              />
-            </div>
-            <div class="col-2">
-              <h6>Unit</h6>
-            </div>
+        </div>
+        <div class="form-row p-3  align-items-center">
+          <div class="col-lg-4 col-sm-12">
+            <h5>Tas Carrier</h5>
           </div>
-          <div class="form-row p-3  align-items-center">
-            <div class="col-4">
-              <h5>Sleeping Bag</h5>
-            </div>
-            <div class="col">
-              <input
-                type="number"
-                min={0}
-                className="form-control"
-                id="jumlahSB"
-                placeholder="Amount"
-                name="jumlahSB"
-                value={data.jumlahSB}
-                onChange={props.onChange}
-              />
-            </div>
-            <div class="col-2">
-              <h6>Unit</h6>
-            </div>
+          <div class="col">
+            <input
+              type="number"
+              min={0}
+              className="form-control"
+              placeholder="Amount"
+              id="jumlahCarrier"
+              name="jumlahCarrier"
+              value={data.jumlahCarrier}
+              onChange={props.onChange}
+            />
           </div>
-          <div class="form-row p-3  align-items-center">
-            <div class="col-4">
-              <h5>Headlamp</h5>
-            </div>
-            <div class="col">
-              <input
-                type="number"
-                min={0}
-                className="form-control"
-                placeholder="Amount"
-                id="jumlahHeadlamp"
-                name="jumlahHeadlamp"
-                value={data.jumlahHeadlamp}
-                onChange={props.onChange}
-              />
-            </div>
-            <div class="col-2">
-              <h6>Unit</h6>
-            </div>
+        </div>
+        <div class="form-row p-3  align-items-center">
+          <div class="col-lg-4 col-sm-12">
+            <h5>Matras</h5>
           </div>
-          <div class="form-row p-3  align-items-center">
-            <div class="col-4">
-              <h5>P3K Kit</h5>
-            </div>
-            <div class="col">
-              <input
-                type="number"
-                min={0}
-                className="form-control"
-                placeholder="Amount"
-                id="jumlahP3k"
-                name="jumlahP3k"
-                value={data.jumlahP3k}
-                onChange={props.onChange}
-              />
-            </div>
-            <div class="col-2">
-              <h6>Set</h6>
-            </div>
+          <div class="col">
+            <input
+              type="number"
+              min={0}
+              className="form-control"
+              id="jumlahMatras"
+              name="jumlahMatras"
+              placeholder="Amount"
+              value={data.jumlahMatras}
+              onChange={props.onChange}
+            />
+          </div>
+        </div>
+        <div class="form-row p-3  align-items-center">
+          <div class="col-lg-4 col-sm-12">
+            <h5>Sleeping Bag</h5>
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              min={0}
+              className="form-control"
+              id="jumlahSB"
+              placeholder="Amount"
+              name="jumlahSB"
+              value={data.jumlahSB}
+              onChange={props.onChange}
+            />
+          </div>
+        </div>
+        <div class="form-row p-3  align-items-center">
+          <div class="col-lg-4 col-sm-12">
+            <h5>Headlamp</h5>
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              min={0}
+              className="form-control"
+              placeholder="Amount"
+              id="jumlahHeadlamp"
+              name="jumlahHeadlamp"
+              value={data.jumlahHeadlamp}
+              onChange={props.onChange}
+            />
+          </div>
+        </div>
+        <div class="form-row p-3  align-items-center">
+          <div class="col-lg-4 col-sm-12">
+            <h5>P3K Kit</h5>
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              min={0}
+              className="form-control"
+              placeholder="Amount"
+              id="jumlahP3k"
+              name="jumlahP3k"
+              value={data.jumlahP3k}
+              onChange={props.onChange}
+            />
           </div>
         </div>
       </div>
