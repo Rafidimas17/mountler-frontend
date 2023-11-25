@@ -67,7 +67,8 @@ class TicketActive extends Component {
 
     const filteredOrders = orders.filter(
       (order) =>
-        order.boarding.boarding_status === "Registrasi" ||
+        (order.payments.payment_status === "paid" &&
+          order.boarding.boarding_status === "Registrasi") ||
         order.boarding.boarding_status === "check-in"
     );
 
@@ -160,7 +161,7 @@ class TicketActive extends Component {
                           {formatDate(order.bookingEndDate)}
                         </h6>
                       </div>
-                      {order.payments.status === "Proses" ? (
+                      {order.boarding.boarding_status === "Registrasi" ? (
                         // Jika status pembayaran adalah "Proses"
                         <>
                           <div className="d-lg-block d-none col-lg-2 order-2">
@@ -176,7 +177,7 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Proses
+                              Boarding
                             </h6>
                           </div>
                           <div className="d-block d-lg-none col-6 order-2">
@@ -192,11 +193,11 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Proses
+                              Boarding
                             </h6>
                           </div>
                         </>
-                      ) : (
+                      ) : order.boarding.boarding_status === "check-in" ? (
                         // Jika status pembayaran bukan "Proses"
                         <>
                           <div className="d-lg-block d-none col-lg-2 order-2">
@@ -212,7 +213,7 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Lunas
+                              Check-in
                             </h6>
                           </div>
                           <div className="d-block d-lg-none col-6 order-2">
@@ -228,10 +229,12 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Lunas
+                              Check-in
                             </h6>
                           </div>
                         </>
+                      ) : (
+                        ""
                       )}
 
                       {order.payments.payment_status === "waiting" ? (

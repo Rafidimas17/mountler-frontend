@@ -49,6 +49,10 @@ export default function File(props) {
           defaultValue={FileName}
           placeholder={placeholder}
           className={["form-control", inputClassName].join(" ")}
+          style={{
+            backgroundColor: "#FFFFF",
+            border: "1px solid rgb(79, 112, 156);",
+          }}
         />
         {append && (
           <div className="input-group-append bg-gray-900">

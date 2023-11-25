@@ -3,6 +3,7 @@ import LoginBg from "./image/login.jpg";
 import IconFacebook from "./icon/facebook.svg";
 import IconTwitter from "./icon/twitter.svg";
 import IconInstagram from "./icon/instagram.svg";
+import Logo from "./image/logo.png";
 import IconTelegram from "./icon/telegram.svg";
 import IconGithub from "./icon/github.svg";
 import IconCities from "./icon/Cities.svg";
@@ -23,6 +24,7 @@ import LogoTicket from "./icon/logo-ticket.svg";
 import ImageCompleted from "./image/completed.jpg";
 // import IconGoogle from "./icon/google.svg";
 export {
+  Logo,
   // IconQris,
   LogoTicket,
   ImageCompleted,

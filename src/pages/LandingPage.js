@@ -7,6 +7,7 @@ import Testimony from "../parts/Testimony";
 import Footer from "../parts/Footer";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import AnimatedLines from "../elements/Loading/Loading";
 import { fetchPage } from "../store/actions/page";
 class LandingPage extends Component {
   constructor(props) {
@@ -34,8 +35,19 @@ class LandingPage extends Component {
     if (!token) {
       return <Redirect to="/login" />;
     }
+
+    // if (isLoading) {
+    //   // Jika data masih dimuat, tampilkan elemen loading
+
+    // }
+
     // console.log(page)
-    if (!page.hasOwnProperty("landingPage")) return null;
+    if (!page.hasOwnProperty("landingPage"))
+      return (
+        <div className="container">
+          <AnimatedLines />
+        </div>
+      );
 
     return (
       <>

@@ -1269,3 +1269,24 @@ section {
 
 }
 
+.input-password {
+  margin-left: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 85%;
+  height: 100%;
+  font-family: 'Poppins';
+  &:focus {
+    outline: 1px;
+  }
+}
+
+.inputForm {
+  &:focus-within {
+    border: 1.5px solid #2d79f3;
+  }
+}
+
+
+
+

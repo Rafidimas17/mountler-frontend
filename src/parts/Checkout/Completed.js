@@ -10,6 +10,7 @@ export default function Completed() {
             <img
               src={ImageCompleted}
               className="img-fluid"
+              style={{ width: "60%" }}
               alt="completed checkout"
             />
             <p className="text-gray-500">

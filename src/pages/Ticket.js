@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Sidebar from "../parts/Sidebar";
-import { LogoTicket, QRCode } from "../assets";
+import { Logo } from "../assets";
 import { Redirect } from "react-router-dom";
 import Header from "../parts/Header";
 import axios from "axios";
 import Breadcrumb from "../elements/Breadcrumb";
 import Tabs from "../elements/Tabs";
 import "./tabs.css";
+import AnimatedLines from "../elements/Loading/Loading";
 class Ticket extends Component {
   constructor(props) {
     super(props);
@@ -65,31 +66,7 @@ class Ticket extends Component {
     }
 
     if (isLoading) {
-      return (
-        <div className="container">
-          <div
-            className="row align-items-center justify-content-center text-center"
-            style={{ height: "100vh" }}>
-            <div className="col-3">
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-grow text-light" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      ); // Display a loading message or spinner
+      return <AnimatedLines />; // Display a loading message or spinner
     }
 
     if (error) {
@@ -111,7 +88,7 @@ class Ticket extends Component {
                     return (
                       <div className="ticket-card">
                         <div className="header-ticket d-flex justify-content-between pt-2 px-4 align-items-center">
-                          <img src={LogoTicket} />
+                          <img src={Logo} />
                           <h5 className="booking-number pr-4">
                             {this.state.ticketData.invoice}
                           </h5>
@@ -184,7 +161,7 @@ class Ticket extends Component {
                     return (
                       <div className="ticket-card">
                         <div className="header-ticket d-flex justify-content-between pt-2 px-4 align-items-center">
-                          <img src={LogoTicket} />
+                          <img src={Logo} />
                           <h5 className="booking-number pr-4">
                             {this.state.ticketData.invoice}
                           </h5>

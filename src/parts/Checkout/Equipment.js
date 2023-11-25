@@ -60,7 +60,7 @@ export default function Equipment(props) {
               type="number"
               min={0}
               className="form-control"
-              placeholder="Amount"
+              placeholder="Jumlah"
               id="jumlahKompor"
               name="jumlahKompor"
               value={data.jumlahKompor}
@@ -77,7 +77,7 @@ export default function Equipment(props) {
               type="number"
               min={0}
               className="form-control"
-              placeholder="Amount"
+              placeholder="Jumlah"
               id="jumlahCarrier"
               name="jumlahCarrier"
               value={data.jumlahCarrier}
@@ -96,7 +96,7 @@ export default function Equipment(props) {
               className="form-control"
               id="jumlahMatras"
               name="jumlahMatras"
-              placeholder="Amount"
+              placeholder="Jumlah"
               value={data.jumlahMatras}
               onChange={props.onChange}
             />
@@ -112,7 +112,7 @@ export default function Equipment(props) {
               min={0}
               className="form-control"
               id="jumlahSB"
-              placeholder="Amount"
+              placeholder="Jumlah"
               name="jumlahSB"
               value={data.jumlahSB}
               onChange={props.onChange}
@@ -128,7 +128,7 @@ export default function Equipment(props) {
               type="number"
               min={0}
               className="form-control"
-              placeholder="Amount"
+              placeholder="Jumlah"
               id="jumlahHeadlamp"
               name="jumlahHeadlamp"
               value={data.jumlahHeadlamp}
@@ -145,7 +145,7 @@ export default function Equipment(props) {
               type="number"
               min={0}
               className="form-control"
-              placeholder="Amount"
+              placeholder="Jumlah"
               id="jumlahP3k"
               name="jumlahP3k"
               value={data.jumlahP3k}
