@@ -15,7 +15,7 @@ function MostPicked(props) {
                 <div className="card card-featured">
                   <div className="tag">
                     Rp {item.price}
-                    <span className="font-weight-light"> / {item.unit}</span>
+                    <span className="font-weight-light"> / hari</span>
                   </div>
                   <figure className="img-wrapper">
                     <img

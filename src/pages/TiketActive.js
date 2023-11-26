@@ -67,8 +67,14 @@ class TicketActive extends Component {
 
     const filteredOrders = orders.filter(
       (order) =>
-        order.boarding.boarding_status === "Registrasi" ||
+        (order.payments.payment_status === "paid" &&
+          order.boarding.boarding_status === "Registrasi") ||
         order.boarding.boarding_status === "check-in"
+    );
+    const inactiveOrder = sortedOrders.find(
+      (item) =>
+        item.boarding.boarding_status === "Registrasi" ||
+        item.boarding.boarding_status === "check-in"
     );
 
     return (
@@ -77,7 +83,7 @@ class TicketActive extends Component {
         <div
           className="container"
           style={{
-            marginTop: 60,
+            marginTop: 10,
             zIndex: 2,
           }}>
           <Breadcrumb data={breadcrumb} />
@@ -86,7 +92,7 @@ class TicketActive extends Component {
               <div className="personal">
                 <h3 className="title-inform mt-2">Pesanan saya</h3>
               </div>
-              {orders.length === 0 ? (
+              {!inactiveOrder ? (
                 <div className="ticket-information">
                   <img
                     src={TicketNotFound}
@@ -95,13 +101,14 @@ class TicketActive extends Component {
                   />
                   <h6>Tidak ada ticket aktif </h6>
                   <p>
-                    Semua ticketmu akan ditampilkan disini. <br></br>
+                    Semua ticketmu akan ditampilkan disini. <br />
                     <span className="info-ticket">
                       Yuk rencanakan pendakianmu sekarang!
                     </span>{" "}
                   </p>
                 </div>
               ) : (
+                // Display active orders
                 filteredOrders.map((order) => (
                   <div className="ticket-information-found" key={order._id}>
                     <div className="row d-flex justify-content-between">
@@ -160,7 +167,7 @@ class TicketActive extends Component {
                           {formatDate(order.bookingEndDate)}
                         </h6>
                       </div>
-                      {order.payments.status === "Proses" ? (
+                      {order.boarding.boarding_status === "Registrasi" ? (
                         // Jika status pembayaran adalah "Proses"
                         <>
                           <div className="d-lg-block d-none col-lg-2 order-2">
@@ -176,7 +183,7 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Proses
+                              Boarding
                             </h6>
                           </div>
                           <div className="d-block d-lg-none col-6 order-2">
@@ -192,11 +199,11 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Proses
+                              Boarding
                             </h6>
                           </div>
                         </>
-                      ) : (
+                      ) : order.boarding.boarding_status === "check-in" ? (
                         // Jika status pembayaran bukan "Proses"
                         <>
                           <div className="d-lg-block d-none col-lg-2 order-2">
@@ -212,7 +219,7 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Lunas
+                              Check-in
                             </h6>
                           </div>
                           <div className="d-block d-lg-none col-6 order-2">
@@ -228,10 +235,12 @@ class TicketActive extends Component {
                                 lineHeight: 2,
                                 fontWeight: 500,
                               }}>
-                              Lunas
+                              Check-in
                             </h6>
                           </div>
                         </>
+                      ) : (
+                        ""
                       )}
 
                       {order.payments.payment_status === "waiting" ? (

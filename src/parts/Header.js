@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "../elements/Button";
 import BrandIcon from "./IconText";
-import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Header(props) {
   const getNavLinkClass = (path) => {
     return props.location.pathname === path ? " active" : "";
   };
+  const [isShowed, setIsShowed] = useState(false);
 
+  const handleToggle = () => {
+    setIsShowed(!isShowed);
+  };
   const base64Url = props.data.split(".")[1];
   const decodedValue = JSON.parse(window.atob(base64Url));
   const removeToken = () => {
@@ -21,9 +24,7 @@ export default function Header(props) {
       <header className="spacing-sm">
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light">
-            <Button className="brand-text-icon mx-auto" href="" type="link">
-              Cakra<span className="text-gray-900">wala.</span>
-            </Button>
+            <BrandIcon />
           </nav>
         </div>
       </header>
@@ -35,30 +36,40 @@ export default function Header(props) {
         <nav className="navbar navbar-expand-lg navbar-light">
           <BrandIcon />
           <button
-            class="navbar-toggler"
+            className="d-sm-block d-lg-none"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            onClick={handleToggle}
+            data-bs-toggle="collapse"
+            style={{ backgroundColor: "white", border: "none" }}
+            data-bs-target="#navbarText"
+            aria-controls="navbarText">
+            <span>
+              {isShowed ? (
+                <i className="fa fa-times-circle fa-lg" aria-hidden="true"></i>
+              ) : (
+                <i className="fa fa-bars fa-lg" aria-hidden="true"></i>
+              )}
+            </span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          {/* </div> */}
+          <div
+            className={`collapse navbar-collapse justify-content-end ${
+              isShowed ? "show" : ""
+            }`}>
             <ul className="navbar-nav ml-auto">
               <li className={`nav-item${getNavLinkClass("/")}`}>
                 <Button className="nav-link" type="link" href="/">
-                  Home
+                  Beranda
                 </Button>
               </li>
               <li className={`nav-item${getNavLinkClass("/porter")}`}>
                 <Button className="nav-link" type="link" href="/porter">
-                  Porter Order
+                  Porter
                 </Button>
               </li>
-              <li className={`nav-item${getNavLinkClass("/stories")}`}>
-                <Button className="nav-link" type="link" href="/stories">
-                  Stories
+              <li className={`nav-item${getNavLinkClass("/tentang-kami")}`}>
+                <Button className="nav-link" type="link" href="/tentang-kami">
+                  Tentang kami
                 </Button>
               </li>
               <li>
@@ -73,12 +84,14 @@ export default function Header(props) {
                     style={{
                       fontFamily: "Poppins",
                       fontSize: 16,
-                      backgroundColor: "white",
+                      backgroundColor: " rgb(180, 230, 250)",
                       border: "none",
+                      borderRadius: 8,
                       color: "#152C58",
                       outline: "none",
                     }}>
                     Halo, {decodedValue.username}
+                    <span style={{ marginLeft: "5px" }}>&#9662;</span>
                   </button>
                   <div
                     className="dropdown-menu"
@@ -99,27 +112,26 @@ export default function Header(props) {
                       }}>
                       Akun saya
                     </h6>
-                    <Link
-                      to="pesanan"
-                      style={{ textDecoration: "none", color: "#2A2A2A" }}>
-                      <Button
-                        className="nav-link pl-4"
-                        type="link"
-                        style={{
-                          fontFamily: "Poppins",
-                          fontSize: 14,
-                          border: "none",
-                          outline: "none",
-                          cursor: "pointer",
-                          textDecoration: "none",
-                          color: "#2A2A2A",
-                        }}
-                        href="/menunggu-pembayaran">
-                        Menunggu pembayaran
-                      </Button>
-                    </Link>
+
+                    <Button
+                      className="nav-link pl-4"
+                      type="link"
+                      href="/menunggu-pembayaran"
+                      style={{
+                        fontFamily: "Poppins",
+                        fontSize: 14,
+                        border: "none",
+                        outline: "none",
+                        cursor: "pointer",
+                        textDecoration: "none",
+                        color: "#2A2A2A",
+                      }}>
+                      Menunggu pembayaran
+                    </Button>
+
                     <Link
                       to="tiket-aktif"
+                      className="nav-item"
                       style={{ textDecoration: "none", color: "#2A2A2A" }}>
                       <Button
                         className="nav-link pl-4"

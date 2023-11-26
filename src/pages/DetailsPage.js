@@ -23,7 +23,7 @@ class DetailsPage extends Component {
     };
   }
   componentDidMount() {
-    window.title = "Details Page";
+    document.title = "Cakrawala | Detail";
     window.scrollTo(0, 0);
     if (!this.props.page[this.props.match.params.id])
       this.props
@@ -50,8 +50,8 @@ class DetailsPage extends Component {
       );
     }
     const breadcrumb = [
-      { pageTitle: "Home", pageHref: "" },
-      { pageTitle: "Mountain Details", pageHref: "" },
+      { pageTitle: "Beranda", pageHref: "" },
+      { pageTitle: "Detail Gunung", pageHref: "" },
     ];
     return (
       <>

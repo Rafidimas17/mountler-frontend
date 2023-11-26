@@ -16,6 +16,7 @@ import TicketActive from "./pages/TiketActive";
 import History from "./pages/Riwayat";
 import Porter from "./pages/Porter";
 import Simulator from "./pages/Simulator";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/profile" component={Profile}></Route>
           <Route path="/signup" component={SignupPage}></Route>
           <Route path="/review/:id" component={Review}></Route>
+          <Route path="/tentang-kami" component={About}></Route>
           <Route path="/ticket-show/:id" component={Ticket}></Route>
           <Route path="/forgotpassword" component={forgotPassword}></Route>
           <Route path="/properties/:id" component={DetailsPage}></Route>

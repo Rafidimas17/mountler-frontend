@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Button from "../elements/Button";
 import CardWelcome from "../parts/CardWelcome";
-import { IconGoogle } from "../assets";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Ganti ini dengan library ikon yang Anda gunakan
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"; // Ganti ini dengan ikon mata dan mata tertutup yang sesuai
+
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
@@ -11,14 +13,21 @@ export default function Login() {
   const [direct, setRedirect] = useState(false);
   const [error, setError] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  // const [password, setPassword] = useState("");
+
   const usernameChange = (e) => {
     const usernameUser = e.target.value;
     setUsername(usernameUser);
   };
 
   const passwordChange = (e) => {
-    const passwordUser = e.target.value;
-    setPassword(passwordUser);
+    setPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleLogin = () => {
@@ -54,7 +63,7 @@ export default function Login() {
             <div className="container">
               <h5 className="title-signup">Login</h5>
               <p className="tagline-welcome mt-2">
-                Don't have any account?{" "}
+                Belum punya akun?{" "}
                 <Link to="/signup" style={{ textDecoration: "none" }}>
                   <span className="regist"> Register</span>
                 </Link>
@@ -66,7 +75,7 @@ export default function Login() {
                       {error}
                     </div>
                   )}
-                  <h4 htmlFor="exampleInputusername">Email/Username</h4>
+                  <h4 htmlFor="exampleInputusername">Username/email</h4>
                   <input
                     type="text"
                     value={username}
@@ -74,11 +83,11 @@ export default function Login() {
                     onChange={usernameChange}
                     id="exampleInputusername1"
                     aria-describedby="usernameHelp"
-                    placeholder="example@example.com"
+                    placeholder="username / email"
                   />
                 </div>
                 <div className="form-group">
-                  <h4 htmlFor="exampleInputPassword">
+                  {/* <h4 htmlFor="exampleInputPassword">
                     Password
                     <Link to="/forgotpassword">
                       <span
@@ -87,15 +96,36 @@ export default function Login() {
                         Forgot Password?
                       </span>
                     </Link>
-                  </h4>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={passwordChange}
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="example"
-                  />
+                  </h4> */}
+                  <h4 htmlFor="exampleInputusername">Password</h4>
+                  <div
+                    class="inputForm"
+                    style={{
+                      fontFamily: "Poppins",
+                      border: "1px solid #5d5d5d",
+                      borderRadius: 8,
+                      height: "50px",
+                      display: "flex",
+                      alignItems: "center",
+                      transition: "0.2s ease-in-out",
+                    }}>
+                    {/* <svg height="20" viewBox="-64 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path><path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path></svg>         */}
+
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="input-password"
+                      placeholder="password"
+                      value={password}
+                      onChange={passwordChange}
+                    />
+                    <button
+                      style={{ backgroundColor: "white", border: "none" }}
+                      onClick={togglePasswordVisibility}>
+                      <FontAwesomeIcon
+                        icon={showPassword ? faEye : faEyeSlash}
+                      />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="form-group">
@@ -115,14 +145,6 @@ export default function Login() {
                     }}>
                     Login
                   </Button>
-                </div>
-                <div className="form-group mb-0 justify-content-center text-center">
-                  <h4
-                    className="text-center"
-                    htmlFor="exampleInputPassword"
-                    hidden>
-                    OR
-                  </h4>
                 </div>
               </div>
             </div>

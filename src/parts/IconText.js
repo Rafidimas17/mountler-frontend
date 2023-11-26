@@ -1,9 +1,13 @@
 import React from "react";
+
 import Button from "../elements/Button";
-export default function IconText() {
+
+import jsonLogo from "../json/logo.json";
+
+export default function IconText({ data }) {
   return (
     <Button className="brand-text-icon" href="" type="link">
-      Cakra<span className="text-gray-900">wala.</span>
+      <img src={jsonLogo.logo} />
     </Button>
   );
 }

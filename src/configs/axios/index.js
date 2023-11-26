@@ -4,6 +4,19 @@ const instance = axios.create({
   baseURL: `${process.env.REACT_APP_HOST}/api-v1/`,
 });
 
+// Menambahkan interceptor untuk setiap permintaan
+instance.interceptors.request.use((config) => {
+  // Mengambil token dari localStorage atau sumber lainnya
+  const token = "iO3quoYg265hlzq30E8RelQc0LOKle4R0yk6CMbgeHgGNcm_mR";
+
+  // Jika token tersedia, tambahkan ke header Authorization
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 instance.interceptors.response.use(
   (response) => response,
   (error) => {

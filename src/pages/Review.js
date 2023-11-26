@@ -80,17 +80,17 @@ class Review extends Component {
       console.error("Error fetching data:", error);
     }
   };
-  showSwal = (responsePayload) => {
+  showSwal = () => {
     withReactContent(Swal)
       .fire({
         icon: "success",
-        title: responsePayload,
+        title: "Terimakasih atas review anda",
         showConfirmButton: false,
         timer: 1500,
       })
       .then(() => {
         // Assuming responsePayload is defined somewhere
-        this.props.history.push(`/}`);
+        this.props.history.push(`/`);
       });
   };
 

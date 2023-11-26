@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import Header from "../parts/Header";
 import Button from "../elements/Button";
 import { Redirect } from "react-router-dom";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 import Stepper, {
   Numbering,
   Meta,
@@ -70,6 +72,22 @@ class Checkout extends Component {
     }
   };
 
+  showSwal = (resolve, reject, nextStep) => {
+    return withReactContent(Swal)
+      .fire({
+        icon: "success",
+        title: "Pesanan berhasil dibuat",
+        showConfirmButton: false,
+        timer: 2000,
+      })
+      .then(() => {
+        resolve(); // Resolusi untuk lanjut ke langkah berikutnya
+        nextStep(); // Panggil nextStep setelah swal selesai
+      })
+      .catch((error) => {
+        reject(error); // Menolak jika terjadi kesalahan
+      });
+  };
   handleAddRow = () => {
     this.setState((prevState) => {
       const newMember = {
@@ -110,60 +128,76 @@ class Checkout extends Component {
     if (checkout && checkout._id) {
       // console.log(checkout._id);
     } else {
-      console.error(
-        "Objek checkout tidak memiliki properti _id atau objek checkout adalah null atau undefined."
-      );
+      // console.error(
+      //   "Objek checkout tidak memiliki properti _id atau objek checkout adalah null atau undefined."
+      // );
     }
     // console.log(checkout._id);
   }
   _Submit = (nextStep) => {
-    const { data } = this.state;
-    const { checkout } = this.props;
+    return new Promise((resolve, reject) => {
+      const { data } = this.state;
+      const { checkout } = this.props;
 
-    const jumlahSafety = data.jumlahTenda * data.jumlahKapasitas;
+      const jumlahSafety = data.jumlahTenda * data.jumlahKapasitas;
 
-    if (jumlahSafety < data.member.length) {
-      alert("Tenda anda tidak sesuai kapasitas");
-    } else if (jumlahSafety >= data.member.length) {
-      console.log(checkout._id);
-      const tax = 10;
-      const subTotal = checkout.price * checkout.duration * data.member.length;
-      const grandTotal = (subTotal * tax) / 100 + subTotal;
-      const payload = new FormData();
-      payload.append("token", data.token);
-      payload.append("idItem", checkout._id);
-      payload.append("duration", checkout.duration);
-      payload.append("startDateBooking", checkout.date.startDate);
-      payload.append("endDateBooking", checkout.date.endDate);
-      payload.append("total", grandTotal);
+      if (jumlahSafety < data.member.length) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Tenda tidak sesuai",
+          footer: "Sesuaikan jumlah dan kapasitas tenda anda",
+        });
+      } else if (jumlahSafety >= data.member.length) {
+        // console.log(checkout._id);
+        const tax = 10;
+        const subTotal =
+          checkout.price * checkout.duration * data.member.length;
+        const grandTotal = (subTotal * tax) / 100 + subTotal;
+        const payload = new FormData();
+        payload.append("token", data.token);
+        payload.append("idItem", checkout._id);
+        payload.append("duration", checkout.duration);
+        payload.append("startDateBooking", checkout.date.startDate);
+        payload.append("endDateBooking", checkout.date.endDate);
+        payload.append("total", grandTotal);
 
-      data.member.forEach((member_data, index) => {
-        const memberPrefix = `members[${index}]`;
-        payload.append(`${memberPrefix}[nameMember]`, member_data.fullname);
-        payload.append(`${memberPrefix}[addressMember]`, member_data.address);
-        payload.append(`${memberPrefix}[noIdMember]`, member_data.no_id);
-        payload.append(`${memberPrefix}[phoneMember]`, member_data.phone);
-        payload.append(`${memberPrefix}[emailMember]`, member_data.email);
-        payload.append(`${memberPrefix}[genderMember]`, member_data.gender);
-      });
-      payload.append("equipments[0][jumlahSleepingBag]", data.jumlahSB);
-      payload.append("equipments[0][jumlahTenda]", data.jumlahTenda);
-      payload.append("equipments[0][jumlahKompor]", data.jumlahKompor);
-      payload.append("equipments[0][jumlahMatras]", data.jumlahMatras);
-      payload.append("equipments[0][jumlahP3k]", data.jumlahP3k);
-      payload.append("equipments[0][jumlahCarrier]", data.jumlahCarrier);
-      payload.append("equipments[0][jumlahHeadlamp]", data.jumlahHeadlamp);
+        data.member.forEach((member_data, index) => {
+          const memberPrefix = `members[${index}]`;
+          payload.append(`${memberPrefix}[nameMember]`, member_data.fullname);
+          payload.append(`${memberPrefix}[addressMember]`, member_data.address);
+          payload.append(`${memberPrefix}[noIdMember]`, member_data.no_id);
+          payload.append(`${memberPrefix}[phoneMember]`, member_data.phone);
+          payload.append(`${memberPrefix}[emailMember]`, member_data.email);
+          payload.append(`${memberPrefix}[genderMember]`, member_data.gender);
+        });
+        payload.append("equipments[0][jumlahSleepingBag]", data.jumlahSB);
+        payload.append("equipments[0][jumlahTenda]", data.jumlahTenda);
+        payload.append("equipments[0][jumlahKompor]", data.jumlahKompor);
+        payload.append("equipments[0][jumlahMatras]", data.jumlahMatras);
+        payload.append("equipments[0][jumlahP3k]", data.jumlahP3k);
+        payload.append("equipments[0][jumlahCarrier]", data.jumlahCarrier);
+        payload.append("equipments[0][jumlahHeadlamp]", data.jumlahHeadlamp);
 
-      this.props.submitBooking(payload).then(() => {
-        nextStep();
-      });
-    }
+        Promise.all([
+          this.props.submitBooking(payload),
+          this.showSwal(resolve, reject, nextStep),
+        ])
+          .then(() => {
+            resolve(); // Resolusi utama setelah keduanya selesai
+          })
+          .catch((error) => {
+            reject(error); // Menolak utama jika salah satu di antaranya gagal
+          });
+      }
+    });
   };
+
   render() {
     const { data } = this.state;
     const { checkout } = this.props;
 
-    console.log(data);
+    // console.log(data);
     if (!data.token) {
       return <Redirect to="/login" />;
     }
@@ -206,8 +240,8 @@ class Checkout extends Component {
         ),
       },
       Equipment: {
-        title: "Equipment",
-        description: "Add your equipment for enjoy hiking!",
+        title: "Perlengkapan",
+        description: "Siapkan perlengkapanmu untuk petualangan terbaikmu",
         content: (
           <Equipment
             data={data}
@@ -242,7 +276,7 @@ class Checkout extends Component {
                     isPrimary
                     hasShadow
                     onClick={nextStep}>
-                    Continue to Book
+                    Lanjutkan
                   </Button>
                   <Button
                     className="btn"
@@ -250,7 +284,7 @@ class Checkout extends Component {
                     isBlock
                     isLight
                     href={`/properties/${checkout._id}`}>
-                    Cancel
+                    Batal
                   </Button>
                 </Controller>
               )}
@@ -272,10 +306,9 @@ class Checkout extends Component {
                             isPrimary
                             hasShadow
                             onClick={() => {
-                              console.log(this.state.data); // Menampilkan state saat tombol diklik
-                              this._Submit(nextStep); // Lanjutkan ke langkah berikutnya
+                              this._Submit().then(nextStep); // Menampilkan state saat tombol diklik
                             }}>
-                            Continue to Book
+                            Pesan sekarang
                           </Button>
                         </Fade>
                       )}
@@ -285,7 +318,7 @@ class Checkout extends Component {
                       isBlock
                       isLight
                       href={`/properties/${checkout._id}`}>
-                      Cancel
+                      Batal
                     </Button>
                   </Controller>
                 </Fade>

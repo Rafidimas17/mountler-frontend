@@ -92,7 +92,9 @@
   }
 }
 
-
+.cross-icon::before {
+  content: '\00d7'; /* Unicode untuk tanda silang */
+}
 header {
   border-bottom: 1px solid $gray-200;
   width: 100%;
@@ -110,16 +112,28 @@ header {
 
     ul.navbar-nav {
       display: flex;
+      // flex-direction: row;
+      gap: 16px;
       justify-content: space-between;
       background-color: white;
       li.nav-item {
-        &.active {
+       
+        .active {
           a.nav-link {
             font-family: 'Poppins', sans-serif;
             font-size: 16px;
-            color: $primary;
+            color: rgb(41, 41, 120);
+        
+            
           }
         }
+        &:hover {
+          /* Gaya yang ingin Anda terapkan saat tautan dihover */
+          background-color: rgb(248, 248, 248); /* Contoh: garis bawah saat dihover */
+          /* Atau Anda dapat menentukan properti gaya lainnya */
+          border-radius: 6px;
+        }
+        
 
         a {
           font-family: 'Poppins', sans-serif;
@@ -1268,4 +1282,25 @@ section {
   }
 
 }
+
+.input-password {
+  margin-left: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 85%;
+  height: 100%;
+  font-family: 'Poppins';
+  &:focus {
+    outline: 1px;
+  }
+}
+
+.inputForm {
+  &:focus-within {
+    border: 1.5px solid #2d79f3;
+  }
+}
+
+
+
 
