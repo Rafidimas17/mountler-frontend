@@ -67,8 +67,8 @@ export default function Header(props) {
                   Porter
                 </Button>
               </li>
-              <li className={`nav-item${getNavLinkClass("/stories")}`}>
-                <Button className="nav-link" type="link" href="/stories">
+              <li className={`nav-item${getNavLinkClass("/tentang-kami")}`}>
+                <Button className="nav-link" type="link" href="/tentang-kami">
                   Tentang kami
                 </Button>
               </li>

@@ -58,7 +58,6 @@ class LandingPage extends Component {
           data={page.landingPage.mostPicked}
         />
         <Categories data={page.landingPage.category} />
-        <Testimony data={page.landingPage.testimonial} />
         <Footer />
       </>
     );
