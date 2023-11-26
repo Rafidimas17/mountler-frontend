@@ -102,7 +102,7 @@ class BookingForm extends Component {
         </label>
         <InputNumber
           max={30}
-          suffix={" day"}
+          suffix={" hari"}
           isSuffixPlural
           onChange={this.updateData}
           name="duration"
@@ -152,7 +152,7 @@ class BookingForm extends Component {
           isPrimary
           isBlock
           onClick={this.startBooking}>
-          Continue to Book
+          Pesan
         </Button>
       </div>
     );

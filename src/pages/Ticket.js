@@ -155,7 +155,7 @@ class Ticket extends Component {
               <div className="row d-flex justify-content-center">
                 {/* <Sidebar /> */}
                 <div
-                  className="col-lg-8 col-sm-12 d-flex flex-column"
+                  className="col-lg-5 col-sm-12 d-flex flex-column"
                   style={{ gap: 16 }}>
                   {ticketData.porterData.map((item) => {
                     return (
@@ -166,8 +166,8 @@ class Ticket extends Component {
                             {this.state.ticketData.invoice}
                           </h5>
                         </div>
-                        <div className="row justify-content-between p-4 mb-4">
-                          <div className="identity-information col-lg-8 col-sm-12 mb-4">
+                        <div className="row justify-content-between p-5">
+                          <div className="identity-information col-lg-12 col-sm-12">
                             <div className="destination">
                               <h5> {this.state.ticketData.item}</h5>
                               <h5> | </h5>
@@ -228,8 +228,6 @@ class Ticket extends Component {
         </>
       );
     }
-
-    return null;
   }
 }
 export default Ticket;

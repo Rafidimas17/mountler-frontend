@@ -63,7 +63,9 @@ class Dashboard extends Component {
     const latestOrder = sortedOrders[0];
 
     const filteredOrders = orders.filter(
-      (order) => order.payments.payment_status === "waiting"
+      (order) =>
+        order.payments.payment_status === "waiting" &&
+        order.boarding.boarding_status === "Registrasi"
     );
     const breadcrumb = [
       { pageTitle: "Beranda", pageHref: "" },
@@ -75,7 +77,7 @@ class Dashboard extends Component {
         <div
           className="container"
           style={{
-            marginTop: 60,
+            marginTop: 20,
             zIndex: 2,
           }}>
           <Breadcrumb data={breadcrumb} />
@@ -191,53 +193,27 @@ class Dashboard extends Component {
                           {order.payments.status}
                         </h6>
                       </div>
-                      {order.payments.payment_status === "waiting" ? (
-                        <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
-                          <a
-                            href={
-                              order.payments.midtrans_url
-                                ? order.payments.midtrans_url.replace(/"/g, "")
-                                : ""
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <Button
-                              className="btn btn-primary"
-                              style={{
-                                fontFamily: "Poppins",
-                                fontSize: 14,
-                                fontWeight: 500,
-                              }}>
-                              Paid now
-                            </Button>
-                          </a>
-                        </div>
-                      ) : order.payments.payment_status === "paid" ? (
-                        <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
-                          <a
-                            href={
-                              order.payments.midtrans_url
-                                ? order.payments.midtrans_url.replace(/"/g, "")
-                                : ""
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <Button
-                              className="btn btn-primary"
-                              type="link"
-                              href={`/ticket-show/${order._id}`}
-                              style={{
-                                fontFamily: "Poppins",
-                                fontSize: 14,
-                                fontWeight: 500,
-                              }}>
-                              Show ticket
-                            </Button>
-                          </a>
-                        </div>
-                      ) : (
-                        ""
-                      )}
+
+                      <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
+                        <a
+                          href={
+                            order.payments.midtrans_url
+                              ? order.payments.midtrans_url.replace(/"/g, "")
+                              : ""
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer">
+                          <Button
+                            className="btn btn-primary"
+                            style={{
+                              fontFamily: "Poppins",
+                              fontSize: 14,
+                              fontWeight: 500,
+                            }}>
+                            Bayar
+                          </Button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 ))

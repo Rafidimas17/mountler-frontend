@@ -14,8 +14,8 @@ export default function Completed() {
               alt="completed checkout"
             />
             <p className="text-gray-500">
-              You have successfully checkout and completed your payment. Now,
-              get ready to enjoy your best hiking experience!
+              Yeay, pesanan kamu berhasil dibuat. Selanjutnya lakukan pembayaran
+              dan mulai pendakian
             </p>
           </div>
         </div>

@@ -46,7 +46,7 @@ export default function Categories({ data }) {
                           href={`/properties/${item._id}`}
                           className="stretched-link d-block text-gray-800">
                           <h5 className="h4" style={{ marginLeft: 7 }}>
-                            {item.name}
+                            {item.title}
                           </h5>
                         </Button>
                         <span className="text-gray-500">

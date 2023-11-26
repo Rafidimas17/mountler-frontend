@@ -33,9 +33,9 @@ export default function BookingInformation(props) {
           <div className="col-lg-8 col-sm-12 " style={{ paddingRight: 30 }}>
             <div className="row">
               <div className="col-lg-8 col-sm-12">
-                <h5 className="h3">Hikers Information</h5>
+                <h5 className="h3">Informasi pendaki</h5>
                 <p style={{ fontFamily: "Poppins" }}>
-                  Please fill your information with completed
+                  Lengkapi informasi biodata team
                 </p>
               </div>
               <div
@@ -44,7 +44,7 @@ export default function BookingInformation(props) {
                 <button
                   className="btn-add mt-2 shadow"
                   onClick={props.handleAddRow}>
-                  <span>Add Member</span>
+                  <span>Tambah anggota</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -122,7 +122,7 @@ export default function BookingInformation(props) {
                                         y2="17"></line>
                                     </svg>
                                   </div>
-                                  <div className="text">Delete</div>
+                                  <div className="text">Hapus</div>
                                 </button>
                               )}
                             </div>

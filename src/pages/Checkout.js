@@ -240,8 +240,8 @@ class Checkout extends Component {
         ),
       },
       Equipment: {
-        title: "Equipment",
-        description: "Add your equipment for enjoy hiking!",
+        title: "Perlengkapan",
+        description: "Siapkan perlengkapanmu untuk petualangan terbaikmu",
         content: (
           <Equipment
             data={data}
@@ -276,7 +276,7 @@ class Checkout extends Component {
                     isPrimary
                     hasShadow
                     onClick={nextStep}>
-                    Continue to Book
+                    Lanjutkan
                   </Button>
                   <Button
                     className="btn"
@@ -284,7 +284,7 @@ class Checkout extends Component {
                     isBlock
                     isLight
                     href={`/properties/${checkout._id}`}>
-                    Cancel
+                    Batal
                   </Button>
                 </Controller>
               )}
@@ -308,7 +308,7 @@ class Checkout extends Component {
                             onClick={() => {
                               this._Submit().then(nextStep); // Menampilkan state saat tombol diklik
                             }}>
-                            Continue to Book
+                            Pesan sekarang
                           </Button>
                         </Fade>
                       )}
@@ -318,7 +318,7 @@ class Checkout extends Component {
                       isBlock
                       isLight
                       href={`/properties/${checkout._id}`}>
-                      Cancel
+                      Batal
                     </Button>
                   </Controller>
                 </Fade>

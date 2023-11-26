@@ -25,12 +25,13 @@ export default function Hero(props) {
                 marginLeft: 10,
                 fontFamily: "Poppins",
                 fontWeight: 600,
-                fontSize: 40,
+                fontSize: 35,
                 gap: 16,
                 color: "#011A4B",
               }}>
-              Forget Busy Work, <br />
-              Start Next Advanture
+              Tinggalkan Kesibukan,
+              <br />
+              Mulai Petualangan Seru!
             </h2>
             <p
               className="mb-5 text-gray-900"
@@ -40,8 +41,8 @@ export default function Hero(props) {
                 fontWeight: 400,
                 fontSize: 18,
               }}>
-              We provide what you need to enjoy your hiking in Indonesia. Let’s
-              get started !
+              Kami menyajikan pengalaman pendakian terbaik di Indonesia. Ayo
+              mulai pendakianmu sekarang!
             </p>
             <Button
               className="btn px-5"
@@ -60,7 +61,7 @@ export default function Hero(props) {
                 borderBottomRightRadius: 4,
               }}
               onClick={showMostPicked}>
-              Show Me Now
+              Mulai pendakian
             </Button>
             <div className="row mt-5">
               <div className="col-auto mr-lg-5">
@@ -86,7 +87,7 @@ export default function Hero(props) {
                       fontWeight: 300,
                       width: "fit-content",
                     }}>
-                    Mountain
+                    Gunung
                   </span>
                 </h6>
               </div>
@@ -113,7 +114,7 @@ export default function Hero(props) {
                       fontWeight: 300,
                       width: "fit-content",
                     }}>
-                    Hiker
+                    Pendaki
                   </span>
                 </h6>
               </div>
@@ -133,14 +134,14 @@ export default function Hero(props) {
                   }}>
                   {formatNumber(props.data.cities)}{" "}
                   <span
-                    className="text-gray-500 font-weight-light "
+                    className="text-gray-500 ml-1 font-weight-light "
                     style={{
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: 300,
                       width: "fit-content",
                     }}>
-                    Cities
+                    Kota
                   </span>
                 </h6>
               </div>
