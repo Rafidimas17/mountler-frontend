@@ -72,7 +72,7 @@ const Signup = () => {
             <div className="container">
               <h5 className="title-signup">Sign up</h5>
               <p className="tagline-welcome mt-2">
-                Create your account and get started!
+                Buat akun dan mulai petualanganmu!
               </p>
               <div className="input-group-form">
                 <div className="form-group">
@@ -108,37 +108,35 @@ const Signup = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <div className="input-password">
-                    <h4>Password</h4>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={passwordHandler}
-                      className="form-control"
-                      id="exampleInputPassword1"
-                      placeholder="example"
-                    />
-                    <div className="input-group-append align-items-center">
-                      <label
-                        className="input-group-text  mt-1"
+                  <h4>Password</h4>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={passwordHandler}
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="example"
+                  />
+                  <div className="input-group-append align-items-center">
+                    <label
+                      className="input-group-text  mt-1"
+                      style={{
+                        backgroundColor: "white",
+                        border: "0px",
+                        fontFamily: "Poppins",
+                      }}>
+                      <input
+                        type="checkbox"
                         style={{
-                          backgroundColor: "white",
-                          border: "0px",
-                          fontFamily: "Poppins",
-                        }}>
-                        <input
-                          type="checkbox"
-                          style={{
-                            marginRight: "5px",
-                            transform: "scale(1.5)",
-                          }}
-                          checked={showPassword}
-                          className="mr-2"
-                          onChange={() => tooglePasswordVisibility()}
-                        />
-                        Show Password
-                      </label>
-                    </div>
+                          marginRight: "5px",
+                          transform: "scale(1.5)",
+                        }}
+                        checked={showPassword}
+                        className="mr-2"
+                        onChange={() => tooglePasswordVisibility()}
+                      />
+                      Show Password
+                    </label>
                   </div>
                 </div>
                 <div className="form-group">

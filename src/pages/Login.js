@@ -63,7 +63,7 @@ export default function Login() {
             <div className="container">
               <h5 className="title-signup">Login</h5>
               <p className="tagline-welcome mt-2">
-                Don't have any account?{" "}
+                Belum punya akun?{" "}
                 <Link to="/signup" style={{ textDecoration: "none" }}>
                   <span className="regist"> Register</span>
                 </Link>
@@ -75,7 +75,7 @@ export default function Login() {
                       {error}
                     </div>
                   )}
-                  <h4 htmlFor="exampleInputusername">Email/Username</h4>
+                  <h4 htmlFor="exampleInputusername">Username/email</h4>
                   <input
                     type="text"
                     value={username}
