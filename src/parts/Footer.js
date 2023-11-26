@@ -41,17 +41,22 @@ export default function Footer() {
                 <img src={Visa} style={{ width: "70px", height: "40px" }} />
                 <img src={BCA} style={{ width: "100px", height: "60px" }} />
                 <img src={BNI} style={{ width: "70px", height: "40px" }} />
-                <img src={BRI} style={{ width: "70px", height: "40px" }} />
-                <img src={Mandiri} style={{ width: "70px", height: "30px" }} />
               </div>
               <div
                 className="col-auto col-sm-12 d-flex  align-items-center"
                 style={{ gap: 16 }}>
+                <img src={BRI} style={{ width: "70px", height: "40px" }} />
+                <img src={Mandiri} style={{ width: "70px", height: "30px" }} />
                 <img src={Linkaja} style={{ width: "70px", height: "40px" }} />
                 <img src={Ovo} style={{ width: "50px", height: "30px" }} />
+              </div>
+              <div
+                className="col-auto col-sm-12 d-flex  align-items-center"
+                style={{ gap: 16 }}>
                 <img src={Gopay} style={{ width: "70px", height: "60px" }} />
                 <img src={Dana} style={{ width: "70px", height: "60px" }} />
-              </div>
+
+            </div>
             </div>
           </div>
         </div>

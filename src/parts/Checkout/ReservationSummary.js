@@ -33,7 +33,7 @@ export default function ReservationSummary({ checkout }) {
           fontWeight: 600,
           fontSize: 20,
         }}>
-        Reservation summary
+        Ringkasan pesanan
       </h3>
 
       <div
@@ -54,7 +54,7 @@ export default function ReservationSummary({ checkout }) {
                 color: "#3d3d3d",
                 fontSize: 16,
               }}>
-              CHECK-IN :
+              Check-in :
             </h6>
             <p
               className="checkin"
@@ -74,7 +74,7 @@ export default function ReservationSummary({ checkout }) {
                 color: "#3d3d3d",
                 fontSize: 16,
               }}>
-              DURATION :
+              Durasi :
             </h6>
             <h6
               className="date-out"
@@ -98,7 +98,7 @@ export default function ReservationSummary({ checkout }) {
                 fontFamily: "Poppins",
                 color: "#3d3d3d",
               }}>
-              CHECK-OUT :
+              Check-out :
             </h6>
             <p
               className="date-out"
@@ -117,7 +117,7 @@ export default function ReservationSummary({ checkout }) {
                 color: "#3d3d3d",
                 fontSize: 16,
               }}>
-              TRACK :
+              Jalur :
             </h6>
             <h6
               className="date-out"
@@ -141,7 +141,7 @@ export default function ReservationSummary({ checkout }) {
                 color: "#3d3d3d",
                 fontSize: 16,
               }}>
-              YOU SELECTED :
+              Gunung pilihan :
             </h6>
             <h6
               className="date-out ml-2"
@@ -169,7 +169,7 @@ export default function ReservationSummary({ checkout }) {
                 fontSize: 18,
                 fontFamily: "Poppins",
               }}>
-              Total Price
+              Total harga
             </h5>
             <h5
               className="totalPrice mt-2"

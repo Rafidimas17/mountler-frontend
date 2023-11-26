@@ -147,7 +147,12 @@ export default function BookingInformation(props) {
                                 }
                               />
                               {!isNameValid && (
-                                <span className="text-danger">
+                                <span
+                                  className="text-danger"
+                                  style={{
+                                    fontFamily: "Poppins",
+                                    fontSize: 12,
+                                  }}>
                                   Nama harus diisi dengan benar.
                                 </span>
                               )}
@@ -169,7 +174,12 @@ export default function BookingInformation(props) {
                                 }
                               />
                               {!isAddressValid && (
-                                <span className="text-danger">
+                                <span
+                                  className="text-danger"
+                                  style={{
+                                    fontFamily: "Poppins",
+                                    fontSize: 12,
+                                  }}>
                                   Alamat harus diisi dengan benar.
                                 </span>
                               )}
@@ -191,7 +201,12 @@ export default function BookingInformation(props) {
                                 }
                               />
                               {!isEmailValid && (
-                                <span className="text-danger">
+                                <span
+                                  className="text-danger"
+                                  style={{
+                                    fontFamily: "Poppins",
+                                    fontSize: 12,
+                                  }}>
                                   Email belum sesuai
                                 </span>
                               )}
@@ -214,7 +229,12 @@ export default function BookingInformation(props) {
                                 }
                               />
                               {!isNoIdValid && (
-                                <span className="text-danger">
+                                <span
+                                  className="text-danger"
+                                  style={{
+                                    fontFamily: "Poppins",
+                                    fontSize: 12,
+                                  }}>
                                   No ID harus minimal 16 karakter.
                                 </span>
                               )}
@@ -235,7 +255,12 @@ export default function BookingInformation(props) {
                                 }
                               />
                               {!isPhoneValid && (
-                                <span className="text-danger">
+                                <span
+                                  className="text-danger"
+                                  style={{
+                                    fontFamily: "Poppins",
+                                    fontSize: 12,
+                                  }}>
                                   No Telepon harus diisi dengan benar.
                                 </span>
                               )}
