@@ -9,7 +9,7 @@ export default function Activities({ data }) {
   return (
     <section className="container">
       <Fade bottom>
-        <h4 className="mb-3 font-weight-medium">Favourite Spot</h4>
+        <h4 className="mb-3 font-weight-medium">Favorit spot</h4>
         <div className="container-grid">
           {data.map((item, index2) => {
             return (
@@ -36,12 +36,7 @@ export default function Activities({ data }) {
                       />
                     </figure>
                     <div className="meta-wrapper">
-                      <Button
-                        type="link"
-                        href={`/properties/${item._id}`}
-                        className="stretched-link d-block text-gray-800">
-                        <h5 className="h4">{item.name}</h5>
-                      </Button>
+                      <h5 className="h4">{item.name}</h5>
                     </div>
                   </div>
                 </Fade>
