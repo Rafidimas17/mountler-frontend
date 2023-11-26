@@ -6,11 +6,10 @@ export default function FeaturedImage({ data }) {
       <div className="container-grid sm">
         {data.map((item, index) => {
           return (
-            <div
+             <div
               key={`FeaturedImage-${index}`}
-              className={`item ${index > 0 ? "column-4" : "column-8"} ${
-                index > 0 ? "row-1" : "row-2"
-              }`}>
+              className={`item column-12 row-1
+              `}>
               {/* <Fade bottom delay={300 * index}> */}
               <div className="card h-100">
                 <figure className="img-wrapper">
