@@ -43,6 +43,7 @@ class Simulator extends Component {
         timer: 1500,
       })
       .then(() => {
+        this.setState({ searchValue: "" });
         // Assuming responsePayload is defined somewhere
         if (responsePayload.status === "end") {
           // Add the "invoice_end" parameter to the URL
@@ -53,11 +54,15 @@ class Simulator extends Component {
       });
   };
 
+  componentDidMount() {
+    document.title = "Cakrawala | Simulator";
+  }
+
   render() {
     const { token, searchValue } = this.state;
     return (
       <>
-        <Header {...this.props} data={token} />;
+        <Header data={token} isCentered />;
         <div className="container" style={{ padding: 100 }}>
           <h5 className="text-primary text-center">
             Selamat datang di boarding simulator

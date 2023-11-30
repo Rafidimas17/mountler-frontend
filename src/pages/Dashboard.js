@@ -19,6 +19,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     const { token } = this.state;
+    document.title = "Cakrawala | Pembayaran";
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.id;
     axios
@@ -34,6 +35,7 @@ class Dashboard extends Component {
 
   render() {
     const { token, orders } = this.state;
+    // console.log(orders);
     if (!token) {
       return <Redirect to="/login" />;
     }
@@ -63,10 +65,9 @@ class Dashboard extends Component {
     const latestOrder = sortedOrders[0];
 
     const filteredOrders = orders.filter(
-      (order) =>
-        order.payments.payment_status === "waiting" &&
-        order.boarding.boarding_status === "Registrasi"
+      (order) => order.payments.payment_status === "waiting"
     );
+
     const breadcrumb = [
       { pageTitle: "Beranda", pageHref: "" },
       { pageTitle: "Menunggu pembayaran", pageHref: "" },
@@ -77,7 +78,7 @@ class Dashboard extends Component {
         <div
           className="container"
           style={{
-            marginTop: 20,
+            marginTop: 10,
             zIndex: 2,
           }}>
           <Breadcrumb data={breadcrumb} />
@@ -86,18 +87,17 @@ class Dashboard extends Component {
               <div className="personal">
                 <h3 className="title-inform mt-2">Menunggu pembayaran</h3>
               </div>
-              {orders.length === 0 ? (
+              {filteredOrders.length === 0 ? (
                 <div className="ticket-information">
                   <img
                     src={TicketNotFound}
                     className="image-not-found"
                     alt="image if not item found"
                   />
-                  <h6>Tidak ada ticket aktif </h6>
+                  <h6>Kamu Tidak Punya Tiket</h6>
                   <p>
-                    Semua ticketmu akan ditampilkan disini. <br></br>
                     <span className="info-ticket">
-                      Yuk rencanakan pendakianmu sekarang!
+                      Yuk pesan tiket kamu sekarang!
                     </span>{" "}
                   </p>
                 </div>

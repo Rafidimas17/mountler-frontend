@@ -14,7 +14,7 @@ class TicketActive extends Component {
       token: localStorage.getItem("token"),
       breadcrumb: [
         { pageTitle: "Beranda", pageHref: "" },
-        { pageTitle: "Tiket saya", pageHref: "" },
+        { pageTitle: "Pesanan saya", pageHref: "" },
       ],
       orders: [], // Menambah state untuk menyimpan data pesanan dari API
     };
@@ -22,6 +22,7 @@ class TicketActive extends Component {
 
   componentDidMount() {
     const { token } = this.state;
+    document.title = "Cakrawala | Pesanan";
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.id;
     axios

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "../parts/Header";
 import axios from "axios";
 import Modal from "../elements/Modal";
+import Breadcrumb from "../elements/Breadcrumb";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 class Porter extends Component {
@@ -14,6 +15,9 @@ class Porter extends Component {
       status: false,
       dataSelected: {},
     };
+  }
+  componentDidMount() {
+    document.title = "Cakrawala | Porter";
   }
   showSwal = (responsePayload) => {
     withReactContent(Swal)
@@ -62,6 +66,10 @@ class Porter extends Component {
   render() {
     const { token, searchValue, porters, status, dataSelected } = this.state;
     // console.log(porters);
+    const breadcrumb = [
+      { pageTitle: "Beranda", pageHref: "" },
+      { pageTitle: "Porter", pageHref: "" },
+    ];
     return (
       <>
         <div
@@ -77,7 +85,8 @@ class Porter extends Component {
             overflowY: "auto",
           }}>
           <Header {...this.props} data={token} />
-          <div className="container" style={{ padding: 100 }}>
+          <div className="container" style={{ marginTop: 10, zIndex: 2 }}>
+            <Breadcrumb data={breadcrumb} />
             <h5 className="text-primary text-center">
               Dapatkan porter terbaikmu sekarang
             </h5>
@@ -155,7 +164,7 @@ class Porter extends Component {
                             className="img-fluid"
                           />
                           <h5 className="fw-500">{item.name}</h5>
-                          <h6>{item.age}</h6>
+                          <h6>{item.age} Tahun</h6>
                           <h6>{item.noHandphone}</h6>
                           <button
                             className="btn btn-primary"

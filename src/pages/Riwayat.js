@@ -22,6 +22,7 @@ class History extends Component {
 
   componentDidMount() {
     const { token } = this.state;
+    document.title = "Cakrawala | Riwayat";
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.id;
     axios
@@ -199,10 +200,42 @@ class History extends Component {
                             </h6>
                           </div>
                         </>
-                      ) : (
-                        // Jika status pembayaran bukan "Selesai"
-                        <></>
-                      )}
+                      ) : order.payment.payment_status === "failure" ? (
+                        <>
+                          <div className="d-lg-block d-none col-lg-2 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#333333",
+                                backgroundColor: "white",
+                                border: "1px solid #2D2D2D",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Dibatalkan
+                            </h6>
+                          </div>
+                          <div className="d-block d-lg-none col-6 order-2">
+                            <h6
+                              style={{
+                                fontFamily: "Poppins",
+                                fontSize: 16,
+                                color: "#B31312",
+                                backgroundColor: "white",
+                                border: "1px solid #FF8F8F",
+                                borderRadius: 8,
+                                textAlign: "center",
+                                lineHeight: 2,
+                                fontWeight: 500,
+                              }}>
+                              Selesai
+                            </h6>
+                          </div>
+                        </>
+                      ) : null}
 
                       <div className="col-12 col-lg-3 order-5 d-flex align-items-center justify-content-center">
                         <Link to={`properties/${order.itemId._id}`}>

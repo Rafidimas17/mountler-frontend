@@ -123,6 +123,7 @@ class Checkout extends Component {
   };
 
   componentDidMount() {
+    document.title = "Cakrawala | Checkout";
     window.scroll(0, 0);
     const { checkout } = this.props;
     if (checkout && checkout._id) {

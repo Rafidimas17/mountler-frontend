@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { hiking, Logo } from "../assets";
 import Header from "../parts/Header";
+import Breadcrumb from "../elements/Breadcrumb";
 class About extends Component {
   constructor(props) {
     super(props);
@@ -8,14 +9,21 @@ class About extends Component {
       token: localStorage.getItem("token"),
     };
   }
+  componentDidMount() {
+    document.title = "Cakrawala | Tentang kami";
+  }
   render() {
     const { token } = this.state;
-
+    const breadcrumb = [
+      { pageTitle: "Beranda", pageHref: "" },
+      { pageTitle: "Tentang kami", pageHref: "" },
+    ];
     return (
       <>
         <Header {...this.props} data={token} />
 
-        <div className="container">
+        <div className="container" style={{ marginTop: 10, zIndex: 2 }}>
+          <Breadcrumb data={breadcrumb} />
           <div className="row d-flex justify-content-between align-items-center p-4">
             <div className="col-lg-4 col-sm-12">
               <img src={hiking} style={{ width: "100%", height: "100%" }} />
