@@ -260,7 +260,7 @@ class Checkout extends Component {
     };
     return (
       <>
-        <Header {...this.props} data={data.token} />
+        <Header isCentered data={data.token} />
         <Stepper steps={steps} initialStep="">
           {(prevStep, nextStep, CurrentStep, steps) => (
             <>

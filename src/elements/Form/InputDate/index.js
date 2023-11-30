@@ -46,7 +46,6 @@ export default function Date(props) {
   const displayDate = `${value.startDate ? formatDate(value.startDate) : ""}${
     value.endDate ? " - " + formatDate(value.endDate) : ""
   }`;
-  console.log(displayDate);
 
   return (
     <div
