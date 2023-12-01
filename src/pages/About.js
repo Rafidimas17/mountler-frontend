@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { hiking, Logo } from "../assets";
 import Header from "../parts/Header";
+import WhatsAppButton from "../elements/WaButton";
 import Breadcrumb from "../elements/Breadcrumb";
 class About extends Component {
   constructor(props) {
@@ -86,6 +87,7 @@ class About extends Component {
             </div>
           </div>
         </div>
+        <WhatsAppButton />
       </>
     );
   }

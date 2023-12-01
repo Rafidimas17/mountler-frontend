@@ -5,6 +5,7 @@ import { Redirect, Link } from "react-router-dom";
 import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
 import axios from "axios";
+import WhatsAppButton from "../elements/WaButton";
 import jwt_decode from "jwt-decode";
 
 class History extends Component {
@@ -257,6 +258,7 @@ class History extends Component {
             </div>
           </div>
         </div>
+        <WhatsAppButton />
       </>
     );
   }

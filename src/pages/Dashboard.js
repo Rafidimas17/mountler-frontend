@@ -3,10 +3,12 @@ import Header from "../parts/Header";
 import Sidebar from "../parts/Sidebar";
 import { Redirect } from "react-router-dom";
 import Button from "../elements/Button";
+
 import { TicketNotFound } from "../assets";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Breadcrumb from "../elements/Breadcrumb";
+import WhatsAppButton from "../elements/WaButton";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -221,6 +223,7 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
+        <WhatsAppButton />
       </>
     );
   }

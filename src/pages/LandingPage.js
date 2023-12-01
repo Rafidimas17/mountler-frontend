@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "../parts/Header";
 import Hero from "../parts/Hero";
 import MostPicked from "../parts/MostPicked";
+import WhatsAppButton from "../elements/WaButton";
 import Categories from "../parts/Categories";
 import Testimony from "../parts/Testimony";
 import Footer from "../parts/Footer";
@@ -59,6 +60,7 @@ class LandingPage extends Component {
         />
         <Categories data={page.landingPage.category} />
         <Footer />
+        <WhatsAppButton />
       </>
     );
   }

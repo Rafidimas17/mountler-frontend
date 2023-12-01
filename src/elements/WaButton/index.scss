@@ -1,0 +1,41 @@
+#wa.btn-floating {
+    position: fixed;
+    right: 20px;
+    bottom: 25px;
+    overflow: hidden;
+    width: 50px;
+    padding-left: 9px;
+    height: 50px;
+    border-radius: 100px;
+    border: 2px solid #fff;
+    z-index: 99;
+    color: white;
+    transition: 0.2s;
+    background-color: #34af23;
+  
+    &:hover {
+      width: auto;
+      padding: 0 15px;
+      cursor: pointer;
+  
+      img {
+        margin-bottom: -3px;
+      }
+  
+      span {
+        display: inline-block;
+      }
+    }
+  
+   
+  
+    span {
+      font-family: var(--main-font);
+      font-size: 14px;
+      margin-left: 5px;
+      transition: 0.8s;
+      line-height: 0px;
+      display: none;
+    }
+  }
+  

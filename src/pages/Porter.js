@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "../parts/Header";
 import axios from "axios";
 import Modal from "../elements/Modal";
+import WhatsAppButton from "../elements/WaButton";
 import Breadcrumb from "../elements/Breadcrumb";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -186,6 +187,7 @@ class Porter extends Component {
           statusResponse={this.showSwal}
           onCloseModal={this.handleCloseModal}
         />
+        <WhatsAppButton />
       </>
     );
   }

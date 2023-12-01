@@ -3,6 +3,7 @@ import Header from "../parts/Header";
 import { Redirect } from "react-router-dom";
 import Button from "../elements/Button";
 import { TicketNotFound } from "../assets";
+import WhatsAppButton from "../elements/WaButton";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Breadcrumb from "../elements/Breadcrumb";
@@ -298,6 +299,7 @@ class TicketActive extends Component {
             </div>
           </div>
         </div>
+        <WhatsAppButton />
       </>
     );
   }

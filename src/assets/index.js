@@ -19,6 +19,7 @@ import Ovo from "./icon/ovo.png";
 import Linkaja from "./icon/linkaja.svg";
 import Dana from "./icon/dana.svg";
 // import Qris from "./icon/qris.svg";
+import Wa from "./image/wa.png";
 import Gopay from "./icon/Gopay_logo.svg";
 import IconCalender from "./icon/calender.svg";
 import IconMountain from "./icon/Mountain.svg";
@@ -35,6 +36,7 @@ import ImageCompleted from "./image/completed.jpg";
 // import IconGoogle from "./icon/google.svg";
 export {
   Logo,
+  Wa,
   Mastercard,
   Ovo,
   Dana,
