@@ -1,23 +1,25 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 import Button from "../elements/Button";
 import BrandIcon from "./IconText";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Cookies from "js-cookie";
 
 export default function Header(props) {
   const getNavLinkClass = (path) => {
     return props.location.pathname === path ? " active" : "";
   };
   const [isShowed, setIsShowed] = useState(false);
-
+  const history = useHistory();
   const handleToggle = () => {
     setIsShowed(!isShowed);
   };
   const base64Url = props.data.split(".")[1];
   const decodedValue = JSON.parse(window.atob(base64Url));
   const removeToken = () => {
-    localStorage.removeItem("token");
-    window.location.reload(true);
+    Cookies.remove("token");
+
+    history.push("/login");
   };
   if (props.isCentered)
     return (

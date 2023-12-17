@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Header from "../parts/Header";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -9,7 +10,7 @@ class Simulator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
       searchValue: "",
       statusResponse: "",
       status: false,
@@ -25,8 +26,19 @@ class Simulator extends Component {
     const { searchValue } = this.state;
 
     try {
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+        },
+      };
       const url = `${process.env.REACT_APP_HOST}/admin/status/scan-qr`;
-      const response = await axios.post(url, { imageUrl: searchValue });
+      const response = await axios.post(
+        url,
+        {
+          imageUrl: searchValue,
+        },
+        axiosConfig
+      );
       // Set the received data from the API to the ticketData state
       this.setState({ invoice: response.data.invoice_end });
       this.showSwal(response.data);

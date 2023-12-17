@@ -1,11 +1,7 @@
 import React from "react";
 import Star from "../elements/Star";
-import Button from "../elements/Button";
-
 import { Fade } from "react-awesome-reveal";
-import { hiking } from "../assets";
 export default function Testimony({ data }) {
-  console.log(data);
   return (
     <Fade left>
       <section className="container">

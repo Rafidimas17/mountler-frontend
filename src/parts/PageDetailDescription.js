@@ -2,6 +2,12 @@ import React from "react";
 
 export default function PageDetailDescription({ data }) {
   let teks = data.description.replace(/<\/?p>/g, "");
+  const featureOrder = ["Shelter", "Porter", "Toilet", "mdpl"];
+
+  // Sorting the features based on the order array
+  const sortedFeatures = data.featureId.sort(
+    (a, b) => featureOrder.indexOf(a.name) - featureOrder.indexOf(b.name)
+  );
   return (
     <main>
       <h4>Deskripsi Gunung</h4>
@@ -9,7 +15,7 @@ export default function PageDetailDescription({ data }) {
         {teks}
       </p>
       <div className="row" style={{ marginTop: 30 }}>
-        {data.featureId.map((feature, index) => {
+        {sortedFeatures.map((feature, index) => {
           return (
             <div
               key={`feature-${index}`}
@@ -32,7 +38,7 @@ export default function PageDetailDescription({ data }) {
                 {feature.unit}{" "}
               </span>
               <span
-                className="text-gray-800 font-weight-light"
+                className="text-gray-900 font-weight-light"
                 style={{ fontFamily: "Poppins" }}>
                 {feature.name}
               </span>

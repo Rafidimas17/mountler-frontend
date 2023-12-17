@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import { hiking, Logo } from "../assets";
 import Header from "../parts/Header";
 import WhatsAppButton from "../elements/WaButton";
@@ -7,7 +8,7 @@ class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
     };
   }
   componentDidMount() {

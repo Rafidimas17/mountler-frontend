@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Header from "../parts/Header";
 import Sidebar from "../parts/Sidebar";
 import { Redirect } from "react-router-dom";
@@ -9,12 +10,13 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Breadcrumb from "../elements/Breadcrumb";
 import WhatsAppButton from "../elements/WaButton";
+import ScrollToTopButton from "../elements/ScrollTop";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
       orders: [], // Menambah state untuk menyimpan data pesanan dari API
     };
   }
@@ -24,8 +26,17 @@ class Dashboard extends Component {
     document.title = "Cakrawala | Pembayaran";
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.id;
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+      },
+    };
+
     axios
-      .get(`${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`)
+      .get(
+        `${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`,
+        axiosConfig
+      )
       .then((response) => {
         const data = response.data;
         this.setState({ orders: data }); // Menyimpan data pesanan dari API ke dalam state
@@ -224,6 +235,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <WhatsAppButton />
+        <ScrollToTopButton />
       </>
     );
   }

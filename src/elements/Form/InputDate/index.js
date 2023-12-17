@@ -1,91 +1,72 @@
-import React, { useState, useRef, useEffect } from "react";
-import propTypes from "prop-types";
-
-import { DateRange } from "react-date-range";
-
+// DatePickerComponent.js
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { IconCalender } from "../../../assets";
 import "./index.scss";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
 
-import formatDate from "../../../utils/formatDate";
-import iconCalendar from "../../../assets/icon/calender.svg";
-
-export default function Date(props) {
-  const { value, placeholder, name } = props;
-  const [isShowed, setIsShowed] = useState(false);
-
-  const datePickerChange = (value) => {
-    const target = {
-      target: {
-        value: value.selection,
-        name: name,
-      },
-    };
-    props.onChange(target);
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+const CustomDatePicker = ({ onDateChange }) => {
+  const [selectedDateRange, setSelectedDateRange] = useState({
+    startDate: null,
+    endDate: null,
   });
 
-  const refDate = useRef(null);
-  const handleClickOutside = (event) => {
-    if (refDate && !refDate.current.contains(event.target)) {
-      setIsShowed(false);
+  const handleDateChange = (dates) => {
+    const [startDate, endDate] = dates;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (startDate >= today || endDate >= today) {
+      setSelectedDateRange({
+        startDate,
+        endDate,
+      });
+
+      if (onDateChange) {
+        onDateChange({
+          startDate: formatDate(startDate),
+          endDate: formatDate(endDate),
+        });
+      }
+    } else {
+      alert("Rentang tanggal harus dimulai dari hari ini atau setelahnya");
     }
   };
 
-  const check = (focus) => {
-    focus.indexOf(1) < 0 && setIsShowed(false);
+  const formatDate = (date) => {
+    return date ? date.toISOString().slice(0, 10) : "";
   };
 
-  const displayDate = `${value.startDate ? formatDate(value.startDate) : ""}${
-    value.endDate ? " - " + formatDate(value.endDate) : ""
-  }`;
+  useEffect(() => {}, [selectedDateRange]);
 
   return (
-    <div
-      ref={refDate}
-      className={["input-date mb-3", props.outerClassName].join(" ")}>
-      <div className="input-group">
-        <div className="input-group-prepend bg-gray-900">
-          <span className="input-group-text">
-            <img src={iconCalendar} alt="icon calendar" />
+    <div>
+      <div
+        className="input-group p-1 d-flex align-items-center justify-content-start border border-sm"
+        style={{ borderRadius: 10 }}>
+        <div className="">
+          <span className="ml-2">
+            <img src={IconCalender} alt="icon calendar" />
           </span>
         </div>
-        <input
-          readOnly
-          type="text"
-          className="form-control"
-          disabled={false}
-          value={displayDate}
-          placeholder={placeholder}
-          onClick={() => setIsShowed(!isShowed)}
-        />
-
-        {isShowed && (
-          <div className="date-range-wrapper">
-            <DateRange
-              editableDateInputs={true}
-              onChange={datePickerChange}
-              moveRangeOnFirstSelection={false}
-              onRangeFocusChange={check}
-              ranges={[value]}
-            />
-          </div>
-        )}
+        <div className="date-range-wrapper" style={{ border: "none" }}>
+          <DatePicker
+            selected={selectedDateRange.startDate}
+            onChange={handleDateChange}
+            startDate={selectedDateRange.startDate}
+            endDate={selectedDateRange.endDate}
+            selectsRange={true}
+            placeholderText="Pilih tanggal"
+            minDate={new Date()}
+            id="form-tanggal"
+            dateFormat="dd-MMM"
+            className="form-control no-border"
+          />
+        </div>
       </div>
     </div>
   );
-}
-
-Date.propTypes = {
-  value: propTypes.object,
-  onChange: propTypes.func,
-  placeholder: propTypes.string,
-  outerClassName: propTypes.string,
 };
+
+export default CustomDatePicker;

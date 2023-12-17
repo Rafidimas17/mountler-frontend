@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import Header from "../parts/Header";
 import { IconPersonal } from "../assets";
@@ -11,7 +12,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
     };
   }
   render() {

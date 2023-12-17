@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Header from "../parts/Header";
 import Breadcrumb from "../elements/Breadcrumb";
 import { Redirect, Link } from "react-router-dom";
@@ -7,12 +8,13 @@ import { TicketNotFound } from "../assets";
 import axios from "axios";
 import WhatsAppButton from "../elements/WaButton";
 import jwt_decode from "jwt-decode";
+import ScrollToTopButton from "../elements/ScrollTop";
 
 class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
       breadcrumb: [
         { pageTitle: "Beranda", pageHref: "" },
         { pageTitle: "Riwayat transaksi", pageHref: "" },
@@ -26,8 +28,16 @@ class History extends Component {
     document.title = "Cakrawala | Riwayat";
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.id;
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+      },
+    };
     axios
-      .get(`${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`)
+      .get(
+        `${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`,
+        axiosConfig
+      )
       .then((response) => {
         const data = response.data;
         this.setState({ orders: data }); // Menyimpan data pesanan dari API ke dalam state
@@ -143,7 +153,7 @@ class History extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(latestOrder.bookingStartDate)}
+                          {formatDate(order.bookingStartDate)}
                         </h6>
                       </div>
                       <div className="col-6 col-lg-2 order-4">
@@ -162,7 +172,7 @@ class History extends Component {
                             fontSize: 16,
                             fontWeight: 500,
                           }}>
-                          {formatDate(latestOrder.bookingEndDate)}
+                          {formatDate(order.bookingEndDate)}
                         </h6>
                       </div>
                       {order.boarding.boarding_status === "Selesai" ? (
@@ -259,6 +269,7 @@ class History extends Component {
           </div>
         </div>
         <WhatsAppButton />
+        <ScrollToTopButton />
       </>
     );
   }

@@ -6,31 +6,11 @@ import Form from "react-bootstrap/Form";
 import "./booking.scss";
 export default function BookingInformation(props) {
   const { data, ItemDetails, checkout } = props;
-  const validateInput = (name, value) => {
-    switch (name) {
-      case "fullname":
-        return typeof value === "string" && value.trim() !== "";
-      case "no_id":
-        return typeof value === "string" && value.length >= 16;
-      case "phone":
-        return (
-          typeof value === "string" && value.length >= 10 && value.length <= 13
-        );
-      case "address":
-        return typeof value === "string" && value.trim() !== "";
-      case "email":
-        // Menggunakan regex untuk memeriksa apakah alamat email valid
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(value);
-      default:
-        return true;
-    }
-  };
   return (
     <Fade>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-8 col-sm-12 " style={{ paddingRight: 30 }}>
+          <div className="col-lg-8 col-sm-12" style={{ paddingRight: 30 }}>
             <div className="row">
               <div className="col-lg-8 col-sm-12">
                 <h5 className="h3">Informasi pendaki</h5>
@@ -64,12 +44,6 @@ export default function BookingInformation(props) {
             </div>
             {data.member.map((item, index) => {
               const label = index === 0 ? "Ketua" : `Anggota ${index}`;
-
-              const isNameValid = validateInput("fullname", item.fullname);
-              const isNoIdValid = validateInput("no_id", item.no_id);
-              const isPhoneValid = validateInput("phone", item.phone);
-              const isAddressValid = validateInput("address", item.address);
-              const isEmailValid = validateInput("email", item.email);
               return (
                 <Fade delay={300}>
                   <div
@@ -128,7 +102,6 @@ export default function BookingInformation(props) {
                             </div>
                           </div>
                           <div className="row p-2">
-                            {/* <div className="col-6 border"></div> */}
                             <div className="col-lg-6 col-sm-12">
                               <h5
                                 className="h6"
@@ -146,17 +119,6 @@ export default function BookingInformation(props) {
                                   props.onChange(event, index)
                                 }
                               />
-                              {!isNameValid && (
-                                <span
-                                  className="text-danger"
-                                  style={{
-                                    fontFamily: "Poppins",
-                                    fontSize: 12,
-                                  }}>
-                                  Nama harus diisi dengan benar.
-                                </span>
-                              )}
-
                               <h5
                                 className="h6"
                                 style={{
@@ -173,17 +135,6 @@ export default function BookingInformation(props) {
                                   props.onChange(event, index)
                                 }
                               />
-                              {!isAddressValid && (
-                                <span
-                                  className="text-danger"
-                                  style={{
-                                    fontFamily: "Poppins",
-                                    fontSize: 12,
-                                  }}>
-                                  Alamat harus diisi dengan benar.
-                                </span>
-                              )}
-
                               <h5
                                 className="h6"
                                 style={{
@@ -200,16 +151,6 @@ export default function BookingInformation(props) {
                                   props.onChange(event, index)
                                 }
                               />
-                              {!isEmailValid && (
-                                <span
-                                  className="text-danger"
-                                  style={{
-                                    fontFamily: "Poppins",
-                                    fontSize: 12,
-                                  }}>
-                                  Email belum sesuai
-                                </span>
-                              )}
                             </div>
                             <div className="col-lg-6 col-sm-12">
                               <h5
@@ -228,17 +169,6 @@ export default function BookingInformation(props) {
                                   props.onChange(event, index)
                                 }
                               />
-                              {!isNoIdValid && (
-                                <span
-                                  className="text-danger"
-                                  style={{
-                                    fontFamily: "Poppins",
-                                    fontSize: 12,
-                                  }}>
-                                  No ID harus minimal 16 karakter.
-                                </span>
-                              )}
-
                               <h6
                                 style={{
                                   fontFamily: "Poppins",
@@ -254,16 +184,6 @@ export default function BookingInformation(props) {
                                   props.onChange(event, index)
                                 }
                               />
-                              {!isPhoneValid && (
-                                <span
-                                  className="text-danger"
-                                  style={{
-                                    fontFamily: "Poppins",
-                                    fontSize: 12,
-                                  }}>
-                                  No Telepon harus diisi dengan benar.
-                                </span>
-                              )}
                               <h6
                                 style={{
                                   fontFamily: "Poppins",

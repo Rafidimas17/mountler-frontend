@@ -41,8 +41,7 @@ export default function ReservationSummary({ checkout }) {
         style={{
           border: "2.5px solid #A5A5A5",
           borderRadius: 10,
-        }}
-        // style={{ border: "1px solid black", height: "100vh" }}
+        }}     
       >
         <div className="row p-2">
           <div className="col">
@@ -61,7 +60,6 @@ export default function ReservationSummary({ checkout }) {
               style={{
                 color: "#0B165B",
                 fontFamily: "Poppins",
-                // fontWeight: 580,
                 fontSize: 14,
               }}>
               {formattedDateStart}
@@ -86,7 +84,7 @@ export default function ReservationSummary({ checkout }) {
                 float: "left",
                 marginTop: 2,
               }}>
-              {checkout.duration} Day
+              {checkout.duration} Hari
             </h6>
           </div>
           <div className="col">

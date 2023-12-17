@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Fade from "react-reveal/Fade";
+import Cookies from "js-cookie";
+import Fade from "react-awesome/Fade";
 // import { connect } from "react-redux";
 
 import Header from "parts/Header";
@@ -109,8 +110,7 @@ class Checkout extends Component {
                           isBlock
                           isPrimary
                           hasShadow
-                          onClick={nextStep}
-                        >
+                          onClick={nextStep}>
                           Continue to Book
                         </Button>
                       </Fade>
@@ -120,8 +120,7 @@ class Checkout extends Component {
                     type="link"
                     isBlock
                     isLight
-                    href={`/properties/${checkout._id}`}
-                  >
+                    href={`/properties/${checkout._id}`}>
                     Cancel
                   </Button>
                 </Controller>
@@ -139,8 +138,7 @@ class Checkout extends Component {
                           isBlock
                           isPrimary
                           hasShadow
-                          onClick={() => this._Submit(nextStep)}
-                        >
+                          onClick={() => this._Submit(nextStep)}>
                           Continue to Book
                         </Button>
                       </Fade>
@@ -150,8 +148,7 @@ class Checkout extends Component {
                     type="button"
                     isBlock
                     isLight
-                    onClick={prevStep}
-                  >
+                    onClick={prevStep}>
                     Cancel
                   </Button>
                 </Controller>
@@ -165,8 +162,7 @@ class Checkout extends Component {
                     isBlock
                     isPrimary
                     hasShadow
-                    href=""
-                  >
+                    href="">
                     Back to Home
                   </Button>
                 </Controller>

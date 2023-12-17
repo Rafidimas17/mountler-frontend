@@ -1,6 +1,7 @@
 import Header from "../parts/Header";
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Button from "../elements/Button";
 import PageDetailTitle from "../parts/PageDetailTitle";
 import FeaturedImage from "../parts/FeaturedImage";
@@ -8,6 +9,7 @@ import PageDetailDescription from "../parts/PageDetailDescription";
 import Weather from "../parts/weather";
 import Footer from "../parts/Footer";
 import { Redirect } from "react-router-dom";
+import ScrollToTopButton from "../elements/ScrollTop";
 import BookingForm from "../parts/BookingForm";
 import Activities from "../parts/Activites";
 import Testimony from "../parts/Testimony";
@@ -19,7 +21,7 @@ class DetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
     };
   }
   componentDidMount() {
@@ -76,6 +78,7 @@ class DetailsPage extends Component {
         <Activities data={page[match.params.id].activityId} />
         <Testimony data={page[match.params.id].reviewId} />
         <Footer />
+        <ScrollToTopButton />
       </>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Header from "../parts/Header";
 import { Redirect } from "react-router-dom";
 import Button from "../elements/Button";
@@ -7,12 +8,13 @@ import WhatsAppButton from "../elements/WaButton";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Breadcrumb from "../elements/Breadcrumb";
+import ScrollToTopButton from "../elements/ScrollTop";
 
 class TicketActive extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
       breadcrumb: [
         { pageTitle: "Beranda", pageHref: "" },
         { pageTitle: "Pesanan saya", pageHref: "" },
@@ -26,8 +28,16 @@ class TicketActive extends Component {
     document.title = "Cakrawala | Pesanan";
     const decodedToken = jwt_decode(token);
     const userId = decodedToken.id;
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+      },
+    };
     axios
-      .get(`${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`)
+      .get(
+        `${process.env.REACT_APP_HOST}/api-v1/dashboard/${userId}`,
+        axiosConfig
+      )
       .then((response) => {
         const data = response.data;
         const sortedOrders = data.sort((a, b) => {
@@ -300,6 +310,7 @@ class TicketActive extends Component {
           </div>
         </div>
         <WhatsAppButton />
+        <ScrollToTopButton />
       </>
     );
   }

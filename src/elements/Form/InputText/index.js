@@ -31,22 +31,40 @@ export default function Text(props) {
     };
 
     if (type === "email") {
-      if (!pattern.test(event.target.value)) setHasError(errorResponse);
-      else setHasError(null);
+      pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!pattern.test(event.target.value)) {
+        setHasError(errorResponse);
+      } else {
+        setHasError(null);
+      }
     }
 
     if (type === "tel") {
-      if (event.target.validity.valid) props.onChange(target);
-    } else {
-      props.onChange(target);
+      pattern = /^[0-9]*$/;
+      if (!pattern.test(event.target.value)) {
+        setHasError(errorResponse);
+      } else {
+        setHasError(null);
+        if (event.target.validity.valid) props.onChange(target);
+      }
     }
+
     if (type === "id") {
-      if (event.target.validity.valid) props.onChange(target);
-    } else {
+      pattern = /^[a-zA-Z0-9]*$/;
+      if (!pattern.test(event.target.value)) {
+        setHasError(errorResponse);
+      } else {
+        setHasError(null);
+        if (event.target.validity.valid) props.onChange(target);
+      }
+    }
+
+    // For other types, just call the onChange prop without validation
+    if (type !== "email" && type !== "tel" && type !== "id") {
+      setHasError(null);
       props.onChange(target);
     }
   };
-
   return (
     <div className={["input-text mb-3", outerClassName].join(" ")}>
       <div className="input-group">

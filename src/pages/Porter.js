@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Header from "../parts/Header";
 import axios from "axios";
 import Modal from "../elements/Modal";
@@ -10,7 +11,7 @@ class Porter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
       searchValue: "",
       porters: [],
       status: false,
@@ -47,8 +48,13 @@ class Porter extends Component {
     const { searchValue } = this.state;
 
     try {
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+        },
+      };
       const url = `${process.env.REACT_APP_HOST}/api-v1/list-porter/${searchValue}`;
-      axios.get(url).then((response) => {
+      axios.get(url, axiosConfig).then((response) => {
         // Setel data yang diterima dari API ke dalam state ticketData
         this.setState({ porters: response.data.payload });
       });

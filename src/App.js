@@ -17,6 +17,7 @@ import History from "./pages/Riwayat";
 import Porter from "./pages/Porter";
 import Simulator from "./pages/Simulator";
 import About from "./pages/About";
+import Example from "./pages/Example";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
           <Route path="/forgotpassword" component={forgotPassword}></Route>
           <Route path="/properties/:id" component={DetailsPage}></Route>
           <Route path="/checkout" component={Checkout}></Route>
-          {/* <Route path="/example" component={Example}></Route> */}
+          <Route path="/example" component={Example}></Route>
           <Route path="/verify-email/:tokenAktif" component={VerifyEmail} />
         </Switch>
       </Router>

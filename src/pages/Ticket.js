@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Sidebar from "../parts/Sidebar";
 import { Logo } from "../assets";
 import { Redirect } from "react-router-dom";
@@ -8,11 +9,12 @@ import Breadcrumb from "../elements/Breadcrumb";
 import Tabs from "../elements/Tabs";
 import "./tabs.css";
 import AnimatedLines from "../elements/Loading/Loading";
+import ScrollToTopButton from "../elements/ScrollTop";
 class Ticket extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
       params: "",
       isLoading: true,
       error: null,
@@ -33,10 +35,14 @@ class Ticket extends Component {
     const { match } = this.props;
     const paramsId = match.params.id;
     this.setState({ params: paramsId });
-
+    const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+      },
+    };
     const url = `${process.env.REACT_APP_HOST}/api-v1/ticket-show/${paramsId}`;
     axios
-      .get(url)
+      .get(url, axiosConfig)
       .then((response) => {
         // Setel data yang diterima dari API ke dalam state ticketData
         this.setState({ ticketData: response.data.payload, isLoading: false });
@@ -225,6 +231,7 @@ class Ticket extends Component {
               handleActive={this.handleStatus}
             />
           </div>
+          <ScrollToTopButton />
         </>
       );
     }

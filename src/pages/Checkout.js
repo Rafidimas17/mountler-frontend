@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import { Fade } from "react-awesome-reveal";
 import { connect } from "react-redux";
 import Header from "../parts/Header";
+import { withRouter } from 'react-router-dom';
 import Button from "../elements/Button";
 import { Redirect } from "react-router-dom";
 import withReactContent from "sweetalert2-react-content";
@@ -42,8 +44,118 @@ class Checkout extends Component {
       jumlahSB: "",
       jumlahHeadlamp: "",
       jumlahP3k: "",
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
     },
+  };
+  validateMemberFields = () => {
+    const { data } = this.state;
+    let errors = {};
+
+    // Add your specific validation logic here for each member field
+    const isValid = data.member.every((member, index) => {
+      const validFullname =
+        member.fullname !== "" && typeof member.fullname === "string";
+      const validAddress =
+        member.address !== "" &&
+        typeof member.address === "string" &&
+        // Additional address format validation (customize as needed)
+        /^[A-Za-z0-9\s,'.-]*$/.test(member.address);
+      const validEmail =
+        member.email !== "" &&
+        typeof member.email === "string" &&
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(member.email);
+      const validGender =
+        member.gender !== "" && typeof member.gender === "string";
+      const validNoId =
+        member.no_id !== "" &&
+        typeof member.no_id === "string" &&
+        // Additional no_id validation (minimum length: 16)
+        /^[0-9]{16,}$/.test(member.no_id);
+      const validPhone =
+        member.phone !== "" &&
+        typeof member.phone === "string" &&
+        // Additional phone validation (must be a number)
+        /^[0-9]*$/.test(member.phone) &&
+        // Additional phone validation (minimum length: 10)
+        member.phone.length >= 10;
+
+      if (
+        !validFullname ||
+        !validAddress ||
+        !validEmail ||
+        !validGender ||
+        !validNoId ||
+        !validPhone
+      ) {
+        errors[index] = {
+          validFullname,
+          validAddress,
+          validEmail,
+          validGender,
+          validNoId,
+          validPhone,
+        };
+      }
+
+      return (
+        validFullname &&
+        validAddress &&
+        validEmail &&
+        validGender &&
+        validNoId &&
+        validPhone
+      );
+    });
+
+    if (!isValid) {
+      // Display error messages for each invalid field
+      Object.keys(errors).forEach((index) => {
+        const error = errors[index];
+        const errorMessages = Object.keys(error)
+          .filter((key) => !error[key])
+          .map((key) => {
+            switch (key) {
+              case "validFullname":
+                return parseInt(index) === 0
+                  ? "Nama ketua tidak sesuai"
+                  : "Nama anggota tidak sesuai";
+              case "validAddress":
+                return parseInt(index) === 0
+                  ? "Alamat ketua tidak sesuai"
+                  : "Alamat anggota tidak sesuai";
+              case "validEmail":
+                return parseInt(index) === 0
+                  ? "Email ketua tidak sesuai"
+                  : "Email anggota tidak sesuai";
+              case "validGender":
+                return parseInt(index) === 0
+                  ? "Gender ketua tidak sesuai"
+                  : "Gender anggota tidak sesuai";
+              case "validNoId":
+                return parseInt(index) === 0
+                  ? "Nomor ID ketua tidak sesuai"
+                  : "Nomor ID anggota tidak sesuai";
+              case "validPhone":
+                return parseInt(index) === 0
+                  ? "Nomor telepon ketua tidak sesuai"
+                  : "Nomor telepon anggota tidak sesuai";
+              default:
+                return "";
+            }
+          })
+          .join(", ");
+
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `Harap periksa informasi ${
+            parseInt(index) === 0 ? "ketua" : `anggota ke-${parseInt(index)}`
+          }: ${errorMessages}`,
+        });
+      });
+    }
+
+    return isValid;
   };
 
   onChange = (event, index) => {
@@ -133,7 +245,7 @@ class Checkout extends Component {
       //   "Objek checkout tidak memiliki properti _id atau objek checkout adalah null atau undefined."
       // );
     }
-    // console.log(checkout._id);
+
   }
   _Submit = (nextStep) => {
     return new Promise((resolve, reject) => {
@@ -142,15 +254,23 @@ class Checkout extends Component {
 
       const jumlahSafety = data.jumlahTenda * data.jumlahKapasitas;
 
-      if (jumlahSafety < data.member.length) {
+      if (
+        jumlahSafety < data.member.length &&
+        data.jumlahHeadlamp >= 1 &&
+        data.jumlahCarrier >= 1 &&
+        data.jumlahKompor >= 1 &&
+        data.jumlahP3k >= 1 &&
+        data.jumlahSB >= 1 &&
+        data.jumlahHeadlamp >= 1 &&
+        data.jumlahMatras >= 1
+      ) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Tenda tidak sesuai",
-          footer: "Sesuaikan jumlah dan kapasitas tenda anda",
+          text: "Perlengkapan utama belum sesuai",
+          footer: "Wajib minimal bawa satu perlengkapan utama",
         });
       } else if (jumlahSafety >= data.member.length) {
-        // console.log(checkout._id);
         const tax = 10;
         const subTotal =
           checkout.price * checkout.duration * data.member.length;
@@ -196,35 +316,14 @@ class Checkout extends Component {
 
   render() {
     const { data } = this.state;
-    const { checkout } = this.props;
+    const { checkout } = this.props;   
 
     // console.log(data);
     if (!data.token) {
       return <Redirect to="/login" />;
     }
     // console.log(typeof data[0].member)
-    if (!checkout)
-      return (
-        <div className="container">
-          <div
-            className="row align-items-center justify-content-center text-center"
-            style={{ height: "100vh" }}>
-            <div className="col-lg-3 col-sm-12">
-              Pilih tanggal dulu
-              <div>
-                <Button
-                  className="btn mt-5"
-                  type="button"
-                  onClick={() => this.props.history.goBack()}
-                  isLight>
-                  Back
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-
+   
     const steps = {
       bookingInformation: {
         title: null,
@@ -269,16 +368,28 @@ class Checkout extends Component {
               <MainContent data={steps} current={CurrentStep} />
               {CurrentStep === "bookingInformation" && (
                 <Controller>
-                  <Fade></Fade>
-                  <Button
-                    className="btn mb-3"
-                    type="button"
-                    isBlock
-                    isPrimary
-                    hasShadow
-                    onClick={nextStep}>
-                    Lanjutkan
-                  </Button>
+                  {data.member.every((member) =>
+                    Object.values(member).every((value) => value !== "")
+                  ) && (
+                    <Button
+                      className="btn mb-3"
+                      type="button"
+                      isBlock
+                      isPrimary
+                      hasShadow
+                      onClick={() => {
+                        // Check if member fields are valid
+                        const isValid = this.validateMemberFields();
+
+                        if (isValid) {
+                          nextStep(); // Proceed to the next step if valid
+                        } else {
+                          this.validateMemberFields(); // Trigger validation and display specific error messages
+                        }
+                      }}>
+                      Lanjutkan
+                    </Button>
+                  )}
                   <Button
                     className="btn"
                     type="link"
@@ -291,37 +402,42 @@ class Checkout extends Component {
               )}
               {CurrentStep === "Equipment" && (
                 <Fade>
-                  <Controller>
-                    {data.jumlahCarrier !== "" &&
-                      data.jumlahHeadlamp !== "" &&
-                      data.jumlahMatras !== "" &&
-                      data.jumlahTenda !== "" &&
-                      data.jumlahSB !== "" &&
-                      data.jumlahP3k !== "" &&
-                      data.jumlahKompor !== "" && (
-                        <Fade>
-                          <Button
-                            className="btn mb-3"
-                            type="button"
-                            isBlock
-                            isPrimary
-                            hasShadow
-                            onClick={() => {
-                              this._Submit().then(nextStep); // Menampilkan state saat tombol diklik
-                            }}>
-                            Pesan sekarang
-                          </Button>
-                        </Fade>
-                      )}
-                    <Button
-                      className="btn"
-                      type="link"
-                      isBlock
-                      isLight
-                      href={`/properties/${checkout._id}`}>
-                      Batal
-                    </Button>
-                  </Controller>
+                <Controller>
+      {data.jumlahCarrier !== "" &&
+        data.jumlahHeadlamp !== "" &&
+        data.jumlahMatras !== "" &&
+        data.jumlahTenda !== "" &&
+        data.jumlahSB !== "" &&
+        data.jumlahP3k !== "" &&
+        data.jumlahKompor !== "" && (
+          <Fade>
+            <Button
+              className="btn mb-3"
+              type="button"
+              isBlock
+              isPrimary
+              hasShadow
+              onClick={() => {
+                this._Submit().then(nextStep); // Menampilkan state saat tombol diklik
+              }}>
+              Pesan sekarang
+            </Button>
+          </Fade>
+        )}
+        <Button
+        className="btn"
+        type="link"
+        isBlock
+        isLight
+        onClick={() => {        
+          console.log(this.props.history.location.pathname)          
+          }
+        }
+      >
+        Batal
+      </Button>
+
+    </Controller>
                 </Fade>
               )}
               {CurrentStep === "completed" && (
@@ -349,4 +465,4 @@ class Checkout extends Component {
 const mapStateToProps = (state) => ({
   checkout: state.checkout,
 });
-export default connect(mapStateToProps, { submitBooking })(Checkout);
+export default withRouter(connect(mapStateToProps, { submitBooking })(Checkout));

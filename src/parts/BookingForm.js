@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import propTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "../elements/Button";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 import { InputDate, InputNumber } from "../elements/Form";
 
@@ -12,81 +14,106 @@ class BookingForm extends Component {
     super(props);
     this.state = {
       data: {
-        duration: 1,
-        track: "",
+        duration: null,
+        track: null,
         nameMountain: "",
         date: {
-          startDate: new Date(),
-          endDate: new Date(),
-          key: "selection",
+          startDate: null,
+          endDate: null,
         },
       },
+      trackFilled: null,
     };
   }
 
-  updateData = (e) => {
+  handleDatePickerChange = (selectedDates) => {
+    // Add one day to both startDate and endDate
+    const startDateWithOneDay =
+      selectedDates.startDate && new Date(selectedDates.startDate);
+    const endDateWithOneDay =
+      selectedDates.endDate && new Date(selectedDates.endDate);
+
+    if (startDateWithOneDay) {
+      startDateWithOneDay.setDate(startDateWithOneDay.getDate() + 1);
+    }
+
+    if (endDateWithOneDay) {
+      endDateWithOneDay.setDate(endDateWithOneDay.getDate() + 1);
+    }
+
+    // Calculate the duration in days
+    const duration =
+      startDateWithOneDay && endDateWithOneDay
+        ? Math.ceil(
+            (endDateWithOneDay - startDateWithOneDay) / (1000 * 60 * 60 * 24)
+          )
+        : null;
+
+    // Set the selected dates and duration in the component state
     this.setState({
-      ...this.state,
       data: {
         ...this.state.data,
-        [e.target.name]: e.target.value,
+        date: {
+          startDate: startDateWithOneDay,
+          endDate: endDateWithOneDay,
+        },
+        duration: duration + 1,
       },
     });
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { data } = this.state;
+  updateData = (e) => {
+    const { name, value } = e.target;
 
-    if (prevState.data.date !== data.date) {
-      const startDate = new Date(data.date.startDate);
-      const endDate = new Date(data.date.endDate);
-      const countDuration = new Date(endDate - startDate).getDate();
+    // If the user selects "--Pilih Track--", reset trackFilled to false
+    if (name === "track" && value === null) {
       this.setState({
-        data: {
-          ...this.state.data,
-          duration: countDuration,
-        },
+        trackFilled: false,
       });
-    }
-
-    if (prevState.data.duration !== data.duration) {
-      const startDate = new Date(data.date.startDate);
-      const endDate = new Date(
-        startDate.setDate(startDate.getDate() + +data.duration - 1)
-      );
-      this.setState({
-        ...this.state,
+    } else {
+      this.setState((prevState) => ({
         data: {
-          ...this.state.data,
-          date: {
-            ...this.state.data.date,
-            endDate: endDate,
-          },
+          ...prevState.data,
+          [name]: value,
         },
-      });
+        trackFilled: name === "track" ? value !== null : prevState.trackFilled,
+      }));
     }
-  }
+  };
 
   startBooking = () => {
-    const { data } = this.state;
-    this.props.startBooking({
-      _id: this.props.itemDetails._id,
-      name: this.props.itemDetails.title,
-      duration: data.duration,
-      price: this.props.itemDetails.price,
-      track: data.track,
-      nameMountin: data.name,
-      bankId: this.props.itemDetails.bankId,
-      date: {
-        startDate: data.date.startDate,
-        endDate: data.date.endDate,
-      },
-    });
-    this.props.history.push("/checkout");
+    const { data, trackFilled } = this.state;
+
+    // Check if trackFilled is null or false
+    if (trackFilled === null || trackFilled === false) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Wajib memilih jalur pendakian",
+      });
+      return;
+    } else {
+      // Proceed to checkout
+      this.props.startBooking({
+        _id: this.props.itemDetails._id,
+        name: this.props.itemDetails.title,
+        duration: data.duration,
+        price: this.props.itemDetails.price,
+        track: data.track,
+        nameMountain: data.name,
+        bankId: this.props.itemDetails.bankId,
+        date: {
+          startDate: data.date.startDate,
+          endDate: data.date.endDate,
+        },
+      });
+
+      this.props.history.push("/checkout");
+    }
   };
 
   render() {
-    const { data } = this.state;
+    const { data, trackFilled } = this.state;
     const { itemDetails } = this.props;
 
     return (
@@ -96,23 +123,10 @@ class BookingForm extends Component {
           Rp{itemDetails.price}{" "}
           <span className="text-gray-500 font-weight-light">per hari</span>
         </h5>
-
-        <label htmlFor="duration" style={{ fontFamily: "Poppins" }}>
-          Berapa lama waktu pendakian ?
-        </label>
-        <InputNumber
-          max={30}
-          suffix={" hari"}
-          isSuffixPlural
-          onChange={this.updateData}
-          name="duration"
-          value={data.duration}
-        />
-
         <label htmlFor="date" style={{ fontFamily: "Poppins" }}>
           Pilih tanggal
         </label>
-        <InputDate onChange={this.updateData} name="date" value={data.date} />
+        <InputDate onDateChange={this.handleDatePickerChange} />
         <label htmlFor="date" style={{ fontFamily: "Poppins" }}>
           Pilih Jalur Pendakian
         </label>
@@ -122,20 +136,35 @@ class BookingForm extends Component {
           onChange={this.updateData}
           value={data.track}
           required>
-          <option value={null} required>
-            --Pilih Track--
+          <option value="" disabled selected>
+            --Pilih track--
           </option>
-          {itemDetails.trackId.map((street, index) => {
-            return (
-              <option key={`street-Rp{index}`} value={street.name}>
-                {street.name}
-              </option>
-            );
-          })}
+          {itemDetails.trackId.map((street, index) => (
+            <option key={`street-Rp{index}`} value={street.name}>
+              {street.name}
+            </option>
+          ))}
         </Form.Select>
+
+        {/* Display error message if Form.Select is not filled */}
+        {trackFilled === false && (
+          <div
+            style={{
+              color: "red",
+              marginTop: "5px",
+              fontFamily: "Poppins",
+            }}>
+            Track wajib diisi.
+          </div>
+        )}
+
         <h6
           className="text-gray-700 mt-3"
-          style={{ marginBottom: 30, fontWeight: 370, fontFamily: "Poppins" }}>
+          style={{
+            marginBottom: 30,
+            fontWeight: 370,
+            fontFamily: "Poppins",
+          }}>
           Total harga{" "}
           <span className="text-gray-900" style={{ fontWeight: 600 }}>
             Rp{itemDetails.price * data.duration}

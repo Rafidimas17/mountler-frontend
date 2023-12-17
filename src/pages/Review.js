@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Cookies from "js-cookie";
 import StarRating from "../elements/StartRating";
 import "./review.css";
 import { InputFile } from "../elements/Form";
@@ -18,7 +18,7 @@ class Review extends Component {
       rate_star: null,
       experience: "",
       imageUrl: "",
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
     };
   }
 
@@ -56,7 +56,11 @@ class Review extends Component {
     // Check the values of the data object
     try {
       const link = `${process.env.REACT_APP_HOST}/api-v1/add-review`;
-
+      const axiosConfig = {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+        },
+      };
       // Check the value of the link variable
       const formData = new FormData();
       formData.append("name", name);
@@ -65,13 +69,7 @@ class Review extends Component {
       formData.append("content", experience);
       formData.append("url", this.props.match.params.id);
       formData.append("image", imageUrl[0]);
-      const response = await axios.post(link, formData, {
-        headers: {
-          Authorization:
-            "Bearer iO3quoYg265hlzq30E8RelQc0LOKle4R0yk6CMbgeHgGNcm_mR",
-          "Content-Type": "multipart/form-data", // Make sure to set the Content-Type header appropriately
-        },
-      });
+      const response = await axios.post(link, formData, axiosConfig);
       this.showSwal(response.data.message);
       // Set the received data from the API to the ticketData state
 

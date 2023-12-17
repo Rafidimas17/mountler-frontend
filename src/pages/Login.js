@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import Button from "../elements/Button";
 import CardWelcome from "../parts/CardWelcome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Ganti ini dengan library ikon yang Anda gunakan
@@ -35,12 +36,19 @@ export default function Login() {
       username: username,
       password: password,
     };
+    const accessKey = process.env.REACT_APP_ACCESS_KEY;
+
     axios
-      .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data)
+      .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data, {
+        headers: {
+          Authorization: `Bearer ${accessKey}`,
+        },
+      })
       .then((result) => {
         if (result) {
           // console.log(result);
-          localStorage.setItem("token", result.data.token);
+          // Save the token in a cookie
+          Cookies.set("token", result.data.token, { expires: 7 }); // Adjust the expiry as needed
           setRedirect(true);
         }
       })

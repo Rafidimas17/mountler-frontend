@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import Cookies from "js-cookie";
 import Header from "../parts/Header";
 import Hero from "../parts/Hero";
 import MostPicked from "../parts/MostPicked";
 import WhatsAppButton from "../elements/WaButton";
 import Categories from "../parts/Categories";
-import Testimony from "../parts/Testimony";
 import Footer from "../parts/Footer";
 import { Redirect } from "react-router-dom";
+import ScrollToTopButton from "../elements/ScrollTop";
 import { connect } from "react-redux";
 import AnimatedLines from "../elements/Loading/Loading";
 import { fetchPage } from "../store/actions/page";
@@ -14,7 +15,7 @@ class LandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token"),
+      token: Cookies.get("token"),
     };
     this.refMostPicked = React.createRef();
   }
@@ -29,6 +30,12 @@ class LandingPage extends Component {
         "landingPage"
       );
   }
+  scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   render() {
     const { page } = this.props;
@@ -37,12 +44,6 @@ class LandingPage extends Component {
       return <Redirect to="/login" />;
     }
 
-    // if (isLoading) {
-    //   // Jika data masih dimuat, tampilkan elemen loading
-
-    // }
-
-    // console.log(page)
     if (!page.hasOwnProperty("landingPage"))
       return (
         <div className="container">
@@ -61,6 +62,7 @@ class LandingPage extends Component {
         <Categories data={page.landingPage.category} />
         <Footer />
         <WhatsAppButton />
+        <ScrollToTopButton />
       </>
     );
   }

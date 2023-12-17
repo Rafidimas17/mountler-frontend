@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
 import propTypes from "prop-types";
 
 export default function Stepper(props) {
-  const { steps, initialStep } = props;
+  const { steps, initialStep, history } = props;
   const stepsKeys = Object.keys(steps);
 
   const [CurrentStep, setCurrentStep] = useState(
@@ -26,6 +25,7 @@ export default function Stepper(props) {
 Stepper.propTypes = {
   data: propTypes.object.isRequired,
   initialStep: propTypes.string,
+  history: propTypes.object.isRequired, // Tambahkan prop history
 };
 
 export { default as Numbering } from "./Numbering";
