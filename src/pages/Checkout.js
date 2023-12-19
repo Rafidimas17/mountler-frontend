@@ -429,10 +429,7 @@ class Checkout extends Component {
         type="link"
         isBlock
         isLight
-        onClick={() => {        
-          console.log(this.props.history.location.pathname)          
-          }
-        }
+        onClick={prevStep}        
       >
         Batal
       </Button>
