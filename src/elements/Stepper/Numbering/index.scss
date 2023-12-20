@@ -1,7 +1,7 @@
 @import "../../../assets/scss/colorVariables";
 
 $stepperMainColor: $gray-200;
-$size: 60px;
+$size: 36px;
 
 ol.stepper {
   display: flex;
@@ -43,7 +43,7 @@ ol.stepper {
         top: 50%;
         left: 100%;
         position: absolute;
-        width: $size + 10;
+        width: $size + 25;
         height: 1px;
         background-color: $stepperMainColor;
       }

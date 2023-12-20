@@ -12,7 +12,7 @@ export default function BookingInformation(props) {
         <div className="row justify-content-center">
           <div className="col-lg-8 col-sm-12" style={{ paddingRight: 30 }}>
             <div className="row">
-              <div className="col-lg-8 col-sm-12">
+              <div className="col-lg-8 col-sm-12">  
                 <h5 className="h3">Informasi pendaki</h5>
                 <p style={{ fontFamily: "Poppins" }}>
                   Lengkapi informasi biodata team
@@ -200,7 +200,9 @@ export default function BookingInformation(props) {
                                 value={data.member[index].gender}
                                 required
                                 style={{ width: "100%" }}>
-                                <option value={null}>--Pilih Kelamin--</option>
+                                <option value="" disabled selected>
+                                --Pilih kelamin--
+                                </option>
                                 <option value="pria">Laki-Laki</option>
                                 <option value="wanita">Perempuan</option>
                               </Form.Select>

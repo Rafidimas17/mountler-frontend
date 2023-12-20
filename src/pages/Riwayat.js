@@ -107,9 +107,9 @@ class History extends Component {
                     className="image-not-found"
                     alt="image if not item found"
                   />
-                  <h6>Tidak ada ticket aktif </h6>
+                  <h6>Tidak ada tiket aktif </h6>
                   <p>
-                    Semua ticketmu akan ditampilkan disini. <br />
+                    Semua tiketmu akan ditampilkan disini. <br />
                     <span className="info-ticket">
                       Yuk rencanakan pendakianmu sekarang!
                     </span>{" "}

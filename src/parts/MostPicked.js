@@ -1,17 +1,21 @@
 import React from "react";
 import Button from "../elements/Button";
+import { Link } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 function MostPicked(props) {
   return (
     <section className="container" ref={props.refMostPicked}>
       <Fade bottom>
-        <h4 className="most-picked-title">Recommended</h4>
+        <h4 className="most-picked-title">Rekomendasi</h4>
         <div className="container-grid">
           {props.data.map((item, index) => {
             return (
+              <>
+
               <div
                 key={`mostpicked-${index}`}
                 className={`item column-4${index === 0 ? " row-2" : " row-1"}`}>
+              <Link to={`properties/${item._id}`}>              
                 <div className="card card-featured">
                   <div className="tag">
                     Rp {item.price}
@@ -28,19 +32,17 @@ function MostPicked(props) {
                       className="img-cover"
                     />
                   </figure>
-                  <div className="meta-wrapper">
-                    <Button
-                      className="btn"
-                      type="link"
-                      href={`/properties/${item._id}`}>
+                  <div className="meta-wrapper d-flex flex-start">                                         
                       <h5>{item.title}</h5>
-                    </Button>
+                    
                     <span>
-                      {item.trackId[0].city},{item.trackId[0].province}
+                      {item.trackId[0].city}, {item.trackId[0].province}
                     </span>
                   </div>
                 </div>
+              </Link>
               </div>
+              </>
             );
           })}
         </div>

@@ -45,7 +45,7 @@ export default function Hero(props) {
               mulai pendakianmu sekarang!
             </p>
             <Button
-              className="btn px-5"
+              className="btn"
               style={{
                 marginLeft: 10,
                 width: 205,

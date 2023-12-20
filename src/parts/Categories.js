@@ -1,6 +1,7 @@
 import React from "react";
 import { Fade } from "react-awesome-reveal";
-import Button from "../elements/Button";
+import { Link } from "react-router-dom";
+
 
 export default function Categories({ data }) {
   return data.map((category, index1) => {
@@ -22,6 +23,7 @@ export default function Categories({ data }) {
                   <div
                     className="item column-3 row-1"
                     key={`category-${index1}-item-${index2}`}>
+                    <Link to={`/properties/${item._id}`} style={{ textDecoration:"none" }}>
                     <div className="card">
                       {item.isPopular && (
                         <div className="tag">
@@ -40,20 +42,17 @@ export default function Categories({ data }) {
                           className="img-cover"
                         />
                       </figure>
-                      <div className="meta-wrapper">
-                        <Button
-                          type="link"
-                          href={`/properties/${item._id}`}
-                          className="stretched-link d-block text-gray-800">
-                          <h5 className="h4" style={{ marginLeft: 7 }}>
+                      <div className="meta-wrapper d-flex flex-column justify-content-start">                        
+                          <h5 className="h4 text-gray-900">
                             {item.title}
                           </h5>
-                        </Button>
+                       
                         <span className="text-gray-500">
                           {item.trackId[0].city}, {item.trackId[0].province}
                         </span>
                       </div>
                     </div>
+                    </Link>
                   </div>
                 );
               })

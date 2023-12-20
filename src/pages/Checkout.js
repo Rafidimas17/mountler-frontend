@@ -54,7 +54,7 @@ class Checkout extends Component {
     // Add your specific validation logic here for each member field
     const isValid = data.member.every((member, index) => {
       const validFullname =
-        member.fullname !== "" && typeof member.fullname === "string";
+  typeof member.fullname === "string" && /^[A-Za-z\s]+$/.test(member.fullname.trim());
       const validAddress =
         member.address !== "" &&
         typeof member.address === "string" &&
@@ -223,7 +223,7 @@ class Checkout extends Component {
   handleRemoveRow = (index) => {
     this.setState((prevState) => {
       const updatedMember = [...prevState.data.member];
-      updatedMember.splice(index, 1);
+      updatedMember.splice(index, 0);
       const newData = {
         ...prevState.data,
         member: updatedMember,
@@ -254,23 +254,40 @@ class Checkout extends Component {
 
       const jumlahSafety = data.jumlahTenda * data.jumlahKapasitas;
 
-      if (
-        jumlahSafety < data.member.length &&
-        data.jumlahHeadlamp >= 1 &&
-        data.jumlahCarrier >= 1 &&
-        data.jumlahKompor >= 1 &&
-        data.jumlahP3k >= 1 &&
-        data.jumlahSB >= 1 &&
-        data.jumlahHeadlamp >= 1 &&
-        data.jumlahMatras >= 1
-      ) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Perlengkapan utama belum sesuai",
-          footer: "Wajib minimal bawa satu perlengkapan utama",
-        });
-      } else if (jumlahSafety >= data.member.length) {
+if (
+  jumlahSafety < data.member.length 
+) {
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Jumlah tenda tidak sesuai",
+    footer: "Kapasitas tenda harus lebih besar dari jumlah anggota",
+  });
+}
+else if (
+  data.jumlahHeadlamp <= 0 ||
+  data.jumlahCarrier <= 0 ||
+  data.jumlahKompor <= 0 ||
+  data.jumlahP3k <= 0 ||
+  data.jumlahSB <= 0 ||
+  data.jumlahHeadlamp <= 0 ||
+  data.jumlahMatras <= 0
+) {
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Perlengkapan utama belum sesuai",
+    footer: "Wajib minimal bawa satu perlengkapan utama",
+  });
+}
+ else if(jumlahSafety >= data.member.length &&
+  data.jumlahHeadlamp >= 0 &&
+  data.jumlahCarrier >= 0 &&
+  data.jumlahKompor >= 0 &&
+  data.jumlahP3k >= 0 &&
+  data.jumlahSB >= 0 &&
+  data.jumlahHeadlamp >= 0 &&
+  data.jumlahMatras >= 0) {
         const tax = 10;
         const subTotal =
           checkout.price * checkout.duration * data.member.length;
@@ -431,7 +448,7 @@ class Checkout extends Component {
         isLight
         onClick={prevStep}        
       >
-        Batal
+        Kembali
       </Button>
 
     </Controller>

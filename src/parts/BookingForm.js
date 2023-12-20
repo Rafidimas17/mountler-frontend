@@ -84,7 +84,7 @@ class BookingForm extends Component {
   startBooking = () => {
     const { data, trackFilled } = this.state;
 
-    // Check if trackFilled is null or false
+    
     if (trackFilled === null || trackFilled === false) {
       Swal.fire({
         icon: "error",
@@ -92,7 +92,9 @@ class BookingForm extends Component {
         text: "Wajib memilih jalur pendakian",
       });
       return;
-    } else {
+    }
+    
+    else {
       // Proceed to checkout
       this.props.startBooking({
         _id: this.props.itemDetails._id,
