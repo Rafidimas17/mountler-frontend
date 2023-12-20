@@ -129,7 +129,7 @@ class BookingForm extends Component {
           Pilih tanggal
         </label>
         <InputDate onDateChange={this.handleDatePickerChange} />
-        <label htmlFor="date" style={{ fontFamily: "Poppins" }}>
+        <label htmlFor="date" className="pt-4" style={{ fontFamily: "Poppins" }}>
           Pilih Jalur Pendakian
         </label>
         <Form.Select

@@ -70,7 +70,7 @@ class Checkout extends Component {
         member.no_id !== "" &&
         typeof member.no_id === "string" &&
         // Additional no_id validation (minimum length: 16)
-        /^[0-9]{16,}$/.test(member.no_id);
+        /^[0-9]{16}$/.test(member.no_id);
       const validPhone =
         member.phone !== "" &&
         typeof member.phone === "string" &&
@@ -133,8 +133,8 @@ class Checkout extends Component {
                   : "Gender anggota tidak sesuai";
               case "validNoId":
                 return parseInt(index) === 0
-                  ? "Nomor ID ketua tidak sesuai"
-                  : "Nomor ID anggota tidak sesuai";
+                  ? "Nomor ID ketua harus 16 angka"
+                  : "Nomor ID anggota harus 16 angka";
               case "validPhone":
                 return parseInt(index) === 0
                   ? "Nomor telepon ketua tidak sesuai"
@@ -358,7 +358,7 @@ else if (
       },
       Equipment: {
         title: "Perlengkapan",
-        description: "Siapkan perlengkapanmu untuk petualangan terbaikmu",
+        description: "Data perlengkapan utama yang dibawa pendaki ",
         content: (
           <Equipment
             data={data}
