@@ -41,7 +41,7 @@ export default function Login() {
     axios
       .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data, {
         headers: {
-          Authorization: `Bearer ${accessKey}`,
+          Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
         },
       })
       .then((result) => {
