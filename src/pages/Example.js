@@ -32,11 +32,7 @@ const AnotherComponent = () => {
         : null;
 
     // Set the selected dates and duration in the component state
-    setSelectedDate({
-      startDate: startDateWithOneDay,
-      endDate: endDateWithOneDay,
-      duration: duration + 1,
-    });
+    
   };
 
   return (
