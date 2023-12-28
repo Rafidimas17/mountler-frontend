@@ -37,12 +37,14 @@ export default function Login() {
       password: password,
     };
     const accessKey = process.env.REACT_APP_ACCESS_KEY;
-
+     const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+      },
+    };
     axios
-      .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data, {
-        headers: {        
-        },
-      })
+      .post(`${process.env.REACT_APP_HOST}/api-v1/login`, data,axiosConfig
+      )
       .then((result) => {
         if (result) {
           // console.log(result);
