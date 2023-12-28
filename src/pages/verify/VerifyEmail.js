@@ -8,8 +8,14 @@ const VerifyEmail = () => {
 
   const handleVerifyEmail = async () => {
     try {
+      const axiosConfig = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_KEY}`,
+      },
+    };
+
       await axios.get(
-        `${process.env.REACT_APP_HOST}/api-v1/verify-email/${param.tokenAktif}`
+        `${process.env.REACT_APP_HOST}/api-v1/verify-email/${param.tokenAktif}`,axiosConfig
       );
       setValidUrl(true);
     } catch (error) {
